@@ -8,6 +8,10 @@ def profile_view(request):
     return render(request, 'main/profile_page.html')
 
 @login_required
+def edit_profile_view(request):
+    return render(request, 'main/edit_profile_page.html')
+
+@login_required
 def delete_profile_view(request, user_id):
     if request.user.id != user_id and not request.user.is_staff:
         messages.error(request, 'You are not authorized to delete this profile.')
