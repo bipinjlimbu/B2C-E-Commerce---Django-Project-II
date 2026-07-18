@@ -3,6 +3,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+def register_view(request):
+    return render(request, 'auth/register_page.html')
+
 def login_view(request):
     if request.user.is_authenticated:
         return redirect('/')
