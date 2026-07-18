@@ -6,9 +6,12 @@
 </head>
 
 <body>
+    {% include 'components/_navbar.html' %}
 <h1 class="text-red-500" > Hello Home </h1>
 <p class="text-blue-600" >Hello k xa </p>
 <i data-lucide="activity" class="lucide-icon"></i>
+
+    {% include 'components/_footer.html' %}
 
 <script src={% static 'js/lucide.min.js' %}></script>
 <script>
