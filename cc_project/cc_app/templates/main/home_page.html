@@ -1,23 +1,195 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Home Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClayCanvas | Handcrafted Ceramic Form & Artistry</title>
     {% load static %}
-<link  href ="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f5f5f4;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c2410c;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #9a3412;
+            border-radius: 10px;
+        }
+    </style>
 </head>
+<body class="bg-white font-sans min-h-screen flex flex-col text-stone-900">
 
-<body>
     {% include 'components/_navbar.html' %}
-<h1 class="text-red-500" > Hello Home </h1>
-<p class="text-blue-600" >Hello k xa </p>
-<i data-lucide="activity" class="lucide-icon"></i>
+
+    <main class="flex-grow">
+        
+        <section class="relative bg-[#f4ece1] text-stone-950 overflow-hidden py-24 lg:py-36 border-b border-stone-200/60">
+            <div class="absolute inset-0 opacity-40 bg-[linear-gradient(to_right,#e5d5c5_1px,transparent_1px),linear-gradient(to_bottom,#e5d5c5_1px,transparent_1px)] [background-size:24px_24px]"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6 max-w-xl">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest bg-orange-700/10 text-orange-800 border border-orange-700/20">
+                            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Fresh from the Studio
+                        </span>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight leading-tight">
+                            EARTHEN FORM. <br>
+                            <span class="text-orange-800 italic font-light">Human Intention.</span>
+                        </h1>
+                        <p class="text-base text-stone-700 font-normal leading-relaxed">
+                            Explore distinct collections of functional dinnerware, textured vases, and sculptural statements thrown by hand on the wheel.
+                        </p>
+                        <div class="flex flex-wrap gap-4 pt-2">
+                            <a href="/products/" class="bg-orange-700 hover:bg-orange-800 text-white font-medium px-6 py-3 rounded-lg transition-all shadow-sm flex items-center gap-2 text-sm tracking-wide">
+                                Browse Studio Inventory
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
+                            <a href="#" class="bg-white/80 hover:bg-white text-stone-800 font-medium px-6 py-3 rounded-lg transition-all border border-stone-300/80 shadow-sm text-sm tracking-wide backdrop-blur-sm">
+                                Read Philosophy
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12">
+                <div>
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-orange-700 mb-1">Studio Collections</h2>
+                    <p class="text-2xl font-serif font-normal tracking-tight text-stone-900">Curated Clay Classifications</p>
+                </div>
+            </div>
+            
+            <div class="flex overflow-x-auto gap-6 pb-6 snap-x snap-mandatory custom-scrollbar">
+                <a href="/products/?category=paintings" class="group min-w-[280px] sm:min-w-[320px] snap-start bg-stone-50 border border-stone-200 p-6 rounded-xl shadow-sm hover:border-orange-600 hover:bg-white transition-all flex items-center justify-between">
+                    <div class="space-y-1">
+                        <h3 class="font-serif text-lg text-stone-950 group-hover:text-orange-700 transition-colors">Original Paintings</h3>
+                        <p class="text-xs text-stone-500">Fine oil & acrylic gallery work</p>
+                    </div>
+                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center border border-stone-200 group-hover:bg-orange-50 group-hover:border-orange-600 transition-colors shrink-0 ml-4">
+                        <i data-lucide="palette" class="w-4 h-4 text-stone-500 group-hover:text-orange-700 transition-colors"></i>
+                    </div>
+                </a>
+
+                <a href="/products/?category=pottery" class="group min-w-[280px] sm:min-w-[320px] snap-start bg-stone-50 border border-stone-200 p-6 rounded-xl shadow-sm hover:border-orange-600 hover:bg-white transition-all flex items-center justify-between">
+                    <div class="space-y-1">
+                        <h3 class="font-serif text-lg text-stone-950 group-hover:text-orange-700 transition-colors">Handmade Pottery</h3>
+                        <p class="text-xs text-stone-500">Wheel-thrown daily tableware</p>
+                    </div>
+                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center border border-stone-200 group-hover:bg-orange-50 group-hover:border-orange-600 transition-colors shrink-0 ml-4">
+                        <i data-lucide="coffee" class="w-4 h-4 text-stone-500 group-hover:text-orange-700 transition-colors"></i>
+                    </div>
+                </a>
+
+                <a href="/products/?category=ceramics" class="group min-w-[280px] sm:min-w-[320px] snap-start bg-stone-50 border border-stone-200 p-6 rounded-xl shadow-sm hover:border-orange-600 hover:bg-white transition-all flex items-center justify-between">
+                    <div class="space-y-1">
+                        <h3 class="font-serif text-lg text-stone-950 group-hover:text-orange-700 transition-colors">Sculptures & Ceramics</h3>
+                        <p class="text-xs text-stone-500">One-off sculptural manipulations</p>
+                    </div>
+                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center border border-stone-200 group-hover:bg-orange-50 group-hover:border-orange-600 transition-colors shrink-0 ml-4">
+                        <i data-lucide="shapes" class="w-4 h-4 text-stone-500 group-hover:text-orange-700 transition-colors"></i>
+                    </div>
+                </a>
+
+                <a href="/products/?category=prints" class="group min-w-[280px] sm:min-w-[320px] snap-start bg-stone-50 border border-stone-200 p-6 rounded-xl shadow-sm hover:border-orange-600 hover:bg-white transition-all flex items-center justify-between">
+                    <div class="space-y-1">
+                        <h3 class="font-serif text-lg text-stone-950 group-hover:text-orange-700 transition-colors">Canvas & Fine Art Prints</h3>
+                        <p class="text-xs text-stone-500">High-grade archival reproductions</p>
+                    </div>
+                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center border border-stone-200 group-hover:bg-orange-50 group-hover:border-orange-600 transition-colors shrink-0 ml-4">
+                        <i data-lucide="image" class="w-4 h-4 text-stone-500 group-hover:text-orange-700 transition-colors"></i>
+                    </div>
+                </a>
+
+                <a href="/products/?category=accessories" class="group min-w-[280px] sm:min-w-[320px] snap-start bg-stone-50 border border-stone-200 p-6 rounded-xl shadow-sm hover:border-orange-600 hover:bg-white transition-all flex items-center justify-between">
+                    <div class="space-y-1">
+                        <h3 class="font-serif text-lg text-stone-950 group-hover:text-orange-700 transition-colors">Art Supplies & Displays</h3>
+                        <p class="text-xs text-stone-500">Studio essentials & presentation setups</p>
+                    </div>
+                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center border border-stone-200 group-hover:bg-orange-50 group-hover:border-orange-600 transition-colors shrink-0 ml-4">
+                        <i data-lucide="brush" class="w-4 h-4 text-stone-500 group-hover:text-orange-700 transition-colors"></i>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mb-24">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-10">
+                <div>
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-orange-700">Artisan Registry</h2>
+                    <p class="text-2xl font-serif font-normal tracking-tight text-stone-900">Available Formations</p>
+                </div>
+                <a href="/products/" class="text-sm font-semibold text-stone-950 hover:text-orange-700 transition-colors underline decoration-1 underline-offset-4 flex items-center gap-1">
+                    View Complete Catalog <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                {% for i in '1234' %}
+                <div class="bg-stone-50 border border-stone-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col group relative">
+                    
+                    <a href="/products/1/" class="flex flex-col flex-grow">
+                        <div class="aspect-square w-full bg-stone-100 flex items-center justify-center p-2 relative overflow-hidden border-b border-stone-200/60">
+                            <div class="w-full h-full flex flex-col items-center justify-center bg-white rounded-lg">
+                                <i data-lucide="brush" class="w-8 h-8 text-stone-300 group-hover:text-orange-600 transition-colors duration-300"></i>
+                                <span class="text-[9px] uppercase tracking-widest text-stone-400 font-bold mt-2">No Graphic Log</span>
+                            </div>
+                            <span class="absolute top-3 left-3 bg-white/90 border border-stone-200 backdrop-blur-sm text-[10px] font-medium tracking-wide text-stone-700 px-2.5 py-0.5 rounded">
+                                Handmade Pottery
+                            </span>
+                        </div>
+
+                        <div class="p-5 flex-grow space-y-2">
+                            <h3 class="font-serif text-stone-900 text-base group-hover:text-orange-700 transition-colors line-clamp-1">
+                                Terracotta Vase Studio Piece
+                            </h3>
+                            <p class="text-xs text-stone-500 font-normal leading-relaxed line-clamp-2">
+                                Hand-turned ceramic composition left raw or coated in studio glazes. Perfect choice for minimal setup profiles.
+                            </p>
+                        </div>
+                    </a>
+
+                    <div class="p-5 pt-0">
+                        <div class="flex items-center justify-between pt-4 border-t border-stone-200/60">
+                            <div class="flex flex-col">
+                                <span class="text-[9px] uppercase font-bold tracking-wider text-stone-400">Valuation</span>
+                                <span class="text-base font-normal text-stone-900">Rs. 4500.00</span>
+                            </div>
+
+                            {% if user.is_authenticated and not user.is_staff %}
+                                <a href="/cart/add/1/" class="bg-stone-900 hover:bg-orange-700 text-stone-100 w-9 h-9 rounded-lg transition-all flex items-center justify-center shadow z-10">
+                                    <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                                </a>
+                            {% elif user.is_staff %}
+                                <a href="/dashboard/admin/?section=product-management" class="bg-stone-100 hover:bg-orange-700 text-stone-600 hover:text-white w-9 h-9 rounded-lg transition-all border border-stone-200 flex items-center justify-center z-10">
+                                    <i data-lucide="sliders" class="w-4 h-4"></i>
+                                </a>
+                            {% else %}
+                                <a href="/login/" class="bg-stone-900 hover:bg-orange-700 text-stone-100 w-9 h-9 rounded-lg transition-all flex items-center justify-center z-10">
+                                    <i data-lucide="log-in" class="w-4 h-4"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+    </main>
 
     {% include 'components/_footer.html' %}
 
-<script src={% static 'js/lucide.min.js' %}></script>
-<script>
-    
-    lucide.createIcons();
-
-</script>
+    <script src="{% static 'js/lucide.min.js' %}"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
