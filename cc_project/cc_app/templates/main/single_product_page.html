@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }} | ClayCanvas</title>
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans min-h-screen flex flex-col">
+
+    {% include 'components/_navbar.html' %}
+
+    {% include 'components/_messages.html' %}
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 space-y-20">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start w-full">
+            
+            <div class="w-full aspect-square bg-white border border-orange-100 rounded-3xl overflow-hidden flex items-center justify-center p-8 relative group shadow-sm">
+                {% if product.product_image %}
+                    <img src="{{ product.product_image.url }}" alt="{{ product.name }}" class="max-w-full max-h-full object-contain rounded-xl group-hover:scale-102 transition-transform duration-500">
+                {% else %}
+                    <div class="flex flex-col items-center justify-center text-center space-y-3">
+                        <i data-lucide="camera" class="w-16 h-16 text-stone-300"></i>
+                        <span class="text-xs uppercase tracking-widest text-stone-400 font-bold">No Artwork Imagery Available</span>
+                    </div>
+                {% endif %}
+                
+                <div class="absolute top-6 left-6 flex gap-2">
+                    <span class="bg-white/90 border border-orange-100 backdrop-blur-md text-[10px] font-bold uppercase tracking-widest text-orange-800 px-3 py-1.5 rounded-lg shadow-sm">
+                        {{ product.get_category_display }}
+                    </span>
+                    {% if product.stock == 1 %}
+                    <span class="bg-amber-50 border border-amber-200 backdrop-blur-md text-[10px] font-bold uppercase tracking-widest text-amber-700 px-3 py-1.5 rounded-lg shadow-sm">
+                        Original Masterwork
+                    </span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="flex flex-col justify-between h-full space-y-8 lg:py-4">
+                <div class="space-y-6">
+                    <div class="space-y-2">
+                        <p class="text-xs font-bold uppercase tracking-widest text-orange-700">Handcrafted Collection</p>
+                        <h1 class="text-3xl lg:text-4xl font-bold text-stone-950 tracking-tight leading-none font-serif">{{ product.name }}</h1>
+                    </div>
+
+                    <div class="p-6 bg-white border border-orange-100 rounded-2xl flex flex-col justify-center shadow-sm">
+                        <span class="text-[10px] uppercase font-bold tracking-widest text-stone-400 mb-1">Price</span>
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-3xl font-bold text-orange-950">Rs. {{ product.price|floatformat:2 }}</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h3 class="text-xs font-bold uppercase tracking-widest text-stone-500 border-b border-orange-100 pb-2">Description & Dimensions</h3>
+                        <p class="text-sm text-stone-600 font-medium leading-relaxed whitespace-pre-line">
+                            {{ product.description|default:"No description details provided for this artwork." }}
+                        </p>
+                    </div>
+
+                    <div class="flex items-center gap-2 text-xs">
+                        <span class="w-2 h-2 rounded-full {% if product.stock > 0 %}bg-emerald-600 shadow-lg shadow-emerald-600/30{% else %}bg-rose-600 shadow-lg shadow-rose-600/30{% endif %}"></span>
+                        <span class="font-bold uppercase tracking-wider {% if product.stock > 0 %}text-stone-500{% else %}text-rose-600{% endif %}">
+                            {% if product.stock > 0 %}
+                                {% if product.stock == 1 %} Only 1 Unique Piece Available {% else %} In Stock ({{ product.stock }} units) {% endif %}
+                            {% else %}
+                                Out of Stock
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="pt-6 border-t border-orange-100 flex flex-wrap sm:flex-nowrap gap-4">
+                    {% if user.is_authenticated and not user.is_staff %}
+                        {% if product.stock > 0 %}
+                            <a href="/cart/add/{{ product.id }}/" class="flex-grow bg-orange-700 hover:bg-orange-800 text-white font-bold py-4 px-8 rounded-xl transition-all flex items-center justify-center gap-3 text-xs uppercase tracking-widest shadow-md hover:shadow-lg">
+                                <i data-lucide="shopping-basket" class="w-4 h-4"></i>
+                                Add to Cart
+                            </a>
+                        {% else %}
+                            <button disabled class="flex-grow bg-stone-200 text-stone-400 font-bold py-4 px-8 rounded-xl flex items-center justify-center gap-3 text-xs uppercase tracking-widest cursor-not-allowed border border-stone-300">
+                                <i data-lucide="slash" class="w-4 h-4"></i>
+                                Out of Stock
+                            </button>
+                        {% endif %}
+                    {% elif user.is_staff %}
+                        <a href="/dashboard/admin/?section=product-management" class="flex-grow bg-stone-900 hover:bg-stone-800 text-white font-bold py-4 px-8 rounded-xl transition-all flex items-center justify-center gap-3 text-xs uppercase tracking-widest">
+                            <i data-lucide="settings" class="w-4 h-4"></i>
+                            Manage Artwork
+                        </a>
+                    {% else %}
+                        <a href="/login/" class="flex-grow bg-orange-700 hover:bg-orange-800 text-white font-bold py-4 px-8 rounded-xl transition-all flex items-center justify-center gap-3 text-xs uppercase tracking-widest shadow-md">
+                            <i data-lucide="log-in" class="w-4 h-4"></i>
+                            Sign In to Purchase
+                        </a>
+                    {% endif %}
+
+                    <div class="flex gap-2 w-full sm:w-auto">
+                        <a href="/products/wishlist-toggle/{{ product.id }}/" class="bg-white hover:bg-stone-50 text-orange-700 w-12 h-12 rounded-xl transition-all flex items-center justify-center border border-orange-200 shadow-sm" title="Wishlist">
+                        {% if product.in_wishlist %}
+                            <i data-lucide="heart" class="w-4 h-4 fill-current"></i>
+                        {% else %}
+                            <i data-lucide="heart" class="w-4 h-4"></i>
+                        {% endif %}
+                        </a>
+
+                        <a href="javascript:history.back()" class="bg-transparent hover:bg-stone-100 text-stone-500 hover:text-stone-800 font-bold py-4 px-6 rounded-xl transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-widest border border-stone-300 whitespace-nowrap">
+                            Back
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="border-t border-orange-100 pt-16 space-y-10">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-orange-700 mb-1">Feedback</h2>
+                    <p class="text-xl font-bold tracking-tight text-stone-950 uppercase font-serif">Collector Reviews</p>
+                </div>
+                <div class="flex flex-wrap items-center gap-4">
+                    {% if user.is_authenticated and not user.is_staff %}
+                        <a href="/review/add/{{ product.id }}" class="bg-white hover:bg-stone-50 border border-orange-200 text-stone-700 font-bold px-5 py-3 rounded-2xl text-xs uppercase tracking-widest transition-all flex items-center gap-2 shadow-sm">
+                            <i data-lucide="plus-circle" class="w-3.5 h-3.5 text-orange-700"></i>
+                            Submit Review
+                        </a>
+                    {% endif %}
+                    <div class="flex items-center gap-4 bg-white border border-orange-100 px-5 py-3 rounded-2xl shadow-sm">
+                        <div class="text-orange-600 flex">
+                            {% for i in "12345" %}
+                                {% if forloop.counter <= product.average_rating %}
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                                {% else %}
+                                    <i data-lucide="star" class="w-3.5 h-3.5"></i>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <span class="text-sm font-bold text-stone-700">{{ product.average_rating|default:"0.0" }} / 5.0 Rating</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {% for review in reviews %}
+                <div class="bg-white border border-orange-100 p-6 rounded-2xl flex flex-col justify-between space-y-4 hover:border-orange-200 transition-all relative group shadow-sm">
+                    
+                    {% if review.customer == request.user %}
+                        <div class="absolute top-4 right-4 flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
+                            <a href="/review/edit/{{ review.id }}/" class="w-7 h-7 bg-white hover:bg-stone-50 border border-stone-200 rounded-lg flex items-center justify-center text-stone-500 hover:text-stone-800 transition-colors" title="Edit Review">
+                                <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                            </a>
+                            <a href="/review/delete/{{ review.id }}/" class="w-7 h-7 bg-white hover:bg-rose-50 border border-stone-200 hover:border-rose-200 rounded-lg flex items-center justify-center text-stone-500 hover:text-rose-600 transition-colors" title="Delete Review">
+                                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                            </a>
+                        </div>
+                    {% endif %}
+
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center text-xs font-bold text-orange-700 overflow-hidden">
+                                    {% if review.customer.profile_picture %}
+                                        <img src="{{ review.customer.profile_picture.url }}" alt="{{ review.customer.get_full_name }}" class="w-full h-full object-cover rounded-lg">
+                                    {% else %}
+                                        {{ review.customer.get_full_name|slice:":1"|upper }}
+                                    {% endif %}
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-stone-800 tracking-wide pr-16">{{ review.customer.get_full_name }}</h4>
+                                    <p class="text-[9px] text-stone-400 font-mono">{{ review.customer.email }}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="text-orange-600 flex {% if review.customer == request.user %}group-hover:opacity-0 transition-opacity duration-200 pr-1{% endif %}">
+                                {% for i in "12345" %}
+                                    {% if forloop.counter <= review.rating %}
+                                        <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                                    {% else %}
+                                        <i data-lucide="star" class="w-3 h-3"></i>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <p class="text-xs text-stone-600 font-medium leading-relaxed">
+                            {{ review.comment }}
+                        </p>
+                    </div>
+                    <span class="text-[9px] text-stone-400 uppercase tracking-widest">{{ review.created_at|timesince }} ago</span>
+                </div>
+                {% empty %}
+                <div class="bg-white border border-orange-100 p-6 rounded-2xl flex flex-col justify-center items-center space-y-4 shadow-sm w-full col-span-1 md:col-span-2 py-12">
+                    <i data-lucide="message-square" class="w-12 h-12 text-stone-300"></i>
+                    <p class="text-sm font-bold text-stone-400">No reviews have been logged for this artwork yet.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+
+    {% include 'components/_footer.html' %}
+
+    <script src="{% static 'js/lucide.min.js' %}"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
