@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from ..models import User, Product
+from ..models import User, Product, Order
 
 @login_required
 def admin_dashboard_view(request):
@@ -13,6 +13,11 @@ def admin_dashboard_view(request):
     
     context = {
         'section': section,
+        'awaiting_dispatch_count': Order.objects.filter(status='confirmed').count(),
+        'awaiting_delivery_count': Order.objects.filter(status='shipping').count(),
+        'delivered_count': Order.objects.filter(status='delivered').count(),
+        'completed_count': Order.objects.filter(status='completed').count(),
+        'cancelled_count': Order.objects.filter(status='cancelled').count()
     }
     
     if section == 'customer-management':
@@ -22,7 +27,7 @@ def admin_dashboard_view(request):
         context['products'] = Product.objects.all().order_by('-created_at')
         
     elif section == 'order-fulfillment':
-        context['orders'] = None
+        context['orders'] = Order.objects.all().order_by('-created_at')
         
     elif section == 'product-reviews':
         context['reviews'] = None
