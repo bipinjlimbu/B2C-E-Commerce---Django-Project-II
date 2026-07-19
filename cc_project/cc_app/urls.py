@@ -4,6 +4,7 @@ from .views.main_view import home_page
 from .views.profile_view import profile_view, edit_profile_view, delete_profile_view
 from .views.products_view import products_view, add_product_view, edit_product_view, toggle_product_status_view, delete_product_view, single_product_view
 from .views.cart_view import cart_view, add_to_cart_view, increase_cart_item_quantity_view, decrease_cart_item_quantity_view, remove_from_cart_view
+from .views.payment_view import initiate_esewa_payment
 from .views.dashboard import admin_dashboard_view
 
 urlpatterns = [
@@ -25,5 +26,6 @@ urlpatterns = [
     path('cart/increase/<int:product_id>/', increase_cart_item_quantity_view, name='increase_cart_item_quantity'),
     path('cart/decrease/<int:product_id>/', decrease_cart_item_quantity_view, name='decrease_cart_item_quantity'),
     path('cart/remove/<int:product_id>/', remove_from_cart_view, name='remove_from_cart'),
+    path('payment/initiate/', initiate_esewa_payment, name='initiate_payment'),
     path('dashboard/admin/', admin_dashboard_view, name='admin_dashboard'),
 ]
