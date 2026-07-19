@@ -68,6 +68,28 @@ def increase_cart_item_quantity_view(request, product_id):
     return redirect('/cart/')
 
 @login_required
+def decrease_cart_item_quantity_view(request, product_id):
+    if request.user.is_staff:
+        messages.error(request, "Staff members do not have a shopping cart.")
+        return redirect('/products/')
+    
+    try:
+        product = Product.objects.get(id=product_id)
+        cart = Cart.objects.get(customer=request.user)
+        cart_item = CartItem.objects.get(cart=cart, product=product)
+        
+        if cart_item.quantity > 1:
+            cart_item.quantity -= 1
+            cart_item.save()
+            messages.success(request, f'Decreased quantity of {product.name} in your cart.')
+        else:
+            messages.error(request, "Quantity cannot be less than 1. Use remove option to delete the item.")
+    except CartItem.DoesNotExist:
+        messages.error(request, "Cart item not found.")
+    
+    return redirect('/cart/')
+
+@login_required
 def remove_from_cart_view(request, product_id):
     if request.user.is_staff:
         messages.error(request, "Staff members do not have a shopping cart.")
