@@ -170,7 +170,7 @@
                             </div>
 
                             {% if user.is_authenticated and not user.is_staff %}
-                                <a href="/cart/add/1/" class="bg-stone-900 hover:bg-orange-700 text-stone-100 w-9 h-9 rounded-lg transition-all flex items-center justify-center shadow z-10">
+                                <a href="/cart/add/{{ product.id }}/" class="bg-stone-900 hover:bg-orange-700 text-stone-100 w-9 h-9 rounded-lg transition-all flex items-center justify-center shadow z-10">
                                     <i data-lucide="shopping-bag" class="w-4 h-4"></i>
                                 </a>
                             {% elif user.is_staff %}

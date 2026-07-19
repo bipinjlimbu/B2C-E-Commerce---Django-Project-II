@@ -1,0 +1,35 @@
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from ..models import User, Product, Cart, CartItem
+
+@login_required
+def add_to_cart_view(request, product_id):
+    product = Product.objects.get(id=product_id)
+    
+    if request.user.is_staff:
+        messages.error(request, "Staff members cannot add products to the cart.")
+        return redirect('/products/')
+    
+    if not product.is_active:
+        messages.error(request, "This product is currently unavailable.")
+        return redirect('/products/')
+    
+    if product.stock <= 0:
+        messages.error(request, "This product is out of stock.")
+        return redirect('/products/')
+    
+    if CartItem.objects.filter(product=product, cart__customer=request.user).exists():
+        messages.info(request, f"{product.name} is already in your cart. Quantity updated.")
+        return redirect('/products/')
+    
+    cart, created = Cart.objects.get_or_create(customer=request.user)
+    cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+    
+    if not created:
+        cart_item.quantity += 1
+        cart_item.save()
+        
+        
+    messages.success(request, f'Added {product.name} to your cart.')
+    return redirect('/products/')
