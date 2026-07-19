@@ -1,0 +1,98 @@
+<div class="space-y-6">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+            <h2 class="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-1">Catalog Architecture</h2>
+            <h1 class="text-2xl font-serif font-normal text-neutral-900 tracking-tight">Product Master</h1>
+        </div>
+        <div>
+            <a href="/products/add/" class="bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-semibold uppercase tracking-wider px-4 py-2.5 rounded-xl transition-colors flex items-center gap-2 shadow-sm">
+                <i data-lucide="plus" class="w-4 h-4"></i>
+                Deploy New Product
+            </a>
+        </div>
+    </div>
+
+    {% if products %}
+    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b border-gray-200 text-[10px] font-bold uppercase tracking-widest text-neutral-400 bg-neutral-50/50">
+                        <th class="p-4 pl-6">Artwork Profile</th>
+                        <th class="p-4">Creative Class</th>
+                        <th class="p-4">Valuation</th>
+                        <th class="p-4">Availability</th>
+                        <th class="p-4">Status</th>
+                        <th class="p-4 pr-6 text-right">System Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 text-sm text-neutral-700">
+                    {% for product in products %}
+                        <tr class="hover:bg-neutral-50/50 transition-colors">
+                            <td class="p-4 pl-6 flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-xl bg-[#f9f5f0] border border-gray-200 overflow-hidden flex items-center justify-center text-neutral-400 shrink-0">
+                                    {% if product.product_image %}
+                                        <img src="{{ product.product_image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                                    {% else %}
+                                        <i data-lucide="image" class="w-5 h-5 text-neutral-400"></i>
+                                    {% endif %}
+                                </div>
+                                <div>
+                                    <span class="text-neutral-900 block font-medium">{{ product.name }}</span>
+                                    <span class="text-[10px] text-neutral-400 block tracking-wider uppercase mt-0.5">Added {{ product.created_at|date:"M d, Y" }}</span>
+                                </div>
+                            </td>
+                            <td class="p-4">
+                                <span class="bg-[#f9f5f0] text-neutral-700 border border-gray-200 text-[10px] font-medium uppercase px-2.5 py-1 rounded-full">
+                                    {{ product.get_category_display }}
+                                </span>
+                            </td>
+                            <td class="p-4 font-mono text-sm font-semibold text-neutral-900">Rs.{{ product.price|floatformat:2 }}</td>
+                            <td class="p-4">
+                                <div class="flex items-center gap-1.5 text-xs">
+                                    <span class="w-1.5 h-1.5 rounded-full {% if product.stock > 0 %}bg-emerald-500{% else %}bg-rose-500{% endif %}"></span>
+                                    <span class="text-neutral-600 font-medium">
+                                        {% if product.stock == 1 and product.category == 'paintings' or product.category == 'pottery' %}
+                                            Original Masterwork
+                                        {% else %}
+                                            {{ product.stock }} Units
+                                        {% endif %}
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="p-4">
+                                <label class="relative inline-flex items-center cursor-pointer select-none">
+                                    <input type="checkbox" name="is_active" {% if product.is_active %}checked{% endif %} class="sr-only peer" onchange="window.location.href='/products/toggle-status/{{ product.id }}/'">
+                                    <div class="w-8 h-4 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-orange-700"></div>
+                                </label>
+                            </td>
+                            <td class="p-4 pr-6 text-right">
+                                <div class="flex items-center justify-end gap-2">
+                                    <a href="/products/edit/{{ product.id }}/" class="p-2 bg-white hover:bg-neutral-50 text-neutral-500 hover:text-neutral-900 rounded-xl border border-gray-200 transition-colors shadow-sm" title="Edit Masterwork">
+                                        <i data-lucide="edit-3" class="w-4 h-4"></i>
+                                    </a>
+                                    <a href="/products/delete/{{ product.id }}/" class="p-2 bg-white hover:bg-rose-50 text-neutral-500 hover:text-rose-700 rounded-xl border border-gray-200 hover:border-rose-200 transition-colors shadow-sm" title="Decommission Architecture">
+                                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% else %}
+    <div class="bg-white border border-gray-200 text-neutral-500 p-8 rounded-2xl text-center shadow-sm max-w-md mx-auto my-12">
+        <div class="w-12 h-12 rounded-2xl bg-[#f9f5f0] border border-gray-100 flex items-center justify-center mx-auto text-neutral-400 mb-3">
+            <i data-lucide="box" class="w-5 h-5"></i>
+        </div>
+        <h3 class="text-neutral-900 font-medium mb-1">Architecture Bare</h3>
+        <p class="text-sm text-neutral-500 mb-4">No assets deployed to the catalog infrastructure.</p>
+        <a href="/products/add/" class="inline-flex items-center gap-2 bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-semibold uppercase tracking-wider px-4 py-2.5 rounded-xl transition-colors shadow-sm">
+            <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+            Deploy First Asset
+        </a>
+    </div>
+    {% endif %}
+</div>
