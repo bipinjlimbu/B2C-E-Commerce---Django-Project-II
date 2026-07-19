@@ -59,6 +59,7 @@
                     <label class="text-[10px] font-bold uppercase tracking-wider text-[#706B64] block">Sort Catalog</label>
                     <select name="sort" onchange="this.form.submit()" class="w-full bg-[#FAF9F5] border border-[#D5CBB5] rounded-xl p-3 text-xs text-[#2C2A29] focus:outline-none focus:border-[#C86B45]">
                         <option value="latest" {% if request.GET.sort == 'latest' %}selected{% endif %}>Recently Added</option>
+                        <option value="oldest" {% if request.GET.sort == 'oldest' %}selected{% endif %}>Oldest First</option>
                         <option value="price_asc" {% if request.GET.sort == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
                         <option value="price_desc" {% if request.GET.sort == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
                     </select>

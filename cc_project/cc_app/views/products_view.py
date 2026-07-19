@@ -1,11 +1,51 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.db.models import Q
 from ..models import User, Product
 
 @login_required
 def products_view(request):
     products = Product.objects.all().order_by('-created_at')
+    category = request.GET.get('category')
+    availability = request.GET.get('availability')
+    price_range = request.GET.get('price_range')
+    sort = request.GET.get('sort')
+    q = request.GET.get('q')
+    
+    if q:
+        products = products.filter(Q(name__icontains=q) | Q(description__icontains=q) | Q(category__icontains=q))
+        
+    if category:
+        products = products.filter(category=category)
+        
+    if availability == 'available':
+        products = products.filter(stock__gt=0, is_active=True)
+    elif availability == 'masterworks':
+        products = products.filter(stock=1, is_active=True)
+        
+    if price_range:
+        if price_range == '0-999':
+            products = products.filter(price__lt=1000)
+        elif price_range == '1000-4999':
+            products = products.filter(price__gte=1000, price__lt=5000)
+        elif price_range == '5000-9999':
+            products = products.filter(price__gte=5000, price__lt=10000)
+        elif price_range == '10000-49999':
+            products = products.filter(price__gte=10000, price__lt=50000)
+        elif price_range == '50000+':
+            products = products.filter(price__gte=50000)
+            
+    if sort:
+        if sort == 'price_asc':
+            products = products.order_by('price')
+        elif sort == 'price_desc':
+            products = products.order_by('-price')
+        elif sort == 'newest':
+            products = products.order_by('-created_at')
+        elif sort == 'oldest':
+            products = products.order_by('created_at')
+        
     return render(request, 'main/products_page.html', {'products': products})
 
 @login_required
