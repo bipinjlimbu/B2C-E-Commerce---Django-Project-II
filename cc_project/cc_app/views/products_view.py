@@ -4,6 +4,11 @@ from django.contrib import messages
 from ..models import User, Product
 
 @login_required
+def products_view(request):
+    products = Product.objects.all().order_by('-created_at')
+    return render(request, 'main/products_page.html', {'products': products})
+
+@login_required
 def add_product_view(request):
     if not request.user.is_staff:
         messages.error(request, "You do not have permission to add products.")

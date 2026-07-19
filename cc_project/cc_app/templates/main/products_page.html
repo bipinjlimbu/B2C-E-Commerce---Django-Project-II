@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Gallery | ClayCanvas</title>
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+</head>
+<body class="bg-[#FAF9F5] text-[#1F1F1E] font-sans min-h-screen flex flex-col antialiased">
+
+    {% include 'components/_navbar.html' %}
+
+    {% include 'components/_messages.html' %}
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 space-y-8">
+        <div>
+            <h1 class="text-xs font-bold uppercase tracking-widest text-[#C86B45] mb-1">Curated Collections</h1>
+            <p class="text-3xl font-serif text-[#2C2A29] capitalize tracking-tight">Fine Art & Pottery Catalog</p>
+        </div>
+
+        <form method="GET" action="/products/" class="bg-[#F3EFE9] border border-[#E5DEC9] rounded-2xl p-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
+                
+                <div class="space-y-1.5">
+                    <label class="text-[10px] font-bold uppercase tracking-wider text-[#706B64] block">Collection / Medium</label>
+                    <select name="category" onchange="this.form.submit()" class="w-full bg-[#FAF9F5] border border-[#D5CBB5] rounded-xl p-3 text-xs text-[#2C2A29] focus:outline-none focus:border-[#C86B45]">
+                        <option value="">All Mediums</option>
+                        <option value="paintings" {% if request.GET.category == 'paintings' %}selected{% endif %}>Original Paintings</option>
+                        <option value="pottery" {% if request.GET.category == 'pottery' %}selected{% endif %}>Handmade Pottery</option>
+                        <option value="ceramics" {% if request.GET.category == 'ceramics' %}selected{% endif %}>Sculptures & Ceramics</option>
+                        <option value="prints" {% if request.GET.category == 'prints' %}selected{% endif %}>Canvas & Fine Art Prints</option>
+                        <option value="accessories" {% if request.GET.category == 'accessories' %}selected{% endif %}>Art Supplies & Displays</option>
+                    </select>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="text-[10px] font-bold uppercase tracking-wider text-[#706B64] block">Availability</label>
+                    <select name="availability" onchange="this.form.submit()" class="w-full bg-[#FAF9F5] border border-[#D5CBB5] rounded-xl p-3 text-xs text-[#2C2A29] focus:outline-none focus:border-[#C86B45]">
+                        <option value="all">All Items</option>
+                        <option value="available" {% if request.GET.availability == 'available' %}selected{% endif %}>In Stock / Available</option>
+                        <option value="masterworks" {% if request.GET.availability == 'masterworks' %}selected{% endif %}>One-off Masterworks (1 Left)</option>
+                    </select>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="text-[10px] font-bold uppercase tracking-wider text-[#706B64] block">Valuation Range</label>
+                    <select name="price_range" onchange="this.form.submit()" class="w-full bg-[#FAF9F5] border border-[#D5CBB5] rounded-xl p-3 text-xs text-[#2C2A29] focus:outline-none focus:border-[#C86B45]">
+                        <option value="all">Any Price</option>
+                        <option value="0-999" {% if request.GET.price_range == '0-999' %}selected{% endif %}>Rs.0 - Rs.999</option>
+                        <option value="1000-4999" {% if request.GET.price_range == '1000-4999' %}selected{% endif %}>Rs.1,000 - Rs.4,999</option>
+                        <option value="5000-9999" {% if request.GET.price_range == '5000-9999' %}selected{% endif %}>Rs.5,000 - Rs.9,999</option>
+                        <option value="10000-49999" {% if request.GET.price_range == '10000-49999' %}selected{% endif %}>Rs.10,000 - Rs.49,999</option>
+                        <option value="50000+" {% if request.GET.price_range == '50000+' %}selected{% endif %}>Rs.50,000+</option>
+                    </select>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="text-[10px] font-bold uppercase tracking-wider text-[#706B64] block">Sort Catalog</label>
+                    <select name="sort" onchange="this.form.submit()" class="w-full bg-[#FAF9F5] border border-[#D5CBB5] rounded-xl p-3 text-xs text-[#2C2A29] focus:outline-none focus:border-[#C86B45]">
+                        <option value="latest" {% if request.GET.sort == 'latest' %}selected{% endif %}>Recently Added</option>
+                        <option value="price_asc" {% if request.GET.sort == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
+                        <option value="price_desc" {% if request.GET.sort == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
+                    </select>
+                </div>
+
+                <div>
+                    <a href="/products/" class="bg-[#FAF9F5] hover:bg-[#EADCC9] text-[#706B64] hover:text-[#C86B45] text-[10px] font-bold uppercase tracking-widest border border-[#D5CBB5] h-[46px] rounded-xl transition-all flex items-center justify-center w-full">
+                        Reset Filters
+                    </a>
+                </div>
+            </div>
+        </form>
+
+        <div class="w-full">
+            {% if products %}
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    {% for product in products %}
+                        <div class="bg-white border border-[#EADCC9] rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-[#C86B45]/50 transition-all flex flex-col group relative">
+                            
+                            <a href="/products/{{ product.id }}/" class="flex flex-col flex-grow">
+                                <div class="aspect-square w-full bg-[#FAF9F5] flex items-center justify-center p-4 relative overflow-hidden border-b border-[#EADCC9]">
+                                    {% if product.product_image %}
+                                        <img src="{{ product.product_image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500">
+                                    {% else %}
+                                        <div class="w-full h-full flex flex-col items-center justify-center bg-[#F3EFE9] rounded-xl">
+                                            <i data-lucide="palette" class="w-10 h-10 text-[#C4B9A3] group-hover:text-[#C86B45] transition-all duration-300"></i>
+                                            <span class="text-[9px] uppercase tracking-widest text-[#968D7B] font-bold mt-2">No Artwork Preview</span>
+                                        </div>
+                                    {% endif %}
+                                    
+                                    <span class="absolute top-3 left-3 bg-white/90 border border-[#EADCC9] backdrop-blur-md text-[9px] font-bold uppercase tracking-widest text-[#706B64] px-2.5 py-1 rounded-md">
+                                        {{ product.get_category_display }}
+                                    </span>
+
+                                    {% if product.stock == 1 %}
+                                        <span class="absolute top-3 right-3 bg-[#FBF1EC] border border-[#E8C5B5] backdrop-blur-md text-[8px] font-bold uppercase tracking-widest text-[#C86B45] px-2 py-0.5 rounded-md">
+                                            1-of-1 Original
+                                        </span>
+                                    {% endif %}
+                                </div>
+
+                                <div class="p-5 flex-grow space-y-2">
+                                    <h3 class="font-serif font-bold text-[#2C2A29] text-base tracking-tight group-hover:text-[#C86B45] transition-colors line-clamp-1">
+                                        {{ product.name }}
+                                    </h3>
+                                    <p class="text-xs text-[#706B64] leading-relaxed line-clamp-2">
+                                        {{ product.description| truncatechars:100 |default:"No description updated for this collection masterwork." }}
+                                    </p>
+                                </div>
+                            </a>
+
+                            <div class="p-5 pt-0">
+                                <div class="flex items-center justify-between pt-3 border-t border-[#F3EFE9]">
+                                    <div class="flex flex-col">
+                                        <span class="text-[9px] uppercase font-bold tracking-wider text-[#968D7B]">Valuation</span>
+                                        <span class="text-base font-bold text-[#2C2A29]">Rs. {{ product.price|floatformat:2 }}</span>
+                                    </div>
+
+                                    {% if user.is_authenticated and not user.is_staff %}
+                                        {% if product.stock > 0 %}
+                                            <a href="/cart/add/{{ product.id }}/" class="bg-[#FAF9F5] hover:bg-[#C86B45] text-[#706B64] hover:text-white w-9 h-9 rounded-xl transition-all border border-[#D5CBB5] hover:border-[#C86B45] flex items-center justify-center shadow-sm z-10">
+                                                <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                                            </a>
+                                        {% else %}
+                                            <p class="text-[10px] font-bold text-[#968D7B] uppercase tracking-wider bg-[#F3EFE9] px-2 py-1 rounded-md border border-[#EADCC9]">Acquired</p>
+                                        {% endif %}
+                                    {% elif user.is_staff %}
+                                        <a href="/dashboard/admin/?section=product-management" class="bg-[#FAF9F5] hover:bg-[#C86B45] text-[#706B64] hover:text-white w-9 h-9 rounded-xl transition-all border border-[#D5CBB5] hover:border-[#C86B45] flex items-center justify-center shadow-sm z-10">
+                                            <i data-lucide="settings" class="w-4 h-4"></i>
+                                        </a>
+                                    {% else %}
+                                        <a href="/login/" class="bg-[#FAF9F5] hover:bg-[#C86B45] text-[#706B64] hover:text-white w-9 h-9 rounded-xl transition-all border border-[#D5CBB5] hover:border-[#C86B45] flex items-center justify-center shadow-sm z-10">
+                                            <i data-lucide="log-in" class="w-4 h-4"></i>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="flex flex-col items-center justify-center text-center py-24 border border-dashed border-[#D5CBB5] rounded-3xl bg-white">
+                    <div class="w-16 h-16 bg-[#FAF9F5] rounded-2xl flex items-center justify-center border border-[#EADCC9] mb-4">
+                        <i data-lucide="palette" class="w-7 h-7 text-[#C4B9A3]"></i>
+                    </div>
+                    <h3 class="text-[#2C2A29] font-bold text-base tracking-tight">No Artworks Found</h3>
+                    <p class="text-xs text-[#706B64] mt-1 max-w-xs leading-relaxed mb-6">No pieces match your selected curation settings. Reset filters to see all available art masterworks.</p>
+                    <a href="/products/" class="bg-[#FAF9F5] hover:bg-[#EADCC9] border border-[#D5CBB5] text-[#2C2A29] font-bold px-6 py-3.5 rounded-xl text-xs uppercase tracking-widest transition-all">
+                        Reset Search Grid
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+
+    {% include 'components/_footer.html' %}
+
+    <script src="{% static 'js/lucide.min.js' %}"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
