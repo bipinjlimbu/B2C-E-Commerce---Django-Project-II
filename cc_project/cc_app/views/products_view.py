@@ -49,3 +49,18 @@ def add_product_view(request):
         return redirect('/dashboard/admin/?section=product-management')
     
     return render(request, 'main/add_products_page.html')
+
+@login_required
+def delete_product_view(request, product_id):
+    if not request.user.is_staff:
+        messages.error(request, "You do not have permission to delete products.")
+        return redirect('/')
+    
+    try:
+        product = Product.objects.get(id=product_id)
+        product.delete()
+        messages.success(request, f"Product '{product.name}' deleted successfully.")
+    except Product.DoesNotExist:
+        messages.error(request, "Product not found.")
+    
+    return redirect('/dashboard/admin/?section=product-management')
