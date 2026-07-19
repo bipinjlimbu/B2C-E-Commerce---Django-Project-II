@@ -36,3 +36,26 @@ def admin_dashboard_view(request):
         context['revenue_logs'] = None
         
     return render(request,'dashboard/admin_dashboard.html', context)
+
+@login_required
+def customer_dashboard_view(request):
+    if request.user.is_staff:
+        messages.error(request, "Staff members do not have a customer dashboard.")
+        return redirect('/dashboard/admin/')
+    
+    section = request.GET.get('section', 'pending-orders')
+    
+    context = {
+        'section': section,
+    }
+    
+    if section == 'pending-orders':
+        context['pending_orders'] = None
+    elif section == 'my-orders':
+        context['my_orders'] = None
+    elif section == 'total-spent':
+        context['total_spent'] = None
+    elif section == 'my-reviews':
+        context['my_reviews'] = None
+        
+    return render(request, 'dashboard/customer_dashboard.html', context)
