@@ -51,6 +51,11 @@ def add_product_view(request):
     return render(request, 'main/add_products_page.html')
 
 @login_required
+def edit_product_view(request, product_id):
+    product = Product.objects.get(id=product_id)
+    return render(request, 'main/edit_products_page.html', {'product': product})
+
+@login_required
 def toggle_product_status_view(request, product_id):
     if not request.user.is_staff:
         messages.error(request, "You do not have permission to change product status.")

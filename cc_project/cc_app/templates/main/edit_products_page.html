@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product | ClayCanvas</title>
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+</head>
+<body class="bg-[#fcfbf9] font-sans min-h-screen flex flex-col text-neutral-800">
+
+    {% include 'components/_navbar.html' %}
+
+    {% include 'components/_messages.html' %}
+
+    <main class="flex-grow flex items-center justify-center p-4 sm:p-6 lg:p-8">
+        <form method="POST" enctype="multipart/form-data" class="w-full max-w-4xl bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm p-8 lg:p-12 space-y-8">
+            {% csrf_token %}
+            
+            <div>
+                <h2 class="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-1">Catalog Architecture</h2>
+                <h1 class="text-2xl font-serif font-normal text-neutral-900 tracking-tight">Modify Asset</h1>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <div class="space-y-6 md:col-span-2">
+                    <div class="bg-[#f9f5f0] border border-gray-200 p-4 rounded-xl focus-within:border-orange-700 transition-colors">
+                        <label for="id_name" class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 block mb-1">Product Title</label>
+                        <input type="text" id="id_name" name="name" {% if data %} value="{{ data.name }}" {% else %} value="{{ product.name }}" {% endif %} maxlength="255" placeholder="e.g. Whispering Sands Ceramic Vase" class="w-full bg-transparent text-sm font-medium text-neutral-900 focus:outline-none placeholder-neutral-400">
+                        {% if errors.name %}
+                            <p class="text-rose-600 text-xs mt-1 font-medium">{{ errors.name }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="bg-[#f9f5f0] border border-gray-200 p-4 rounded-xl focus-within:border-orange-700 transition-colors md:col-span-2">
+                    <label for="id_category" class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 block mb-1">System Category</label>
+                    <select id="id_category" name="category" class="w-full bg-transparent text-sm font-medium text-neutral-900 focus:outline-none cursor-pointer">
+                        <option value="" disabled class="bg-white text-neutral-400">Select Allocation Segment</option>
+                        <option value="paintings" {% if data %} {% if data.category == 'paintings' %}selected{% endif %} {% else %} {% if product.category == 'paintings' %}selected{% endif %} {% endif %} class="bg-white text-neutral-900">Original Paintings</option>
+                        <option value="pottery" {% if data %} {% if data.category == 'pottery' %}selected{% endif %} {% else %} {% if product.category == 'pottery' %}selected{% endif %} {% endif %} class="bg-white text-neutral-900">Handmade Pottery</option>
+                        <option value="ceramics" {% if data %} {% if data.category == 'ceramics' %}selected{% endif %} {% else %} {% if product.category == 'ceramics' %}selected{% endif %} {% endif %} class="bg-white text-neutral-900">Sculptures & Ceramics</option>
+                        <option value="prints" {% if data %} {% if data.category == 'prints' %}selected{% endif %} {% else %} {% if product.category == 'prints' %}selected{% endif %} {% endif %} class="bg-white text-neutral-900">Canvas & Fine Art Prints</option>
+                        <option value="accessories" {% if data %} {% if data.category == 'accessories' %}selected{% endif %} {% else %} {% if product.category == 'accessories' %}selected{% endif %} {% endif %} class="bg-white text-neutral-900">Art Supplies & Displays</option>
+                    </select>
+                    {% if errors.category %}
+                        <p class="text-rose-600 text-xs mt-1 font-medium">{{ errors.category }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="bg-[#f9f5f0] border border-gray-200 p-4 rounded-xl focus-within:border-orange-700 transition-colors">
+                    <label for="id_price" class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 block mb-1">Valuation Price (Rs.)</label>
+                    <input type="number" id="id_price" name="price" step="0.01" min="0" {% if data %} value="{{ data.price }}" {% else %} value="{{ product.price|stringformat:".2f" }}" {% endif %} placeholder="0.00" class="w-full bg-transparent text-sm font-semibold text-neutral-900 focus:outline-none placeholder-neutral-400 font-mono">
+                    {% if errors.price %}
+                        <p class="text-rose-600 text-xs mt-1 font-medium">{{ errors.price }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="bg-[#f9f5f0] border border-gray-200 p-4 rounded-xl focus-within:border-orange-700 transition-colors">
+                    <label for="id_stock" class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 block mb-1">Stock Metric Quantity</label>
+                    <input type="number" id="id_stock" name="stock" min="0" {% if data %} value="{{ data.stock }}" {% else %} value="{{ product.stock }}" {% endif %} placeholder="1" class="w-full bg-transparent text-sm font-semibold text-neutral-900 focus:outline-none placeholder-neutral-400 font-mono">
+                    {% if errors.stock %}
+                        <p class="text-rose-600 text-xs mt-1 font-medium">{{ errors.stock }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="space-y-6 md:col-span-2">
+                    <div class="bg-[#f9f5f0] border border-gray-200 p-4 rounded-xl focus-within:border-orange-700 transition-colors">
+                        <label for="id_description" class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 block mb-1">Detailed Description & Dimensions</label>
+                        <textarea id="id_description" name="description" rows="5" placeholder="Detailed description of the artwork, dimensions, and materials used." class="w-full bg-transparent text-sm font-medium text-neutral-900 focus:outline-none placeholder-neutral-400 resize-none leading-relaxed">{% if data %}{{ data.description }}{% else %}{{ product.description }}{% endif %}</textarea>
+                        {% if errors.description %}
+                            <p class="text-rose-600 text-xs mt-1 font-medium">{{ errors.description }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="space-y-6 md:col-span-2">
+                    <div class="bg-[#f9f5f0] border border-gray-200 p-6 rounded-xl flex flex-col items-center justify-center text-center group transition-colors relative">
+                        <div class="space-y-4 w-full">
+                            {% if product.product_image %}
+                                <div class="flex flex-col items-center gap-2">
+                                    <p class="text-[10px] font-bold uppercase tracking-widest text-neutral-400">Current Artwork Imagery</p>
+                                    <div class="w-32 h-32 rounded-xl bg-white border border-gray-200 p-2 flex items-center justify-center overflow-hidden shadow-sm">
+                                        <img src="{{ product.product_image.url }}" alt="{{ product.name }}" class="max-w-full max-h-full object-cover rounded-lg">
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            <div class="space-y-2">
+                                <div class="w-12 h-12 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-neutral-400 mx-auto group-hover:border-orange-700 transition-colors shadow-sm">
+                                    <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+                                </div>
+                                <div class="flex text-xs text-neutral-500 justify-center">
+                                    <label for="id_product_image" class="relative cursor-pointer rounded-md font-semibold text-orange-800 hover:text-orange-900 focus-within:outline-none">
+                                        <span>Replace asset imagery</span>
+                                        <input id="id_product_image" name="product_image" type="file" accept="image/*" class="sr-only">
+                                    </label>
+                                </div>
+                                <p class="text-[10px] text-neutral-400 uppercase tracking-wider">Image files up to 10MB</p>
+                            </div>
+                        </div>
+                        {% if errors.product_image %}
+                            <p class="text-rose-600 text-xs mt-2 font-medium">{{ errors.product_image }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 bg-[#f9f5f0] border border-gray-200 p-4 rounded-xl flex items-center justify-between">
+                    <div>
+                        <label for="id_is_active" class="text-xs font-bold uppercase tracking-widest text-neutral-800 block">Visibility Status</label>
+                        <p class="text-[10px] text-neutral-400 uppercase tracking-wider">Toggle asset distribution inside active live storefront matrix</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="id_is_active" name="is_active" value="true" {% if data %}{% if data.is_active %}checked{% endif %}{% else %}{% if product.is_active %}checked{% endif %}{% endif %} class="sr-only peer">
+                        <div class="w-8 h-4 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-orange-700"></div>
+                    </label>
+                </div>
+
+            </div>
+
+            <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                <button type="submit" class="flex-grow sm:flex-none bg-neutral-900 hover:bg-neutral-800 text-white font-semibold py-3 px-6 rounded-xl transition-colors flex items-center justify-center gap-2 text-xs uppercase tracking-wider shadow-sm">
+                    <i data-lucide="save" class="w-4 h-4"></i>
+                    Save Changes
+                </button>
+                <a href="/dashboard/admin/?section=product-management" class="flex-grow sm:flex-none bg-white hover:bg-neutral-50 text-neutral-600 font-semibold py-3 px-6 rounded-xl transition-colors flex items-center justify-center gap-2 text-xs uppercase tracking-wider border border-gray-200 shadow-sm">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </main>
+
+    {% include 'components/_footer.html' %}
+
+    <script src="{% static 'js/lucide.min.js' %}"></script>
+    <script>
+        lucide.createIcons();
+        
+        document.getElementById('id_product_image').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name;
+            if (fileName) {
+                const labelContainer = e.target.closest('.space-y-2');
+                const textElement = labelContainer.querySelector('span');
+                textElement.textContent = fileName;
+                textElement.className = "text-emerald-700 font-mono text-xs font-semibold";
+            }
+        });
+    </script>
+</body>
+</html>
