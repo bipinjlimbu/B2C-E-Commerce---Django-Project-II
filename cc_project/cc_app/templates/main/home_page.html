@@ -134,26 +134,30 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                {% for i in '1234' %}
+                {% for product in products %}
                 <div class="bg-stone-50 border border-stone-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col group relative">
                     
-                    <a href="/products/1/" class="flex flex-col flex-grow">
+                    <a href="/products/{{ product.id }}/" class="flex flex-col flex-grow">
                         <div class="aspect-square w-full bg-stone-100 flex items-center justify-center p-2 relative overflow-hidden border-b border-stone-200/60">
                             <div class="w-full h-full flex flex-col items-center justify-center bg-white rounded-lg">
-                                <i data-lucide="brush" class="w-8 h-8 text-stone-300 group-hover:text-orange-600 transition-colors duration-300"></i>
-                                <span class="text-[9px] uppercase tracking-widest text-stone-400 font-bold mt-2">No Graphic Log</span>
+                                {% if product.product_image %}
+                                    <img src="{{ product.product_image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                                {% else %}
+                                    <i data-lucide="brush" class="w-8 h-8 text-stone-300 group-hover:text-orange-600 transition-colors duration-300"></i>
+                                    <span class="text-[9px] uppercase tracking-widest text-stone-400 font-bold mt-2">No Graphic Log</span>
+                                {% endif %}
                             </div>
                             <span class="absolute top-3 left-3 bg-white/90 border border-stone-200 backdrop-blur-sm text-[10px] font-medium tracking-wide text-stone-700 px-2.5 py-0.5 rounded">
-                                Handmade Pottery
+                                {{ product.get_category_display }}
                             </span>
                         </div>
 
                         <div class="p-5 flex-grow space-y-2">
                             <h3 class="font-serif text-stone-900 text-base group-hover:text-orange-700 transition-colors line-clamp-1">
-                                Terracotta Vase Studio Piece
+                                {{ product.name }}
                             </h3>
                             <p class="text-xs text-stone-500 font-normal leading-relaxed line-clamp-2">
-                                Hand-turned ceramic composition left raw or coated in studio glazes. Perfect choice for minimal setup profiles.
+                                {{ product.description |truncatechars:100|default:"No description available." }}
                             </p>
                         </div>
                     </a>
@@ -162,7 +166,7 @@
                         <div class="flex items-center justify-between pt-4 border-t border-stone-200/60">
                             <div class="flex flex-col">
                                 <span class="text-[9px] uppercase font-bold tracking-wider text-stone-400">Valuation</span>
-                                <span class="text-base font-normal text-stone-900">Rs. 4500.00</span>
+                                <span class="text-base font-normal text-stone-900">Rs. {{ product.price }}</span>
                             </div>
 
                             {% if user.is_authenticated and not user.is_staff %}
@@ -181,6 +185,11 @@
                         </div>
                     </div>
                 </div>
+                {% empty %}
+                    <div class="col-span-full text-center py-12">
+                        <i data-lucide="box" class="w-8 h-8 text-stone-300 mx-auto mb-4"></i>
+                        <p class="text-sm text-stone-500">No products available at the moment. Please check back later.</p>
+                    </div>
                 {% endfor %}
             </div>
         </section>
