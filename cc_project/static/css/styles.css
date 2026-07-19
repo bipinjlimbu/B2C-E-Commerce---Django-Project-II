@@ -1453,6 +1453,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(209 250 229 / var(--tw-border-opacity));
 }
 
+.border-rose-100 {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 228 230 / var(--tw-border-opacity));
+}
+
 .border-t-transparent {
   border-top-color: transparent;
 }
@@ -1637,6 +1642,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-amber-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(255 251 235 / var(--tw-bg-opacity));
+}
+
+.bg-rose-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 241 242 / var(--tw-bg-opacity));
 }
 
 .bg-\[linear-gradient\(to_right\2c \#e5d5c5_1px\2c transparent_1px\)\2c linear-gradient\(to_bottom\2c \#e5d5c5_1px\2c transparent_1px\)\] {
@@ -2715,6 +2725,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .hover\:text-rose-600:hover {
   --tw-text-opacity: 1;
   color: rgb(225 29 72 / var(--tw-text-opacity));
+}
+
+.hover\:text-stone-600:hover {
+  --tw-text-opacity: 1;
+  color: rgb(87 83 78 / var(--tw-text-opacity));
 }
 
 .hover\:shadow-md:hover {
