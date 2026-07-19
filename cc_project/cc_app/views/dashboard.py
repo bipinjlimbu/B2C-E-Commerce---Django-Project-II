@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from ..models import User
 
 @login_required
 def admin_dashboard_view(request):
@@ -15,7 +16,7 @@ def admin_dashboard_view(request):
     }
     
     if section == 'customer-management':
-        context['customers'] = None
+        context['customers'] = User.objects.filter(is_staff=False).order_by('-date_joined')
         
     elif section == 'product-management':
         context['products'] = None
