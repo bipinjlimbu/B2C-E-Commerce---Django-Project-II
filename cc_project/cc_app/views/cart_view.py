@@ -33,3 +33,14 @@ def add_to_cart_view(request, product_id):
         
     messages.success(request, f'Added {product.name} to your cart.')
     return redirect('/products/')
+
+@login_required
+def cart_view(request):
+    if request.user.is_staff:
+        messages.error(request, "Staff members do not have a shopping cart.")
+        return redirect('/products/')
+    
+    cart, created = Cart.objects.get_or_create(customer=request.user)
+    cart_items = CartItem.objects.filter(cart=cart)    
+    total_price = sum(item.product.price * item.quantity for item in cart_items)
+    return render(request, 'main/cart_page.html', {'cart_items': cart_items, 'total_price': total_price})
