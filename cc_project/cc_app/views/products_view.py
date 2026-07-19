@@ -53,6 +53,50 @@ def add_product_view(request):
 @login_required
 def edit_product_view(request, product_id):
     product = Product.objects.get(id=product_id)
+    
+    if not request.user.is_staff:
+        messages.error(request, "You do not have permission to edit products.")
+        return redirect('/')
+    
+    if not product:
+        messages.error(request, "Product not found.")
+        return redirect('/dashboard/admin/?section=product-management')
+    
+    errors = {}
+    if request.method == 'POST':
+        name = request.POST.get('name', '').strip()
+        category = request.POST.get('category', '').strip()
+        description = request.POST.get('description', '').strip()
+        price = request.POST.get('price', '').strip()
+        stock = request.POST.get('stock', '').strip()
+        is_active = request.POST.get('is_active') == 'true'
+        product_image = request.FILES.get('product_image')
+        
+        if not name:
+            errors['name'] = "Product name is required."
+        if not category:
+            errors['category'] = "Category is required."
+        if not description:
+            errors['description'] = "Description is required."
+        if not price:
+            errors['price'] = "Price is required."
+        if not stock:
+            errors['stock'] = "Stock quantity is required."
+        if errors:
+            return render(request, 'main/edit_products_page.html', {'errors': errors, 'data': request.POST, 'product': product})
+        
+        product.name = name
+        product.category = category
+        product.description = description
+        product.price = price
+        product.stock = stock
+        product.is_active = is_active
+        if product_image:
+            product.product_image = product_image
+        product.save()
+        messages.success(request, f"Product '{product.name}' updated successfully.")
+        return redirect('/dashboard/admin/?section=product-management')
+    
     return render(request, 'main/edit_products_page.html', {'product': product})
 
 @login_required
