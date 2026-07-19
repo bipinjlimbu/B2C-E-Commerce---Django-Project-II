@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed | ClayCanvas</title>
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+</head>
+
+<body class="bg-stone-50 flex flex-col min-h-screen text-stone-800 font-sans">
+    {% include 'components/_navbar.html' %}
+
+    {% include 'components/_messages.html' %}
+
+    <main class="flex-grow flex items-center justify-center py-12 px-4">
+        <div class="bg-white rounded-[2rem] shadow-sm max-w-md w-full p-10 text-center border border-orange-100 border-b-[10px] border-b-emerald-600">
+            
+            <div class="flex justify-center mb-6">
+                <div class="bg-emerald-50 p-5 rounded-full relative group border border-emerald-100">
+                    <i data-lucide="palette" class="w-16 h-16 text-emerald-600 stroke-[2px]"></i>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <i data-lucide="check" class="w-6 h-6 text-emerald-700 stroke-[3px]"></i>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="text-3xl font-bold text-stone-950 tracking-tight uppercase mb-1 font-serif">
+                Order <span class="text-emerald-600">Confirmed</span>
+            </h2>
+            <p class="text-stone-500 mb-8 text-sm font-medium">Your artwork procurement has been processed successfully.</p>
+
+            <div class="bg-stone-50 rounded-2xl p-6 mb-8 text-left border border-orange-100 divide-y divide-orange-100">
+                <p class="flex justify-between py-3 items-center">
+                    <strong class="text-stone-400 uppercase text-[10px] tracking-[0.15em] font-bold">Order ID</strong> 
+                    <span class="text-stone-900 font-bold">#{{ order.id }}</span>
+                </p>
+                <p class="flex justify-between py-3 items-center">
+                    <strong class="text-stone-400 uppercase text-[10px] tracking-[0.15em] font-bold">Transaction Ref</strong> 
+                    <span class="text-stone-700 text-xs font-medium truncate ml-4">{{ order.transaction_id }}</span>
+                </p>
+                <p class="flex justify-between py-3 pt-4 items-baseline">
+                    <strong class="text-stone-400 uppercase text-[10px] tracking-[0.15em] font-bold">Total Settled</strong> 
+                    <span class="text-emerald-600 font-bold text-xl">Rs. {{ order.total_amount }}</span>
+                </p>
+            </div>
+
+            <a href="/" class="group flex items-center justify-center w-full bg-orange-700 text-white py-4 rounded-2xl font-bold uppercase tracking-wider hover:bg-orange-800 transition-all shadow-md hover:shadow-lg">
+                Return to Gallery
+                <i data-lucide="arrow-right" class="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </main>
+
+    {% include 'components/_footer.html' %}
+
+    <script src="{% static 'js/lucide.min.js' %}"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

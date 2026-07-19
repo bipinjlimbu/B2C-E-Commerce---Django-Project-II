@@ -85,3 +85,74 @@ def initiate_esewa_payment(request):
         return render(request, 'main/esewa_redirect_page.html', context)
     
     return redirect('cart')
+
+def payment_success_view(request):
+    encoded_data = request.GET.get('data')
+    if not encoded_data:
+        return redirect('payment_failed')
+
+    decoded_bytes = base64.b64decode(encoded_data)
+    decoded_data = json.loads(decoded_bytes.decode('utf-8'))
+    
+    product_code = "EPAYTEST"
+    transaction_uuid = decoded_data['transaction_uuid']
+    total_amount = decoded_data['total_amount']
+    shipping_address = decoded_data.get('shipping_address', '')
+    
+    # FIXED URL: uat.esewa.com.np is dead. Use rc-epay.
+    verify_url = "https://rc-epay.esewa.com.np/api/epay/transaction/status/"
+    params = {
+        'product_code': product_code,
+        'total_amount': total_amount,
+        'shipping_address': shipping_address,
+        'transaction_uuid': transaction_uuid
+    }
+    
+    try:
+        # Single request with timeout and params
+        response = requests.get(verify_url, params=params, timeout=10)
+        response.raise_for_status()
+        verification_status = response.json()
+    except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
+        messages.error(request, "Communication failure with eSewa. Check DNS/Internet.")
+        return redirect('payment_failed')
+    except Exception as e:
+        messages.error(request, f"Error: {str(e)}")
+        return redirect('payment_failed')
+
+    if verification_status.get('status') == "COMPLETE":
+        # --- DB SAVING LOGIC (AS PER YOUR ORIGINAL) ---
+        customer = request.user
+        cart_items = CartItem.objects.filter(cart__customer=customer)
+        
+        # 1. Create Main Order
+        order = Order.objects.create(
+            customer=customer,
+            total_amount=float(total_amount.replace(',', '')),
+            transaction_id=transaction_uuid,
+            status=Order.Status.PAID,
+            shipping_address=shipping_address,
+            payment_method=Order.PaymentMethod.ESEWA
+        )
+        
+        # 2. Move items from Cart to OrderItem
+        for item in cart_items:
+            OrderItem.objects.create(
+                order=order,
+                product=item.product,
+                price_at_purchase=item.product.price,
+                quantity=item.quantity
+            )
+            
+            product = item.product
+            product.stock -= item.quantity
+            product.save()
+        
+        # 3. Clear Cart
+        cart_items.delete()
+        
+        return render(request, 'main/payment_confirmed_page.html', {'order': order})
+
+    else:
+        messages.error(request, "Verification Failed. Protocol Aborted.")
+        return redirect('payment_failed')
