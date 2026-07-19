@@ -19,7 +19,7 @@ def initiate_esewa_payment(request):
                 customer=request.user,
                 total_amount=total_amount,
                 transaction_id=str(uuid.uuid4()),
-                status=Order.Status.PAID,
+                status=Order.Status.CONFIRMED,
                 shipping_address=shipping_address,
                 payment_method=Order.PaymentMethod.COD
             )
@@ -130,7 +130,7 @@ def payment_success_view(request):
             customer=customer,
             total_amount=float(total_amount.replace(',', '')),
             transaction_id=transaction_uuid,
-            status=Order.Status.PAID,
+            status=Order.Status.CONFIRMED,
             shipping_address=shipping_address,
             payment_method=Order.PaymentMethod.ESEWA
         )
