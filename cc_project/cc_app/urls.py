@@ -6,7 +6,7 @@ from .views.products_view import products_view, add_product_view, edit_product_v
 from .views.cart_view import cart_view, add_to_cart_view, increase_cart_item_quantity_view, decrease_cart_item_quantity_view, remove_from_cart_view
 from .views.payment_view import initiate_esewa_payment, payment_success_view, payment_failed_view
 from .views.order_view import dispatch_order_view, deliver_order_view, complete_order_view, cancel_order_view
-from .views.wishlist_view import wishlist_view, wishlist_toggle_view
+from .views.wishlist_view import wishlist_view, wishlist_toggle_view, remove_wishlist_view
 from .views.dashboard import admin_dashboard_view, customer_dashboard_view
 
 urlpatterns = [
@@ -37,6 +37,7 @@ urlpatterns = [
     path('order/cancel/<int:order_id>/', cancel_order_view, name='cancel_order'),
     path('wishlist/', wishlist_view, name='wishlist'),
     path('products/wishlist-toggle/<int:product_id>/', wishlist_toggle_view, name='wishlist_toggle'),
+    path('products/wishlist/remove/<int:product_id>/', remove_wishlist_view, name='remove_wishlist'),
     path('dashboard/admin/', admin_dashboard_view, name='admin_dashboard'),
     path('dashboard/', customer_dashboard_view, name='customer_dashboard'),
 ]

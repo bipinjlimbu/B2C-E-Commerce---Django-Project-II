@@ -5,10 +5,19 @@ from ..models import Wishlist, Product
 
 @login_required
 def wishlist_view(request):
-    return render(request, 'main/wishlist_page.html')
+    if request.user.is_staff:
+        messages.error(request, "Staff members cannot access the wishlist.")
+        return redirect('home')
+    
+    wishlist_items = Wishlist.objects.filter(customer=request.user)
+    return render(request, 'main/wishlist_page.html',{'wishlist_items':wishlist_items})
 
 @login_required
 def wishlist_toggle_view(request, product_id):
+    if request.user.is_staff:
+        messages.error(request, "Staff members cannot modify the wishlist.")
+        return redirect('home')
+    
     try:
         product = Product.objects.get(id=product_id)
     except Product.DoesNotExist:
@@ -24,3 +33,20 @@ def wishlist_toggle_view(request, product_id):
         messages.success(request, f"{product.name} added to your wishlist.")
 
     return redirect(f'/products/{ product.id }/')
+
+@login_required
+def remove_wishlist_view(request, product_id):
+    if request.user.is_staff:
+        messages.error(request, "Staff members cannot modify the wishlist.")
+        return redirect('home')
+
+    try:
+        wishlist_item = Wishlist.objects.get(customer=request.user, product_id=product_id)
+    except Wishlist.DoesNotExist:
+        messages.error(request, "Wishlist item not found.")
+        return redirect('wishlist')
+
+    wishlist_item.delete()
+    messages.success(request, "Item removed from your wishlist.")
+
+    return redirect('wishlist')
