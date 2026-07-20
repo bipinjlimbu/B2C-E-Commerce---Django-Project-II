@@ -65,3 +65,20 @@ def complete_order_view(request, order_id):
     order.save()
     messages.success(request, "Order marked as completed successfully.")
     return redirect('/dashboard/?section=pending-orders')
+
+@login_required
+def cancel_order_view(request, order_id):
+    try:
+        order = Order.objects.get(id=order_id, customer=request.user)
+    except Order.DoesNotExist:
+        messages.error(request, "Order not found.")
+        return redirect('/dashboard/?section=pending-orders')
+
+    if order.status in [Order.Status.CONFIRMED, Order.Status.SHIPPING, Order.Status.DELIVERED]:
+        order.status = Order.Status.CANCELLED
+        order.save()
+        messages.success(request, "Order cancelled successfully.")
+    else:
+        messages.error(request, "Only confirmed or in-transit orders can be cancelled.")
+
+    return redirect('/dashboard/?section=pending-orders')
