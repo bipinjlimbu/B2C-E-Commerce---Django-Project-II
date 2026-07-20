@@ -5,6 +5,7 @@ from .views.profile_view import profile_view, edit_profile_view, delete_profile_
 from .views.products_view import products_view, add_product_view, edit_product_view, toggle_product_status_view, delete_product_view, single_product_view
 from .views.cart_view import cart_view, add_to_cart_view, increase_cart_item_quantity_view, decrease_cart_item_quantity_view, remove_from_cart_view
 from .views.payment_view import initiate_esewa_payment, payment_success_view, payment_failed_view
+from .views.order_view import dispatch_order_view
 from .views.dashboard import admin_dashboard_view, customer_dashboard_view
 
 urlpatterns = [
@@ -29,6 +30,7 @@ urlpatterns = [
     path('payment/initiate/', initiate_esewa_payment, name='initiate_payment'),
     path('payment/success/', payment_success_view, name='payment_success'),
     path('payment/failed/', payment_failed_view, name='payment_failed'),
+    path('order/dispatch/<int:order_id>/', dispatch_order_view, name='dispatch_order'),
     path('dashboard/admin/', admin_dashboard_view, name='admin_dashboard'),
     path('dashboard/', customer_dashboard_view, name='customer_dashboard'),
 ]
