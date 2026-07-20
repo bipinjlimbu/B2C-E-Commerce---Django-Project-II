@@ -7,6 +7,10 @@ from ..models import Product, Review
 def add_review_view(request, product_id):
     product = Product.objects.get(id=product_id)
     
+    if Review.objects.filter(product=product, customer=request.user).exists():
+        messages.error(request, "You have already reviewed this product.")
+        return redirect(f'/products/{product.id}/')
+    
     errors = {}
     if request.method == 'POST':
         rating = request.POST.get('rating')
@@ -57,3 +61,15 @@ def edit_review_view(request, review_id):
         return redirect(f'/products/{review.product.id}/')
     
     return render(request, 'main/edit_review_page.html', {'review': review})
+
+@login_required
+def delete_review_view(request, review_id):
+    review = Review.objects.get(id=review_id)
+    
+    if review.customer != request.user and not request.user.is_staff:
+        messages.error(request, "You do not have permission to delete this review.")
+        return redirect(f'/products/{review.product.id}/')
+    
+    review.delete()
+    messages.success(request, "Review deleted successfully.")
+    return redirect(f'/products/{review.product.id}/')
