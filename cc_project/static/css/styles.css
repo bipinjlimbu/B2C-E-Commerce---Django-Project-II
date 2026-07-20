@@ -953,6 +953,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 2.75rem;
 }
 
+.w-\[20\%\] {
+  width: 20%;
+}
+
+.w-\[25\%\] {
+  width: 25%;
+}
+
+.w-\[15\%\] {
+  width: 15%;
+}
+
 .min-w-\[320px\] {
   min-width: 320px;
 }
@@ -967,6 +979,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .min-w-\[110px\] {
   min-width: 110px;
+}
+
+.min-w-\[800px\] {
+  min-width: 800px;
 }
 
 .max-w-md {
@@ -1300,6 +1316,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(243 244 246 / var(--tw-divide-opacity));
 }
 
+.divide-stone-100 > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-opacity: 1;
+  border-color: rgb(245 245 244 / var(--tw-divide-opacity));
+}
+
 .overflow-hidden {
   overflow: hidden;
 }
@@ -1535,6 +1556,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-orange-900 {
   --tw-border-opacity: 1;
   border-color: rgb(124 45 18 / var(--tw-border-opacity));
+}
+
+.border-stone-800 {
+  --tw-border-opacity: 1;
+  border-color: rgb(41 37 36 / var(--tw-border-opacity));
 }
 
 .border-t-transparent {
@@ -2027,6 +2053,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   text-align: right;
 }
 
+.align-middle {
+  vertical-align: middle;
+}
+
 .font-sans {
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
@@ -2387,6 +2417,16 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-orange-900 {
   --tw-text-opacity: 1;
   color: rgb(124 45 18 / var(--tw-text-opacity));
+}
+
+.text-orange-100 {
+  --tw-text-opacity: 1;
+  color: rgb(255 237 213 / var(--tw-text-opacity));
+}
+
+.text-stone-50 {
+  --tw-text-opacity: 1;
+  color: rgb(250 250 249 / var(--tw-text-opacity));
 }
 
 .underline {
@@ -2789,6 +2829,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .hover\:bg-neutral-50\/50:hover {
   background-color: rgb(250 250 250 / 0.5);
+}
+
+.hover\:bg-stone-50\/80:hover {
+  background-color: rgb(250 250 249 / 0.8);
 }
 
 .hover\:text-orange-700:hover {

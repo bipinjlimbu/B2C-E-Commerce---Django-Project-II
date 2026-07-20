@@ -1,0 +1,50 @@
+<div class="space-y-6">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+            <h2 class="text-xs font-bold uppercase tracking-widest text-orange-700 mb-1">Financial Audit</h2>
+            <h1 class="text-2xl font-bold text-stone-950 tracking-tight uppercase font-serif">Revenue Logs</h1>
+        </div>
+        <div class="flex items-center gap-3">
+            <div class="bg-stone-900 text-stone-50 px-4 py-2.5 rounded-xl border border-stone-800 text-xs font-bold font-serif shadow-sm">
+                Total Gross: Rs.{{ total_gross_revenue|floatformat:2 }}
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white border border-stone-200 rounded-2xl shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse min-w-[800px]">
+                <thead>
+                    <tr class="border-b border-stone-200 text-[10px] font-bold uppercase tracking-widest text-stone-500 bg-stone-50">
+                        <th class="p-4 pl-6 w-[20%]">Order</th>
+                        <th class="p-4 w-[25%]">Customer Account</th>
+                        <th class="p-4 w-[25%]">Payment Method</th>
+                        <th class="p-4 w-[15%]">Captured Value</th>
+                        <th class="p-4 pr-6 text-right w-[15%]">Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-stone-100 text-sm font-semibold text-stone-800">
+                    {% for log in revenue_logs %}
+                        <tr class="hover:bg-stone-50/80 transition-colors">
+                            <td class="p-4 pl-6 align-middle">
+                                <span class="text-stone-950 block font-bold text-xs font-serif">#ORDER-{{ log.id }}</span>
+                            </td>
+                            <td class="p-4 align-middle">
+                                <span class="text-stone-950 block font-bold font-serif">{{ log.customer.get_full_name|default:"N/A" }}</span>
+                                <span class="text-[11px] font-sans font-medium text-stone-400 block">@{{ log.customer.username }}</span>
+                            </td>
+                            <td class="p-4 align-middle">
+                                <div class="flex items-center gap-1.5 text-xs font-medium text-stone-700">
+                                    <i data-lucide="credit-card" class="w-3.5 h-3.5 text-orange-700 shrink-0"></i>
+                                    <span>{{ log.get_payment_method_display }}</span>
+                                </div>
+                            </td>
+                            <td class="p-4 align-middle font-bold text-sm text-emerald-700 font-serif">+Rs.{{ log.total_amount|floatformat:2 }}</td>
+                            <td class="p-4 pr-6 text-right align-middle font-sans font-medium text-xs text-stone-400">{{ log.created_at|date:"Y-m-d H:i" }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
