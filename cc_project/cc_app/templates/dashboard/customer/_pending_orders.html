@@ -74,7 +74,7 @@
                                 <span>In Transit</span>
                             </div>
                         {% elif order.status == "delivered" %}
-                            <a href="/order/confirmed/{{ order.id }}" class="bg-orange-700 hover:bg-orange-800 text-white font-bold h-11 px-5 rounded-xl transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-widest shadow-md whitespace-nowrap active:scale-95">
+                            <a href="/order/complete/{{ order.id }}" class="bg-orange-700 hover:bg-orange-800 text-white font-bold h-11 px-5 rounded-xl transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-widest shadow-md whitespace-nowrap active:scale-95">
                                 <i data-lucide="check-circle-2" class="w-4 h-4 text-white"></i>
                                 <span>Mark as Received</span>
                             </a>

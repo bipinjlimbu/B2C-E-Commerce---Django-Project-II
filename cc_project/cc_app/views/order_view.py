@@ -44,3 +44,24 @@ def deliver_order_view(request, order_id):
     order.save()
     messages.success(request, "Order marked as delivered successfully.")
     return redirect('/dashboard/admin/?section=order-fulfillment')
+
+@login_required
+def complete_order_view(request, order_id):
+    if request.user.is_staff:
+        messages.error(request, "You do not have permission to complete orders.")
+        return redirect('/')
+    
+    try:
+        order = Order.objects.get(id=order_id, customer=request.user)
+    except Order.DoesNotExist:
+        messages.error(request, "Order not found.")
+        return redirect('/dashboard/?section=pending-orders')
+
+    if order.status != Order.Status.DELIVERED:
+        messages.error(request, "Only delivered orders can be marked as completed.")
+        return redirect('/dashboard/?section=pending-orders')
+
+    order.status = Order.Status.COMPLETED
+    order.save()
+    messages.success(request, "Order marked as completed successfully.")
+    return redirect('/dashboard/?section=pending-orders')
