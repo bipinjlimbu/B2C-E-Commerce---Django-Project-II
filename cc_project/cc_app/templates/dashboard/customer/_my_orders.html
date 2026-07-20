@@ -1,0 +1,73 @@
+<div class="space-y-6">
+    <div>
+        <h2 class="text-xs font-bold uppercase tracking-widest text-orange-700 mb-1">Acquisition History</h2>
+        <p class="text-2xl font-bold tracking-tight text-stone-950 uppercase font-serif">Purchase History</p>
+    </div>
+
+    <div class="space-y-4">
+        {% for order in orders %}
+            <div class="bg-white border border-orange-100 rounded-2xl p-6 min-h-[140px] flex flex-col lg:flex-row lg:items-center justify-between gap-6 hover:border-orange-200 transition-all shadow-sm group">
+                
+                <div class="space-y-4 flex-grow w-full">
+                    
+                    <div class="flex flex-wrap items-center gap-3">
+                        <span class="font-bold text-base text-stone-950 font-serif">#ORDER-{{ order.id }}</span>
+                        <span class="text-xs text-stone-400 font-medium">| Registered: {{ order.created_at }}</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-4xl">
+                        
+                        {% for item in order.items.all %}
+                            <div class="flex items-center gap-3 bg-stone-50 border border-orange-100/60 p-2 rounded-xl">
+                                <div class="w-10 h-10 bg-white border border-orange-100 rounded-lg overflow-hidden flex items-center justify-center p-1 shrink-0">
+                                    {% if item.product.product_image %}
+                                        <img src="{{ item.product.product_image.url }}" alt="{{ item.product.name }}" class="w-full h-full object-cover rounded-sm">
+                                    {% else %}
+                                        <i data-lucide="palette" class="w-5 h-5 text-stone-300"></i>
+                                    {% endif %}
+                                </div>
+                                <span class="text-stone-800 text-xs font-bold tracking-tight truncate font-serif">
+                                    {{ item.product.name }} <span class="text-orange-800 font-sans font-medium ml-1">× {{ item.quantity }}</span>
+                                </span>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap sm:flex-nowrap items-center justify-between lg:justify-end gap-6 border-t lg:border-t-0 border-stone-100 pt-4 lg:pt-0 shrink-0 w-full lg:w-auto">
+                    
+                    <div class="flex flex-col lg:text-right">
+                        <span class="text-[9px] uppercase font-bold tracking-wider text-stone-400">Total Price</span>
+                        <div class="flex items-baseline gap-0.5">
+                            <span class="text-xs font-bold text-stone-500 mr-0.5">Rs.</span>
+                            <span class="text-base font-bold text-orange-950 font-serif">{{ order.total_amount }}</span>
+                        </div>
+                    </div>
+
+                    <div class="shrink-0">
+                        {% if order.status == 'completed' %}
+                            <div class="bg-emerald-50 border border-emerald-100 text-emerald-700 font-bold h-10 px-5 rounded-xl flex items-center justify-center text-[10px] uppercase tracking-widest select-none min-w-[110px]">
+                                Completed
+                            </div>
+                        {% else %}
+                            <div class="bg-rose-50 border border-rose-100 text-rose-700 font-bold h-10 px-5 rounded-xl flex items-center justify-center text-[10px] uppercase tracking-widest select-none min-w-[110px]">
+                                Cancelled
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                </div>
+
+            </div>
+        {% empty %}
+            <div class="flex flex-col items-center justify-center text-center p-12 bg-white border border-dashed border-orange-200 rounded-2xl min-h-[220px]">
+                <div class="w-12 h-12 rounded-xl bg-stone-50 border border-orange-100 flex items-center justify-center mb-4 text-stone-400">
+                    <i data-lucide="history" class="w-5 h-5"></i>
+                </div>
+                <h3 class="text-sm font-bold text-stone-900 uppercase tracking-wider mb-1 font-serif">No Past Orders</h3>
+                <p class="text-xs text-stone-500 max-w-xs font-medium">You have no completed or archived artwork orders in your history.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>

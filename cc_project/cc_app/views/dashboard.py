@@ -52,7 +52,7 @@ def customer_dashboard_view(request):
     if section == 'pending-orders':
         context['pending_orders'] = Order.objects.exclude(customer=request.user, status__in=['completed', 'cancelled']).order_by('-created_at')
     elif section == 'my-orders':
-        context['my_orders'] = None
+        context['orders'] = Order.objects.filter(customer=request.user, status__in=['completed', 'cancelled']).order_by('-created_at')
     elif section == 'total-spent':
         context['total_spent'] = None
     elif section == 'my-reviews':
