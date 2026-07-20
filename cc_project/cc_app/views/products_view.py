@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
-from ..models import User, Product, Wishlist
+from ..models import User, Product, Wishlist, Review
 
 @login_required
 def products_view(request):
@@ -192,5 +192,7 @@ def single_product_view(request, product_id):
         product.in_wishlist = True
     else:
         product.in_wishlist = False
+        
+    reviews = Review.objects.filter(product=product).order_by('-created_at')
     
-    return render(request, 'main/single_product_page.html', {'product': product})
+    return render(request, 'main/single_product_page.html', {'product': product, 'reviews': reviews})
