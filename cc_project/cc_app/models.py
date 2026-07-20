@@ -66,7 +66,6 @@ class CartItem(models.Model):
 class Order(models.Model):
     class Status(models.TextChoices):
         CONFIRMED = 'confirmed', 'Order Confirmed'
-        PROCESSING = 'processing', 'Packaging Artwork'
         SHIPPING = 'shipping', 'In Transit'
         DELIVERED = 'delivered', 'Delivered'
         COMPLETED = 'completed', 'Completed'
