@@ -97,13 +97,15 @@
                     {% endif %}
 
                     <div class="flex gap-2 w-full sm:w-auto">
-                        <a href="/products/wishlist-toggle/{{ product.id }}/" class="bg-white hover:bg-stone-50 text-orange-700 w-12 h-12 rounded-xl transition-all flex items-center justify-center border border-orange-200 shadow-sm" title="Wishlist">
-                        {% if product.in_wishlist %}
-                            <i data-lucide="heart" class="w-4 h-4 fill-current"></i>
-                        {% else %}
-                            <i data-lucide="heart" class="w-4 h-4"></i>
+                        {% if not request.user.is_staff %}
+                            <a href="/products/wishlist-toggle/{{ product.id }}/" class="bg-white hover:bg-stone-50 text-orange-700 w-12 h-12 rounded-xl transition-all flex items-center justify-center border border-orange-200 shadow-sm" title="Wishlist">
+                            {% if product.in_wishlist %}
+                                <i data-lucide="heart" class="w-4 h-4 fill-current"></i>
+                            {% else %}
+                                <i data-lucide="heart" class="w-4 h-4"></i>
+                            {% endif %}
+                            </a>
                         {% endif %}
-                        </a>
 
                         <a href="javascript:history.back()" class="bg-transparent hover:bg-stone-100 text-stone-500 hover:text-stone-800 font-bold py-4 px-6 rounded-xl transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-widest border border-stone-300 whitespace-nowrap">
                             Back
