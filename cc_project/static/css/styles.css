@@ -1784,6 +1784,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   fill: currentColor;
 }
 
+.fill-amber-500 {
+  fill: #f59e0b;
+}
+
 .stroke-\[2px\] {
   stroke-width: 2px;
 }
