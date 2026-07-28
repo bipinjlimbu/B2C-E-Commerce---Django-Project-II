@@ -115,7 +115,7 @@
             </div>
         </div>
 
-        <div class="border-t border-[#DDD2C5] pt-16 space-y-10">
+        <div class="border-t border-[#DDD2C5] pt-16 space-y-8">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
                     <h2 class="text-xs font-bold uppercase tracking-widest text-[#B65E3C] mb-1">Feedback</h2>
@@ -143,21 +143,21 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex flex-col space-y-4 w-full">
                 {% for review in reviews %}
-                <div class="bg-[#FFFCF7] border border-[#DDD2C5] p-6 rounded-2xl flex flex-col justify-between space-y-4 hover:border-[#B65E3C]/50 transition-all relative group shadow-sm">
+                <div class="w-full bg-[#FFFCF7] border border-[#DDD2C5] p-6 rounded-2xl flex flex-col space-y-4 hover:border-[#B65E3C]/50 transition-all relative group shadow-sm">
                     
                     {% if review.customer == request.user or request.user.is_staff %}
                     <div class="absolute top-4 right-4 flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
-                            {% if review.customer == request.user %}
-                                <a href="/review/edit/{{ review.id }}/" class="w-7 h-7 bg-[#FFFCF7] hover:bg-[#F8F3EC] border border-[#DDD2C5] rounded-lg flex items-center justify-center text-[#6B5E53] hover:text-[#4A3428] transition-colors" title="Edit Review">
-                                    <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
-                                </a>
-                            {% endif %}
-                            <a href="/review/delete/{{ review.id }}/" class="w-7 h-7 bg-[#FFFCF7] hover:bg-rose-50 border border-[#DDD2C5] hover:border-rose-200 rounded-lg flex items-center justify-center text-[#6B5E53] hover:text-rose-600 transition-colors" title="Delete Review">
-                                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                        {% if review.customer == request.user %}
+                            <a href="/review/edit/{{ review.id }}/" class="w-7 h-7 bg-[#FFFCF7] hover:bg-[#F8F3EC] border border-[#DDD2C5] rounded-lg flex items-center justify-center text-[#6B5E53] hover:text-[#4A3428] transition-colors" title="Edit Review">
+                                <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
                             </a>
-                        </div>
+                        {% endif %}
+                        <a href="/review/delete/{{ review.id }}/" class="w-7 h-7 bg-[#FFFCF7] hover:bg-rose-50 border border-[#DDD2C5] hover:border-rose-200 rounded-lg flex items-center justify-center text-[#6B5E53] hover:text-rose-600 transition-colors" title="Delete Review">
+                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                        </a>
+                    </div>
                     {% endif %}
 
                     <div class="space-y-3">
@@ -176,7 +176,7 @@
                                 </div>
                             </div>
                             
-                            <div class="text-[#B65E3C] flex {% if review.customer == request.user %}group-hover:opacity-0 transition-opacity duration-200 pr-1{% endif %}">
+                            <div class="text-[#B65E3C] flex {% if review.customer == request.user or request.user.is_staff %}group-hover:opacity-0 transition-opacity duration-200 pr-16 md:pr-1{% endif %}">
                                 {% for i in "12345" %}
                                     {% if forloop.counter <= review.rating %}
                                         <i data-lucide="star" class="w-3 h-3 fill-current"></i>
@@ -193,9 +193,9 @@
                     <span class="text-[9px] text-[#6B5E53]/60 uppercase tracking-widest">{{ review.created_at|timesince }} ago</span>
                 </div>
                 {% empty %}
-                <div class="bg-[#FFFCF7] border border-[#DDD2C5] p-6 rounded-2xl flex flex-col justify-center items-center space-y-4 shadow-sm w-full col-span-1 md:col-span-2 py-12">
-                    <i data-lucide="message-square" class="w-12 h-12 text-[#6B5E53]/40"></i>
-                    <p class="text-sm font-bold text-[#6B5E53]/70">No reviews have been logged for this artwork yet.</p>
+                <div class="bg-[#FFFCF7] border border-[#DDD2C5] p-8 rounded-2xl flex flex-col justify-center items-center space-y-3 shadow-sm w-full text-center py-12">
+                    <i data-lucide="message-square" class="w-10 h-10 text-[#6B5E53]/40"></i>
+                    <p class="text-xs font-bold text-[#6B5E53]/70">No reviews have been logged for this artwork yet.</p>
                 </div>
                 {% endfor %}
             </div>
