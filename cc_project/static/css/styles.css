@@ -1812,6 +1812,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(255 252 247 / 0.9);
 }
 
+.bg-\[\#B4473A\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(180 71 58 / var(--tw-bg-opacity));
+}
+
 .bg-\[linear-gradient\(to_right\2c \#e5d5c5_1px\2c transparent_1px\)\2c linear-gradient\(to_bottom\2c \#e5d5c5_1px\2c transparent_1px\)\] {
   background-image: linear-gradient(to right,#e5d5c5 1px,transparent 1px),linear-gradient(to bottom,#e5d5c5 1px,transparent 1px);
 }
@@ -2478,6 +2483,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(221 210 197 / var(--tw-text-opacity));
 }
 
+.text-\[\#6B5E53\]\/60 {
+  color: rgb(107 94 83 / 0.6);
+}
+
 .underline {
   text-decoration: underline;
 }
@@ -2527,6 +2536,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .placeholder-neutral-300::placeholder {
   --tw-placeholder-opacity: 1;
   color: rgb(212 212 212 / var(--tw-placeholder-opacity));
+}
+
+.placeholder-\[\#6B5E53\]\/60::-moz-placeholder {
+  color: rgb(107 94 83 / 0.6);
+}
+
+.placeholder-\[\#6B5E53\]\/60::placeholder {
+  color: rgb(107 94 83 / 0.6);
 }
 
 .opacity-0 {
@@ -3013,6 +3030,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(255 252 247 / var(--tw-text-opacity));
 }
 
+.hover\:text-\[\#B4473A\]:hover {
+  --tw-text-opacity: 1;
+  color: rgb(180 71 58 / var(--tw-text-opacity));
+}
+
 .hover\:shadow-lg:hover {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
@@ -3045,9 +3067,19 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(200 107 69 / var(--tw-border-opacity));
 }
 
+.focus\:border-\[\#B65E3C\]:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(182 94 60 / var(--tw-border-opacity));
+}
+
 .focus\:bg-white:focus {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.focus\:bg-\[\#FFFCF7\]:focus {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 252 247 / var(--tw-bg-opacity));
 }
 
 .focus\:outline-none:focus {
