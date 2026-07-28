@@ -175,7 +175,6 @@ def delete_product_view(request, product_id):
     
     return redirect('/dashboard/admin/?section=product-management')
 
-@login_required
 def single_product_view(request, product_id):
     try:
         product = Product.objects.get(id=product_id)
@@ -187,10 +186,11 @@ def single_product_view(request, product_id):
         messages.error(request, "This product is currently unavailable.")
         return redirect('/products/')
     
-    if Wishlist.objects.filter(customer=request.user, product=product).exists():
-        product.in_wishlist = True
-    else:
-        product.in_wishlist = False
+    if request.user.is_authenticated:
+        if Wishlist.objects.filter(customer=request.user, product=product).exists():
+            product.in_wishlist = True
+        else:
+            product.in_wishlist = False
         
     reviews = Review.objects.filter(product=product).order_by('-created_at')
     
