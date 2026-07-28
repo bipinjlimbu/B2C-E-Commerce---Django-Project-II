@@ -4,7 +4,6 @@ from django.contrib import messages
 from django.db.models import Q
 from ..models import User, Product, Wishlist, Review
 
-@login_required
 def products_view(request):
     products = Product.objects.all().order_by('-created_at')
     category = request.GET.get('category')
