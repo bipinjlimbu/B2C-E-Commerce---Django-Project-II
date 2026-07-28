@@ -853,6 +853,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 0.25rem;
 }
 
+.h-2\.5 {
+  height: 0.625rem;
+}
+
 .max-h-full {
   max-height: 100%;
 }
@@ -963,6 +967,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-11 {
   width: 2.75rem;
+}
+
+.w-2\.5 {
+  width: 0.625rem;
 }
 
 .min-w-\[320px\] {
@@ -1844,6 +1852,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(74 52 40 / 0.7);
 }
 
+.bg-\[\#4A3428\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(74 52 40 / var(--tw-bg-opacity));
+}
+
 .bg-\[linear-gradient\(to_right\2c \#e5d5c5_1px\2c transparent_1px\)\2c linear-gradient\(to_bottom\2c \#e5d5c5_1px\2c transparent_1px\)\] {
   background-image: linear-gradient(to right,#e5d5c5 1px,transparent 1px),linear-gradient(to bottom,#e5d5c5 1px,transparent 1px);
 }
@@ -2532,6 +2545,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(107 94 83 / 0.4);
 }
 
+.text-\[\#6B5E53\]\/50 {
+  color: rgb(107 94 83 / 0.5);
+}
+
 .underline {
   text-decoration: underline;
 }
@@ -3052,6 +3069,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(234 224 213 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-\[\#38271E\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(56 39 30 / var(--tw-bg-opacity));
+}
+
 .hover\:text-orange-700:hover {
   --tw-text-opacity: 1;
   color: rgb(194 65 12 / var(--tw-text-opacity));
@@ -3120,6 +3142,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .hover\:text-\[\#B4473A\]:hover {
   --tw-text-opacity: 1;
   color: rgb(180 71 58 / var(--tw-text-opacity));
+}
+
+.hover\:text-\[\#4A3428\]:hover {
+  --tw-text-opacity: 1;
+  color: rgb(74 52 40 / var(--tw-text-opacity));
 }
 
 .hover\:shadow-lg:hover {
