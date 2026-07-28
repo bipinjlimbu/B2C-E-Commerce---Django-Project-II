@@ -24,7 +24,7 @@
         }
     </style>
 </head>
-<body class="bg-[#F8F3EC] font-sans min-h-screen flex flex-col text-[#6B5E53]">
+<body class="bg-[#F8F3EC] font-sans min-h-screen flex flex-col text-[#6B5E53] antialiased">
 
     {% include 'components/_navbar.html' %}
 
@@ -141,58 +141,69 @@
                 </a>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {% for product in products %}
-                <div class="bg-[#FFFCF7] border border-[#DDD2C5] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col group relative">
-                    
-                    <a href="/products/{{ product.id }}/" class="flex flex-col flex-grow">
-                        <div class="aspect-square w-full bg-[#F8F3EC] flex items-center justify-center p-2 relative overflow-hidden border-b border-[#DDD2C5]">
-                            <div class="w-full h-full flex flex-col items-center justify-center bg-[#FFFCF7] rounded-lg">
+                    <div class="bg-[#FFFCF7] border border-[#DDD2C5] rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-[#B65E3C]/50 transition-all flex flex-col group relative">
+                        
+                        <a href="/products/{{ product.id }}/" class="flex flex-col flex-grow">
+                            <div class="aspect-square w-full bg-[#F8F3EC] relative overflow-hidden border-b border-[#DDD2C5]">
                                 {% if product.product_image %}
-                                    <img src="{{ product.product_image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                                    <img src="{{ product.product_image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                 {% else %}
-                                    <i data-lucide="brush" class="w-8 h-8 text-[#DDD2C5] group-hover:text-[#B65E3C] transition-colors duration-300"></i>
-                                    <span class="text-[9px] uppercase tracking-widest text-[#6B5E53] font-bold mt-2">No Image Available</span>
+                                    <div class="w-full h-full flex flex-col items-center justify-center bg-[#F8F3EC] p-4">
+                                        <i data-lucide="palette" class="w-10 h-10 text-[#6B5E53]/40 group-hover:text-[#B65E3C] transition-all duration-300"></i>
+                                        <span class="text-[9px] uppercase tracking-widest text-[#6B5E53]/60 font-bold mt-2">No Artwork Preview</span>
+                                    </div>
+                                {% endif %}
+                                
+                                <span class="absolute top-3 left-3 bg-[#FFFCF7]/90 border border-[#DDD2C5] backdrop-blur-md text-[9px] font-bold uppercase tracking-widest text-[#6B5E53] px-2.5 py-1 rounded-md shadow-sm z-10">
+                                    {{ product.get_category_display }}
+                                </span>
+
+                                {% if product.stock == 1 %}
+                                    <span class="absolute top-3 right-3 bg-[#F8F3EC] border border-[#B65E3C]/30 backdrop-blur-md text-[8px] font-bold uppercase tracking-widest text-[#B65E3C] px-2 py-0.5 rounded-md shadow-sm z-10">
+                                        1-of-1 Original
+                                    </span>
                                 {% endif %}
                             </div>
-                            <span class="absolute top-3 left-3 bg-[#FFFCF7]/90 border border-[#DDD2C5] backdrop-blur-sm text-[10px] font-medium tracking-wide text-[#6B5E53] px-2.5 py-0.5 rounded">
-                                {{ product.get_category_display }}
-                            </span>
-                        </div>
 
-                        <div class="p-5 flex-grow space-y-2">
-                            <h3 class="font-serif text-[#4A3428] text-base group-hover:text-[#B65E3C] transition-colors line-clamp-1">
-                                {{ product.name }}
-                            </h3>
-                            <p class="text-xs text-[#6B5E53] font-normal leading-relaxed line-clamp-2">
-                                {{ product.description |truncatechars:100|default:"No description available." }}
-                            </p>
-                        </div>
-                    </a>
-
-                    <div class="p-5 pt-0">
-                        <div class="flex items-center justify-between pt-4 border-t border-[#DDD2C5]">
-                            <div class="flex flex-col">
-                                <span class="text-[9px] uppercase font-bold tracking-wider text-[#6B5E53]">Price</span>
-                                <span class="text-base font-normal text-[#4A3428]">Rs. {{ product.price }}</span>
+                            <div class="p-5 flex-grow space-y-2">
+                                <h3 class="font-serif font-bold text-[#4A3428] text-base tracking-tight group-hover:text-[#B65E3C] transition-colors line-clamp-1">
+                                    {{ product.name }}
+                                </h3>
+                                <p class="text-xs text-[#6B5E53] leading-relaxed line-clamp-2">
+                                    {{ product.description|truncatechars:100|default:"No description updated for this collection masterwork." }}
+                                </p>
                             </div>
+                        </a>
 
-                            {% if user.is_authenticated and not user.is_staff %}
-                                <a href="/cart/add/{{ product.id }}/" class="bg-[#B65E3C] hover:bg-[#94492F] text-[#FFFCF7] w-9 h-9 rounded-lg transition-all flex items-center justify-center shadow z-10">
-                                    <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-                                </a>
-                            {% elif user.is_staff %}
-                                <a href="/dashboard/admin/?section=product-management" class="bg-[#F8F3EC] hover:bg-[#B65E3C] text-[#6B5E53] hover:text-[#FFFCF7] w-9 h-9 rounded-lg transition-all border border-[#DDD2C5] flex items-center justify-center z-10">
-                                    <i data-lucide="sliders" class="w-4 h-4"></i>
-                                </a>
-                            {% else %}
-                                <a href="/login/" class="bg-[#B65E3C] hover:bg-[#94492F] text-[#FFFCF7] w-9 h-9 rounded-lg transition-all flex items-center justify-center z-10">
-                                    <i data-lucide="log-in" class="w-4 h-4"></i>
-                                </a>
-                            {% endif %}
+                        <div class="p-5 pt-0">
+                            <div class="flex items-center justify-between pt-3 border-t border-[#DDD2C5]/50">
+                                <div class="flex flex-col">
+                                    <span class="text-[9px] uppercase font-bold tracking-wider text-[#6B5E53]/70">Valuation</span>
+                                    <span class="text-base font-bold text-[#4A3428]">Rs. {{ product.price|floatformat:2 }}</span>
+                                </div>
+
+                                {% if user.is_authenticated and not user.is_staff %}
+                                    {% if product.stock > 0 %}
+                                        <a href="/cart/add/{{ product.id }}/" class="bg-[#F8F3EC] hover:bg-[#B65E3C] text-[#6B5E53] hover:text-[#FFFCF7] w-9 h-9 rounded-xl transition-all border border-[#DDD2C5] hover:border-[#B65E3C] flex items-center justify-center shadow-sm z-10">
+                                            <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                                        </a>
+                                    {% else %}
+                                        <p class="text-[10px] font-bold text-[#6B5E53]/70 uppercase tracking-wider bg-[#F8F3EC] px-2 py-1 rounded-md border border-[#DDD2C5]">Acquired</p>
+                                    {% endif %}
+                                {% elif user.is_staff %}
+                                    <a href="/dashboard/admin/?section=product-management" class="bg-[#F8F3EC] hover:bg-[#B65E3C] text-[#6B5E53] hover:text-[#FFFCF7] w-9 h-9 rounded-xl transition-all border border-[#DDD2C5] hover:border-[#B65E3C] flex items-center justify-center shadow-sm z-10">
+                                        <i data-lucide="settings" class="w-4 h-4"></i>
+                                    </a>
+                                {% else %}
+                                    <a href="/login/" class="bg-[#F8F3EC] hover:bg-[#B65E3C] text-[#6B5E53] hover:text-[#FFFCF7] w-9 h-9 rounded-xl transition-all border border-[#DDD2C5] hover:border-[#B65E3C] flex items-center justify-center shadow-sm z-10">
+                                        <i data-lucide="log-in" class="w-4 h-4"></i>
+                                    </a>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
-                </div>
                 {% empty %}
                     <div class="col-span-full text-center py-12">
                         <i data-lucide="box" class="w-8 h-8 text-[#DDD2C5] mx-auto mb-4"></i>
