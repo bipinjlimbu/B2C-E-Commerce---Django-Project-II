@@ -11,20 +11,20 @@
             height: 4px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f5f5f4;
+            background: #F8F3EC;
             border-radius: 10px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #c2410c;
+            background: #B65E3C;
             border-radius: 10px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #9a3412;
+            background: #94492F;
             border-radius: 10px;
         }
     </style>
 </head>
-<body class="bg-white font-sans min-h-screen flex flex-col text-stone-900">
+<body class="bg-[#F8F3EC] font-sans min-h-screen flex flex-col text-[#6B5E53]">
 
     {% include 'components/_navbar.html' %}
 
@@ -32,30 +32,38 @@
 
     <main class="flex-grow">
         
-        <section class="relative bg-[#f4ece1] text-stone-950 overflow-hidden py-24 lg:py-36 border-b border-stone-200/60">
-            <div class="absolute inset-0 opacity-40 bg-[linear-gradient(to_right,#e5d5c5_1px,transparent_1px),linear-gradient(to_bottom,#e5d5c5_1px,transparent_1px)] [background-size:24px_24px]"></div>
+        <section class="relative bg-[#FFFCF7] text-[#4A3428] overflow-hidden py-24 lg:py-36 border-b border-[#DDD2C5]">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <div class="space-y-6 max-w-xl">
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest bg-orange-700/10 text-orange-800 border border-orange-700/20">
-                            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Fresh from the Studio
-                        </span>
-                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight leading-tight">
-                            EARTHEN FORM. <br>
-                            <span class="text-orange-800 italic font-light">Human Intention.</span>
-                        </h1>
-                        <p class="text-base text-stone-700 font-normal leading-relaxed">
-                            Explore distinct collections of functional dinnerware, textured vases, and sculptural statements thrown by hand on the wheel.
-                        </p>
-                        <div class="flex flex-wrap gap-4 pt-2">
-                            <a href="/products/" class="bg-orange-700 hover:bg-orange-800 text-white font-medium px-6 py-3 rounded-lg transition-all shadow-sm flex items-center gap-2 text-sm tracking-wide">
-                                Browse Studio Inventory
-                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                <div class="max-w-2xl space-y-6">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest bg-[#B65E3C]/10 text-[#B65E3C] border border-[#B65E3C]/20">
+                        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Handmade Ceramics
+                    </span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight leading-tight text-[#4A3428]">
+                        Handmade Pottery & <br>
+                        <span class="text-[#B65E3C] italic font-light">Ceramic Art</span>
+                    </h1>
+                    <p class="text-base sm:text-lg text-[#6B5E53] font-normal leading-relaxed">
+                        Explore our collection of functional dinnerware, textured vases, and handcrafted ceramic pieces.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <a href="/products/" class="bg-[#B65E3C] hover:bg-[#94492F] text-[#FFFCF7] font-medium px-6 py-3 rounded-lg transition-all shadow-sm flex items-center gap-2 text-sm tracking-wide">
+                            Shop Products
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                        
+                        {% if not user.is_authenticated %}
+                            <a href="/register/" class="bg-[#F8F3EC] hover:bg-[#DDD2C5]/40 text-[#4A3428] font-medium px-6 py-3 rounded-lg transition-all border border-[#DDD2C5] shadow-sm text-sm tracking-wide">
+                                Join Us
                             </a>
-                            <a href="#" class="bg-white/80 hover:bg-white text-stone-800 font-medium px-6 py-3 rounded-lg transition-all border border-stone-300/80 shadow-sm text-sm tracking-wide backdrop-blur-sm">
-                                Read Philosophy
+                        {% elif user.is_staff %}
+                            <a href="/dashboard/admin/" class="bg-[#F8F3EC] hover:bg-[#DDD2C5]/40 text-[#4A3428] font-medium px-6 py-3 rounded-lg transition-all border border-[#DDD2C5] shadow-sm text-sm tracking-wide">
+                                Dashboard
                             </a>
-                        </div>
+                        {% else %}
+                            <a href="/dashboard/" class="bg-[#F8F3EC] hover:bg-[#DDD2C5]/40 text-[#4A3428] font-medium px-6 py-3 rounded-lg transition-all border border-[#DDD2C5] shadow-sm text-sm tracking-wide">
+                                Dashboard
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -64,59 +72,59 @@
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12">
                 <div>
-                    <h2 class="text-xs font-bold uppercase tracking-widest text-orange-700 mb-1">Studio Collections</h2>
-                    <p class="text-2xl font-serif font-normal tracking-tight text-stone-900">Curated Clay Classifications</p>
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-[#B65E3C] mb-1">Categories</h2>
+                    <p class="text-2xl font-serif font-normal tracking-tight text-[#4A3428]">Shop by Category</p>
                 </div>
             </div>
             
             <div class="flex overflow-x-auto gap-6 pb-6 snap-x snap-mandatory custom-scrollbar">
-                <a href="/products/?category=paintings" class="group min-w-[280px] sm:min-w-[320px] snap-start bg-stone-50 border border-stone-200 p-6 rounded-xl shadow-sm hover:border-orange-600 hover:bg-white transition-all flex items-center justify-between">
+                <a href="/products/?category=paintings" class="group min-w-[280px] sm:min-w-[320px] snap-start bg-[#FFFCF7] border border-[#DDD2C5] p-6 rounded-xl shadow-sm hover:border-[#B65E3C] transition-all flex items-center justify-between">
                     <div class="space-y-1">
-                        <h3 class="font-serif text-lg text-stone-950 group-hover:text-orange-700 transition-colors">Original Paintings</h3>
-                        <p class="text-xs text-stone-500">Fine oil & acrylic gallery work</p>
+                        <h3 class="font-serif text-lg text-[#4A3428] group-hover:text-[#B65E3C] transition-colors">Original Paintings</h3>
+                        <p class="text-xs text-[#6B5E53]">Oil and acrylic paintings</p>
                     </div>
-                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center border border-stone-200 group-hover:bg-orange-50 group-hover:border-orange-600 transition-colors shrink-0 ml-4">
-                        <i data-lucide="palette" class="w-4 h-4 text-stone-500 group-hover:text-orange-700 transition-colors"></i>
+                    <div class="w-10 h-10 bg-[#F8F3EC] rounded-lg flex items-center justify-center border border-[#DDD2C5] group-hover:bg-[#B65E3C]/10 group-hover:border-[#B65E3C] transition-colors shrink-0 ml-4">
+                        <i data-lucide="palette" class="w-4 h-4 text-[#6B5E53] group-hover:text-[#B65E3C] transition-colors"></i>
                     </div>
                 </a>
 
-                <a href="/products/?category=pottery" class="group min-w-[280px] sm:min-w-[320px] snap-start bg-stone-50 border border-stone-200 p-6 rounded-xl shadow-sm hover:border-orange-600 hover:bg-white transition-all flex items-center justify-between">
+                <a href="/products/?category=pottery" class="group min-w-[280px] sm:min-w-[320px] snap-start bg-[#FFFCF7] border border-[#DDD2C5] p-6 rounded-xl shadow-sm hover:border-[#B65E3C] transition-all flex items-center justify-between">
                     <div class="space-y-1">
-                        <h3 class="font-serif text-lg text-stone-950 group-hover:text-orange-700 transition-colors">Handmade Pottery</h3>
-                        <p class="text-xs text-stone-500">Wheel-thrown daily tableware</p>
+                        <h3 class="font-serif text-lg text-[#4A3428] group-hover:text-[#B65E3C] transition-colors">Handmade Pottery</h3>
+                        <p class="text-xs text-[#6B5E53]">Mugs, bowls, and plates</p>
                     </div>
-                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center border border-stone-200 group-hover:bg-orange-50 group-hover:border-orange-600 transition-colors shrink-0 ml-4">
-                        <i data-lucide="coffee" class="w-4 h-4 text-stone-500 group-hover:text-orange-700 transition-colors"></i>
+                    <div class="w-10 h-10 bg-[#F8F3EC] rounded-lg flex items-center justify-center border border-[#DDD2C5] group-hover:bg-[#B65E3C]/10 group-hover:border-[#B65E3C] transition-colors shrink-0 ml-4">
+                        <i data-lucide="coffee" class="w-4 h-4 text-[#6B5E53] group-hover:text-[#B65E3C] transition-colors"></i>
                     </div>
                 </a>
 
-                <a href="/products/?category=ceramics" class="group min-w-[280px] sm:min-w-[320px] snap-start bg-stone-50 border border-stone-200 p-6 rounded-xl shadow-sm hover:border-orange-600 hover:bg-white transition-all flex items-center justify-between">
+                <a href="/products/?category=ceramics" class="group min-w-[280px] sm:min-w-[320px] snap-start bg-[#FFFCF7] border border-[#DDD2C5] p-6 rounded-xl shadow-sm hover:border-[#B65E3C] transition-all flex items-center justify-between">
                     <div class="space-y-1">
-                        <h3 class="font-serif text-lg text-stone-950 group-hover:text-orange-700 transition-colors">Sculptures & Ceramics</h3>
-                        <p class="text-xs text-stone-500">One-off sculptural manipulations</p>
+                        <h3 class="font-serif text-lg text-[#4A3428] group-hover:text-[#B65E3C] transition-colors">Sculptures & Ceramics</h3>
+                        <p class="text-xs text-[#6B5E53]">Decorative ceramic pieces</p>
                     </div>
-                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center border border-stone-200 group-hover:bg-orange-50 group-hover:border-orange-600 transition-colors shrink-0 ml-4">
-                        <i data-lucide="shapes" class="w-4 h-4 text-stone-500 group-hover:text-orange-700 transition-colors"></i>
+                    <div class="w-10 h-10 bg-[#F8F3EC] rounded-lg flex items-center justify-center border border-[#DDD2C5] group-hover:bg-[#B65E3C]/10 group-hover:border-[#B65E3C] transition-colors shrink-0 ml-4">
+                        <i data-lucide="shapes" class="w-4 h-4 text-[#6B5E53] group-hover:text-[#B65E3C] transition-colors"></i>
                     </div>
                 </a>
 
-                <a href="/products/?category=prints" class="group min-w-[280px] sm:min-w-[320px] snap-start bg-stone-50 border border-stone-200 p-6 rounded-xl shadow-sm hover:border-orange-600 hover:bg-white transition-all flex items-center justify-between">
+                <a href="/products/?category=prints" class="group min-w-[280px] sm:min-w-[320px] snap-start bg-[#FFFCF7] border border-[#DDD2C5] p-6 rounded-xl shadow-sm hover:border-[#B65E3C] transition-all flex items-center justify-between">
                     <div class="space-y-1">
-                        <h3 class="font-serif text-lg text-stone-950 group-hover:text-orange-700 transition-colors">Canvas & Fine Art Prints</h3>
-                        <p class="text-xs text-stone-500">High-grade archival reproductions</p>
+                        <h3 class="font-serif text-lg text-[#4A3428] group-hover:text-[#B65E3C] transition-colors">Art Prints</h3>
+                        <p class="text-xs text-[#6B5E53]">High quality printed art</p>
                     </div>
-                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center border border-stone-200 group-hover:bg-orange-50 group-hover:border-orange-600 transition-colors shrink-0 ml-4">
-                        <i data-lucide="image" class="w-4 h-4 text-stone-500 group-hover:text-orange-700 transition-colors"></i>
+                    <div class="w-10 h-10 bg-[#F8F3EC] rounded-lg flex items-center justify-center border border-[#DDD2C5] group-hover:bg-[#B65E3C]/10 group-hover:border-[#B65E3C] transition-colors shrink-0 ml-4">
+                        <i data-lucide="image" class="w-4 h-4 text-[#6B5E53] group-hover:text-[#B65E3C] transition-colors"></i>
                     </div>
                 </a>
 
-                <a href="/products/?category=accessories" class="group min-w-[280px] sm:min-w-[320px] snap-start bg-stone-50 border border-stone-200 p-6 rounded-xl shadow-sm hover:border-orange-600 hover:bg-white transition-all flex items-center justify-between">
+                <a href="/products/?category=accessories" class="group min-w-[280px] sm:min-w-[320px] snap-start bg-[#FFFCF7] border border-[#DDD2C5] p-6 rounded-xl shadow-sm hover:border-[#B65E3C] transition-all flex items-center justify-between">
                     <div class="space-y-1">
-                        <h3 class="font-serif text-lg text-stone-950 group-hover:text-orange-700 transition-colors">Art Supplies & Displays</h3>
-                        <p class="text-xs text-stone-500">Studio essentials & presentation setups</p>
+                        <h3 class="font-serif text-lg text-[#4A3428] group-hover:text-[#B65E3C] transition-colors">Art Supplies</h3>
+                        <p class="text-xs text-[#6B5E53]">Tools and accessories</p>
                     </div>
-                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center border border-stone-200 group-hover:bg-orange-50 group-hover:border-orange-600 transition-colors shrink-0 ml-4">
-                        <i data-lucide="brush" class="w-4 h-4 text-stone-500 group-hover:text-orange-700 transition-colors"></i>
+                    <div class="w-10 h-10 bg-[#F8F3EC] rounded-lg flex items-center justify-center border border-[#DDD2C5] group-hover:bg-[#B65E3C]/10 group-hover:border-[#B65E3C] transition-colors shrink-0 ml-4">
+                        <i data-lucide="brush" class="w-4 h-4 text-[#6B5E53] group-hover:text-[#B65E3C] transition-colors"></i>
                     </div>
                 </a>
             </div>
@@ -125,60 +133,60 @@
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mb-24">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-10">
                 <div>
-                    <h2 class="text-xs font-bold uppercase tracking-wider text-orange-700">Artisan Registry</h2>
-                    <p class="text-2xl font-serif font-normal tracking-tight text-stone-900">Available Formations</p>
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-[#B65E3C]">Products</h2>
+                    <p class="text-2xl font-serif font-normal tracking-tight text-[#4A3428]">Featured Items</p>
                 </div>
-                <a href="/products/" class="text-sm font-semibold text-stone-950 hover:text-orange-700 transition-colors underline decoration-1 underline-offset-4 flex items-center gap-1">
-                    View Complete Catalog <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                <a href="/products/" class="text-sm font-semibold text-[#4A3428] hover:text-[#B65E3C] transition-colors underline decoration-1 underline-offset-4 flex items-center gap-1">
+                    View All Products <i data-lucide="chevron-right" class="w-4 h-4"></i>
                 </a>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                 {% for product in products %}
-                <div class="bg-stone-50 border border-stone-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col group relative">
+                <div class="bg-[#FFFCF7] border border-[#DDD2C5] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col group relative">
                     
                     <a href="/products/{{ product.id }}/" class="flex flex-col flex-grow">
-                        <div class="aspect-square w-full bg-stone-100 flex items-center justify-center p-2 relative overflow-hidden border-b border-stone-200/60">
-                            <div class="w-full h-full flex flex-col items-center justify-center bg-white rounded-lg">
+                        <div class="aspect-square w-full bg-[#F8F3EC] flex items-center justify-center p-2 relative overflow-hidden border-b border-[#DDD2C5]">
+                            <div class="w-full h-full flex flex-col items-center justify-center bg-[#FFFCF7] rounded-lg">
                                 {% if product.product_image %}
                                     <img src="{{ product.product_image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
                                 {% else %}
-                                    <i data-lucide="brush" class="w-8 h-8 text-stone-300 group-hover:text-orange-600 transition-colors duration-300"></i>
-                                    <span class="text-[9px] uppercase tracking-widest text-stone-400 font-bold mt-2">No Graphic Log</span>
+                                    <i data-lucide="brush" class="w-8 h-8 text-[#DDD2C5] group-hover:text-[#B65E3C] transition-colors duration-300"></i>
+                                    <span class="text-[9px] uppercase tracking-widest text-[#6B5E53] font-bold mt-2">No Image Available</span>
                                 {% endif %}
                             </div>
-                            <span class="absolute top-3 left-3 bg-white/90 border border-stone-200 backdrop-blur-sm text-[10px] font-medium tracking-wide text-stone-700 px-2.5 py-0.5 rounded">
+                            <span class="absolute top-3 left-3 bg-[#FFFCF7]/90 border border-[#DDD2C5] backdrop-blur-sm text-[10px] font-medium tracking-wide text-[#6B5E53] px-2.5 py-0.5 rounded">
                                 {{ product.get_category_display }}
                             </span>
                         </div>
 
                         <div class="p-5 flex-grow space-y-2">
-                            <h3 class="font-serif text-stone-900 text-base group-hover:text-orange-700 transition-colors line-clamp-1">
+                            <h3 class="font-serif text-[#4A3428] text-base group-hover:text-[#B65E3C] transition-colors line-clamp-1">
                                 {{ product.name }}
                             </h3>
-                            <p class="text-xs text-stone-500 font-normal leading-relaxed line-clamp-2">
+                            <p class="text-xs text-[#6B5E53] font-normal leading-relaxed line-clamp-2">
                                 {{ product.description |truncatechars:100|default:"No description available." }}
                             </p>
                         </div>
                     </a>
 
                     <div class="p-5 pt-0">
-                        <div class="flex items-center justify-between pt-4 border-t border-stone-200/60">
+                        <div class="flex items-center justify-between pt-4 border-t border-[#DDD2C5]">
                             <div class="flex flex-col">
-                                <span class="text-[9px] uppercase font-bold tracking-wider text-stone-400">Valuation</span>
-                                <span class="text-base font-normal text-stone-900">Rs. {{ product.price }}</span>
+                                <span class="text-[9px] uppercase font-bold tracking-wider text-[#6B5E53]">Price</span>
+                                <span class="text-base font-normal text-[#4A3428]">Rs. {{ product.price }}</span>
                             </div>
 
                             {% if user.is_authenticated and not user.is_staff %}
-                                <a href="/cart/add/{{ product.id }}/" class="bg-stone-900 hover:bg-orange-700 text-stone-100 w-9 h-9 rounded-lg transition-all flex items-center justify-center shadow z-10">
+                                <a href="/cart/add/{{ product.id }}/" class="bg-[#B65E3C] hover:bg-[#94492F] text-[#FFFCF7] w-9 h-9 rounded-lg transition-all flex items-center justify-center shadow z-10">
                                     <i data-lucide="shopping-bag" class="w-4 h-4"></i>
                                 </a>
                             {% elif user.is_staff %}
-                                <a href="/dashboard/admin/?section=product-management" class="bg-stone-100 hover:bg-orange-700 text-stone-600 hover:text-white w-9 h-9 rounded-lg transition-all border border-stone-200 flex items-center justify-center z-10">
+                                <a href="/dashboard/admin/?section=product-management" class="bg-[#F8F3EC] hover:bg-[#B65E3C] text-[#6B5E53] hover:text-[#FFFCF7] w-9 h-9 rounded-lg transition-all border border-[#DDD2C5] flex items-center justify-center z-10">
                                     <i data-lucide="sliders" class="w-4 h-4"></i>
                                 </a>
                             {% else %}
-                                <a href="/login/" class="bg-stone-900 hover:bg-orange-700 text-stone-100 w-9 h-9 rounded-lg transition-all flex items-center justify-center z-10">
+                                <a href="/login/" class="bg-[#B65E3C] hover:bg-[#94492F] text-[#FFFCF7] w-9 h-9 rounded-lg transition-all flex items-center justify-center z-10">
                                     <i data-lucide="log-in" class="w-4 h-4"></i>
                                 </a>
                             {% endif %}
@@ -187,8 +195,8 @@
                 </div>
                 {% empty %}
                     <div class="col-span-full text-center py-12">
-                        <i data-lucide="box" class="w-8 h-8 text-stone-300 mx-auto mb-4"></i>
-                        <p class="text-sm text-stone-500">No products available at the moment. Please check back later.</p>
+                        <i data-lucide="box" class="w-8 h-8 text-[#DDD2C5] mx-auto mb-4"></i>
+                        <p class="text-sm text-[#6B5E53]">No products available at the moment. Please check back later.</p>
                     </div>
                 {% endfor %}
             </div>
