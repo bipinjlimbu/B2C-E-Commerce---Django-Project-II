@@ -7,7 +7,7 @@
     {% load static %}
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
 </head>
-<body class="bg-stone-100 text-stone-900 font-sans min-h-screen flex flex-col selection:bg-orange-200">
+<body class="bg-[#F8F3EC] text-[#6B5E53] font-sans min-h-screen flex flex-col antialiased">
 
     {% include 'components/_navbar.html' %}
 
@@ -15,60 +15,60 @@
 
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 space-y-8">
         <div>
-            <h1 class="text-xs font-bold uppercase tracking-widest text-orange-700 mb-1">Personal Collection</h1>
-            <p class="text-2xl lg:text-3xl font-bold tracking-tight text-stone-950 uppercase font-serif">Saved Wishlist</p>
+            <h1 class="text-xs font-bold uppercase tracking-widest text-[#B65E3C] mb-1">Personal Collection</h1>
+            <p class="text-2xl lg:text-3xl font-bold tracking-tight text-[#4A3428] uppercase font-serif">Saved Wishlist</p>
         </div>
 
         <div class="w-full">
             {% if wishlist_items %}
                 <div class="space-y-4">
                     {% for item in wishlist_items %}
-                        <div class="bg-white border border-orange-100 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-6 hover:border-orange-200 transition-all shadow-sm group">
+                        <div class="bg-[#FFFCF7] border border-[#DDD2C5] rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-6 hover:border-[#B65E3C]/50 transition-all shadow-sm group">
                             
                             <a href="/products/{{ item.product.id }}/" class="flex flex-col sm:flex-row items-center gap-6 flex-grow w-full">
-                                <div class="w-20 h-20 bg-stone-50 border border-orange-100 rounded-xl overflow-hidden flex items-center justify-center p-2 flex-shrink-0">
+                                <div class="w-20 h-20 bg-[#F8F3EC] border border-[#DDD2C5] rounded-xl overflow-hidden flex items-center justify-center p-2 flex-shrink-0">
                                     {% if item.product.product_image %}
                                         <img src="{{ item.product.product_image.url }}" alt="{{ item.product.name }}" class="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-500">
                                     {% else %}
-                                        <i data-lucide="palette" class="w-6 h-6 text-stone-300"></i>
+                                        <i data-lucide="palette" class="w-6 h-6 text-[#6B5E53]/40"></i>
                                     {% endif %}
                                 </div>
 
                                 <div class="space-y-2 text-center sm:text-left flex-grow">
                                     <div class="flex flex-col items-center sm:items-start gap-1">
-                                        <h3 class="font-bold text-stone-900 text-base tracking-tight font-serif group-hover:text-orange-700 transition-colors">
+                                        <h3 class="font-bold text-[#4A3428] text-base tracking-tight font-serif group-hover:text-[#B65E3C] transition-colors">
                                             {{ item.product.name }}
                                         </h3>
-                                        <span class="bg-stone-50 border border-orange-100 text-[9px] font-bold uppercase tracking-widest text-stone-500 px-2.5 py-0.5 rounded-md">
+                                        <span class="bg-[#F8F3EC] border border-[#DDD2C5] text-[9px] font-bold uppercase tracking-widest text-[#6B5E53] px-2.5 py-0.5 rounded-md">
                                             {{ item.product.get_category_display }}
                                         </span>
                                     </div>
                                 </div>
                             </a>
 
-                            <div class="flex flex-row sm:items-center justify-between sm:justify-end gap-6 w-full sm:w-auto border-t sm:border-t-0 border-stone-100 pt-4 sm:pt-0">
+                            <div class="flex flex-row sm:items-center justify-between sm:justify-end gap-6 w-full sm:w-auto border-t sm:border-t-0 border-[#DDD2C5] pt-4 sm:pt-0">
                                 <div class="flex flex-col">
-                                    <span class="text-[9px] uppercase font-bold tracking-wider text-stone-400">Price</span>
+                                    <span class="text-[9px] uppercase font-bold tracking-wider text-[#6B5E53]/70">Valuation</span>
                                     <div class="flex items-baseline gap-1">
-                                        <span class="text-xs font-bold text-stone-500 mr-0.5">Rs.</span>
-                                        <span class="text-base font-bold text-orange-950 font-serif">{{ item.product.price|floatformat:2 }}</span>
+                                        <span class="text-xs font-bold text-[#6B5E53] mr-0.5">Rs.</span>
+                                        <span class="text-base font-bold text-[#4A3428] font-serif">{{ item.product.price|floatformat:2 }}</span>
                                     </div>
                                 </div>
 
                                 <div class="flex items-center gap-3">
                                     {% if item.product.stock > 0 %}
-                                        <a href="/cart/add/{{ item.product.id }}/" class="bg-orange-800 hover:bg-orange-900 text-white font-bold h-10 px-4 rounded-xl transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-widest shadow-sm whitespace-nowrap">
+                                        <a href="/cart/add/{{ item.product.id }}/" class="bg-[#B65E3C] hover:bg-[#94492F] text-[#FFFCF7] font-bold h-10 px-4 rounded-xl transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-widest shadow-sm whitespace-nowrap">
                                             <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i>
                                             <span>Add to Cart</span>
                                         </a>
                                     {% else %}
-                                        <button disabled class="bg-stone-100 text-stone-400 font-bold h-10 px-4 rounded-xl border border-stone-200 flex items-center justify-center gap-2 text-xs uppercase tracking-widest cursor-not-allowed whitespace-nowrap">
+                                        <button disabled class="bg-[#F8F3EC] text-[#6B5E53]/50 font-bold h-10 px-4 rounded-xl border border-[#DDD2C5] flex items-center justify-center gap-2 text-xs uppercase tracking-widest cursor-not-allowed whitespace-nowrap">
                                             <i data-lucide="slash" class="w-3.5 h-3.5"></i>
                                             <span>Out of Stock</span>
                                         </button>
                                     {% endif %}
 
-                                    <a href="/products/wishlist/remove/{{ item.product.id }}/" class="bg-stone-50 hover:bg-rose-50 text-stone-500 hover:text-rose-700 border border-orange-100 hover:border-rose-200 h-10 px-4 rounded-xl transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-widest font-bold whitespace-nowrap" title="Remove Item">
+                                    <a href="/products/wishlist/remove/{{ item.product.id }}/" class="bg-[#FFFCF7] hover:bg-rose-50 text-[#6B5E53] hover:text-rose-600 border border-[#DDD2C5] hover:border-rose-200 h-10 px-4 rounded-xl transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-widest font-bold whitespace-nowrap" title="Remove Item">
                                         <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
                                         <span>Remove</span>
                                     </a>
@@ -79,13 +79,13 @@
                     {% endfor %}
                 </div>
             {% else %}
-                <div class="flex flex-col items-center justify-center text-center py-24 border border-dashed border-orange-200 rounded-3xl bg-white shadow-sm">
-                    <div class="w-16 h-16 bg-stone-50 rounded-2xl flex items-center justify-center border border-orange-100 mb-4">
-                        <i data-lucide="heart" class="w-7 h-7 text-stone-400"></i>
+                <div class="flex flex-col items-center justify-center text-center py-24 border border-dashed border-[#DDD2C5] rounded-3xl bg-[#FFFCF7] shadow-sm">
+                    <div class="w-16 h-16 bg-[#F8F3EC] rounded-2xl flex items-center justify-center border border-[#DDD2C5] mb-4">
+                        <i data-lucide="heart" class="w-7 h-7 text-[#6B5E53]/40"></i>
                     </div>
-                    <h3 class="text-stone-900 font-bold text-base tracking-tight font-serif uppercase">Wishlist is Empty</h3>
-                    <p class="text-xs text-stone-500 mt-1 max-w-xs leading-relaxed mb-6 font-medium">You haven't added any ceramic pieces or artworks to your wishlist collection yet.</p>
-                    <a href="/products/" class="bg-stone-900 hover:bg-stone-950 text-white font-bold px-6 py-3.5 rounded-xl text-xs uppercase tracking-widest transition-all shadow-sm">
+                    <h3 class="text-[#4A3428] font-bold text-base tracking-tight font-serif uppercase">Wishlist is Empty</h3>
+                    <p class="text-xs text-[#6B5E53] mt-1 max-w-xs leading-relaxed mb-6 font-medium">You haven't added any ceramic pieces or artworks to your wishlist collection yet.</p>
+                    <a href="/products/" class="bg-[#4A3428] hover:bg-[#38271E] text-[#FFFCF7] font-bold px-6 py-3.5 rounded-xl text-xs uppercase tracking-widest transition-all shadow-sm">
                         Explore Gallery
                     </a>
                 </div>
