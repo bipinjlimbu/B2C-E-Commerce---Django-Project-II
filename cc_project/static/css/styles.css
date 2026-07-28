@@ -2487,6 +2487,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(107 94 83 / 0.6);
 }
 
+.text-\[\#B4473A\] {
+  --tw-text-opacity: 1;
+  color: rgb(180 71 58 / var(--tw-text-opacity));
+}
+
 .underline {
   text-decoration: underline;
 }
@@ -2723,6 +2728,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(23 23 23 / var(--tw-bg-opacity));
 }
 
+.file\:bg-\[\#B65E3C\]::file-selector-button {
+  --tw-bg-opacity: 1;
+  background-color: rgb(182 94 60 / var(--tw-bg-opacity));
+}
+
 .file\:py-0\.5::file-selector-button {
   padding-top: 0.125rem;
   padding-bottom: 0.125rem;
@@ -2750,6 +2760,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .file\:text-white::file-selector-button {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.file\:text-\[\#FFFCF7\]::file-selector-button {
+  --tw-text-opacity: 1;
+  color: rgb(255 252 247 / var(--tw-text-opacity));
 }
 
 .after\:absolute::after {
@@ -3052,6 +3067,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(194 65 12 / var(--tw-bg-opacity));
 }
 
+.hover\:file\:bg-\[\#94492F\]::file-selector-button:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(148 73 47 / var(--tw-bg-opacity));
+}
+
 .focus\:border-orange-700:focus {
   --tw-border-opacity: 1;
   border-color: rgb(194 65 12 / var(--tw-border-opacity));
@@ -3096,6 +3116,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .focus\:ring-orange-700:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(194 65 12 / var(--tw-ring-opacity));
+}
+
+.focus\:ring-\[\#B65E3C\]:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(182 94 60 / var(--tw-ring-opacity));
 }
 
 .active\:scale-95:active {
