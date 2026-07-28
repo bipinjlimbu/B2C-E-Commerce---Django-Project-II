@@ -7,7 +7,7 @@
     {% load static %}
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
 </head>
-<body class="bg-[#f9f5f0] font-sans min-h-screen flex flex-col text-neutral-900">
+<body class="bg-[#F8F3EC] font-sans min-h-screen flex flex-col text-[#6B5E53]">
 
     {% include 'components/_navbar.html' %}
 
@@ -15,11 +15,11 @@
 
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-12 sm:px-6 lg:px-8">
         
-        <div class="mb-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 pb-6 border-b border-gray-200">
+        <div class="mb-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 pb-6 border-b border-[#DDD2C5]">
             <div class="flex items-center gap-5">
                 <div class="relative w-24 h-24 shrink-0">
-                    <div class="absolute inset-0 bg-orange-700 rounded-full rotate-6 opacity-10"></div>
-                    <div class="relative w-24 h-24 rounded-full bg-white border border-gray-200 overflow-hidden flex items-center justify-center text-neutral-400 shadow-sm">
+                    <div class="absolute inset-0 bg-[#B65E3C] rounded-full rotate-6 opacity-10"></div>
+                    <div class="relative w-24 h-24 rounded-full bg-[#FFFCF7] border border-[#DDD2C5] overflow-hidden flex items-center justify-center text-[#6B5E53]/60 shadow-sm">
                         {% if user.profile_picture %}
                             <img src="{{ user.profile_picture.url }}" alt="{{ user.username }}" class="w-full h-full object-cover">
                         {% else %}
@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div>
-                    <h1 class="text-3xl font-serif font-normal text-neutral-900 tracking-tight">
+                    <h1 class="text-3xl font-serif font-normal text-[#4A3428] tracking-tight">
                         {% if user.first_name or user.last_name %}
                             {{ user.first_name }} {{ user.last_name }}
                         {% elif user.is_staff %}
@@ -37,24 +37,24 @@
                             Anonymous User
                         {% endif %}
                     </h1>
-                    <p class="text-sm font-mono text-orange-700 mt-0.5">@{{ user.username|default:"dummy_creator" }}</p>
+                    <p class="text-sm font-mono text-[#B65E3C] mt-0.5">@{{ user.username|default:"dummy_creator" }}</p>
                 </div>
             </div>
 
             <div class="flex flex-wrap items-center gap-3">
                 {% if user.is_staff %}
-                    <a href="/dashboard/admin/" class="bg-neutral-900 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded-xl transition-colors text-sm flex items-center gap-2">
+                    <a href="/dashboard/admin/" class="bg-[#B65E3C] hover:bg-[#94492F] text-[#FFFCF7] font-medium py-2 px-4 rounded-xl transition-colors text-sm flex items-center gap-2 shadow-sm">
                         <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
                         Admin Dashboard
                     </a>
                 {% else %}
-                    <a href="/dashboard/" class="bg-neutral-900 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded-xl transition-colors text-sm flex items-center gap-2">
+                    <a href="/dashboard/" class="bg-[#B65E3C] hover:bg-[#94492F] text-[#FFFCF7] font-medium py-2 px-4 rounded-xl transition-colors text-sm flex items-center gap-2 shadow-sm">
                         <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
                         Dashboard
                     </a>
                 {% endif %}
 
-                <a href="/profile/edit/" class="bg-white hover:bg-neutral-50 text-neutral-800 font-medium py-2 px-4 rounded-xl transition-colors text-sm border border-gray-300 flex items-center gap-2">
+                <a href="/profile/edit/" class="bg-[#FFFCF7] hover:bg-[#F8F3EC] text-[#4A3428] font-medium py-2 px-4 rounded-xl transition-colors text-sm border border-[#DDD2C5] flex items-center gap-2 shadow-sm">
                     <i data-lucide="edit-3" class="w-4 h-4"></i>
                     Edit Profile
                 </a>
@@ -64,70 +64,70 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
             
             <div class="lg:col-span-1 space-y-4">
-                <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-sm space-y-4">
-                    <h3 class="text-sm font-serif font-normal text-neutral-800 border-b border-gray-100 pb-2">Overview</h3>
+                <div class="bg-[#FFFCF7] border border-[#DDD2C5] p-6 rounded-2xl shadow-sm space-y-4">
+                    <h3 class="text-sm font-serif font-normal text-[#4A3428] border-b border-[#DDD2C5] pb-2">Overview</h3>
                     
                     <div class="flex items-center justify-between text-sm">
-                        <span class="text-neutral-500">Account Type</span>
-                        <span class="font-medium text-neutral-800">
+                        <span class="text-[#6B5E53]">Account Type</span>
+                        <span class="font-medium text-[#4A3428]">
                             {% if user.is_staff %}Staff{% else %}Customer{% endif %}
                         </span>
                     </div>
                     
                     <div class="flex items-center justify-between text-sm">
-                        <span class="text-neutral-500">Registry Status</span>
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+                        <span class="text-[#6B5E53]">Registry Status</span>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#E8F0E6] text-[#2D5A27] border border-[#C2DCBE]">
                             Active
                         </span>
                     </div>
                 </div>
 
                 {% if not user.is_staff %}
-                    <a href="/profile/delete/{{ user.id }}/" class="w-full bg-white hover:bg-red-50 text-red-600 font-medium py-2.5 px-4 rounded-xl transition-colors text-sm flex items-center justify-center gap-2 border border-red-200 shadow-sm">
+                    <a href="/profile/delete/{{ user.id }}/" class="w-full bg-[#FFFCF7] hover:bg-[#FDF2F0] text-[#B4473A] font-medium py-2.5 px-4 rounded-xl transition-colors text-sm flex items-center justify-center gap-2 border border-[#EAC2BD] shadow-sm">
                         <i data-lucide="trash" class="w-4 h-4"></i>
                         Delete Account
                     </a>
                 {% endif %}
             </div>
 
-            <div class="lg:col-span-2 bg-white border border-gray-200 p-8 rounded-2xl shadow-sm">
-                <h2 class="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-6">Account Parameters</h2>
+            <div class="lg:col-span-2 bg-[#FFFCF7] border border-[#DDD2C5] p-8 rounded-2xl shadow-sm">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-[#6B5E53]/70 mb-6">Account Details</h2>
                 
                 <div class="space-y-6">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div class="border-b border-gray-100 pb-4">
-                            <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-400 block mb-1">First Name</span>
-                            <p class="text-base font-medium text-neutral-900">{{ user.first_name|default:"—" }}</p>
+                        <div class="border-b border-[#DDD2C5]/50 pb-4">
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-[#6B5E53]/70 block mb-1">First Name</span>
+                            <p class="text-base font-medium text-[#4A3428]">{{ user.first_name|default:"—" }}</p>
                         </div>
 
-                        <div class="border-b border-gray-100 pb-4">
-                            <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-400 block mb-1">Last Name</span>
-                            <p class="text-base font-medium text-neutral-900">{{ user.last_name|default:"—" }}</p>
+                        <div class="border-b border-[#DDD2C5]/50 pb-4">
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-[#6B5E53]/70 block mb-1">Last Name</span>
+                            <p class="text-base font-medium text-[#4A3428]">{{ user.last_name|default:"—" }}</p>
                         </div>
                     </div>
 
-                    <div class="flex items-start justify-between gap-4 border-b border-gray-100 pb-4">
+                    <div class="flex items-start justify-between gap-4 border-b border-[#DDD2C5]/50 pb-4">
                         <div>
-                            <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-400 block mb-1">Email Address</span>
-                            <p class="text-base font-medium text-neutral-900 break-all">{{ user.email|default:"creator@claycanvas.com" }}</p>
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-[#6B5E53]/70 block mb-1">Email Address</span>
+                            <p class="text-base font-medium text-[#4A3428] break-all">{{ user.email|default:"creator@claycanvas.com" }}</p>
                         </div>
-                        <i data-lucide="mail" class="w-5 h-5 text-neutral-400 shrink-0 mt-1"></i>
+                        <i data-lucide="mail" class="w-5 h-5 text-[#6B5E53]/60 shrink-0 mt-1"></i>
                     </div>
 
-                    <div class="flex items-start justify-between gap-4 border-b border-gray-100 pb-4">
+                    <div class="flex items-start justify-between gap-4 border-b border-[#DDD2C5]/50 pb-4">
                         <div>
-                            <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-400 block mb-1">Phone Link</span>
-                            <p class="text-base font-medium text-neutral-900">{{ user.phone|default:"No hardware link configured" }}</p>
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-[#6B5E53]/70 block mb-1">Phone Number</span>
+                            <p class="text-base font-medium text-[#4A3428]">{{ user.phone|default:"No phone provided" }}</p>
                         </div>
-                        <i data-lucide="smartphone" class="w-5 h-5 text-neutral-400 shrink-0 mt-1"></i>
+                        <i data-lucide="smartphone" class="w-5 h-5 text-[#6B5E53]/60 shrink-0 mt-1"></i>
                     </div>
 
                     <div class="flex items-start justify-between gap-4">
                         <div>
-                            <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-400 block mb-1">Address</span>
-                            <p class="text-base font-medium text-neutral-900 whitespace-pre-line leading-relaxed">{{ user.address|default:"No Address provided" }}</p>
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-[#6B5E53]/70 block mb-1">Address</span>
+                            <p class="text-base font-medium text-[#4A3428] whitespace-pre-line leading-relaxed">{{ user.address|default:"No address provided" }}</p>
                         </div>
-                        <i data-lucide="map-pin" class="w-5 h-5 text-neutral-400 shrink-0 mt-1"></i>
+                        <i data-lucide="map-pin" class="w-5 h-5 text-[#6B5E53]/60 shrink-0 mt-1"></i>
                     </div>
                 </div>
             </div>

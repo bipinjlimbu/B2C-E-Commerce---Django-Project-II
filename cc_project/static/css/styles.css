@@ -1567,6 +1567,20 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(182 94 60 / 0.2);
 }
 
+.border-\[\#C2DCBE\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(194 220 190 / var(--tw-border-opacity));
+}
+
+.border-\[\#EAC2BD\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(234 194 189 / var(--tw-border-opacity));
+}
+
+.border-\[\#DDD2C5\]\/50 {
+  border-color: rgb(221 210 197 / 0.5);
+}
+
 .border-t-transparent {
   border-top-color: transparent;
 }
@@ -1815,6 +1829,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-\[\#B4473A\] {
   --tw-bg-opacity: 1;
   background-color: rgb(180 71 58 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#E8F0E6\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(232 240 230 / var(--tw-bg-opacity));
 }
 
 .bg-\[linear-gradient\(to_right\2c \#e5d5c5_1px\2c transparent_1px\)\2c linear-gradient\(to_bottom\2c \#e5d5c5_1px\2c transparent_1px\)\] {
@@ -2492,6 +2511,15 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(180 71 58 / var(--tw-text-opacity));
 }
 
+.text-\[\#2D5A27\] {
+  --tw-text-opacity: 1;
+  color: rgb(45 90 39 / var(--tw-text-opacity));
+}
+
+.text-\[\#6B5E53\]\/70 {
+  color: rgb(107 94 83 / 0.7);
+}
+
 .underline {
   text-decoration: underline;
 }
@@ -2978,6 +3006,16 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .hover\:bg-\[\#DDD2C5\]\/40:hover {
   background-color: rgb(221 210 197 / 0.4);
+}
+
+.hover\:bg-\[\#F8F3EC\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 243 236 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-\[\#FDF2F0\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(253 242 240 / var(--tw-bg-opacity));
 }
 
 .hover\:text-orange-700:hover {
