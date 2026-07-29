@@ -1543,6 +1543,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(214 211 209 / var(--tw-border-opacity));
 }
 
+.border-\[\#5B8A5A\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(91 138 90 / var(--tw-border-opacity));
+}
+
+.border-\[\#B4473A\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(180 71 58 / var(--tw-border-opacity));
+}
+
 .border-t-transparent {
   border-top-color: transparent;
 }
