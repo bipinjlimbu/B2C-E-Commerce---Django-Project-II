@@ -431,7 +431,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-scroll-snap-strictness: proximity;
 }
 
-.divide-y > *, .border, .border-4, .border-2, .border-t, .border-b, .border-b-2, .border-l, .border-r, .border-b-\[10px\], .file\:border-0::file-selector-button, .sm\:border-t-0, .lg\:border-t-0 {
+.divide-y > *, .border, .border-4, .border-2, .border-t, .border-b, .border-b-2, .border-l, .border-r, .border-b-\[10px\], .border-b-8, .file\:border-0::file-selector-button, .sm\:border-t-0, .lg\:border-t-0 {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
@@ -1322,6 +1322,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(245 245 244 / var(--tw-divide-opacity));
 }
 
+.divide-\[\#DDD2C5\] > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-opacity: 1;
+  border-color: rgb(221 210 197 / var(--tw-divide-opacity));
+}
+
 .overflow-hidden {
   overflow: hidden;
 }
@@ -1422,6 +1427,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .border-b-\[10px\] {
   border-bottom-width: 10px;
+}
+
+.border-b-8 {
+  border-bottom-width: 8px;
 }
 
 .border-dashed {
@@ -1541,6 +1550,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-b-emerald-600 {
   --tw-border-opacity: 1;
   border-bottom-color: rgb(5 150 105 / var(--tw-border-opacity));
+}
+
+.border-b-\[\#5B8A5A\] {
+  --tw-border-opacity: 1;
+  border-bottom-color: rgb(91 138 90 / var(--tw-border-opacity));
 }
 
 .bg-\[\#F8F3EC\] {
@@ -2350,6 +2364,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-emerald-800 {
   --tw-text-opacity: 1;
   color: rgb(6 95 70 / var(--tw-text-opacity));
+}
+
+.text-\[\#5B8A5A\] {
+  --tw-text-opacity: 1;
+  color: rgb(91 138 90 / var(--tw-text-opacity));
 }
 
 .underline {
