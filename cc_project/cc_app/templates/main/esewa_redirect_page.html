@@ -7,18 +7,23 @@
     {% load static %}
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
 </head>
-<body class="bg-stone-50 flex items-center justify-center min-h-screen">
+<body class="bg-[#F8F3EC] text-[#6B5E53] font-sans flex items-center justify-center min-h-screen antialiased">
+
     <div class="text-center px-6 max-w-sm">
         <div class="relative w-24 h-24 mx-auto mb-8">
-            <div class="absolute inset-0 border-4 border-orange-100 rounded-full"></div>
-            <div class="absolute inset-0 border-4 border-orange-700 border-t-transparent rounded-full animate-spin"></div>
-            <div class="absolute inset-4 bg-orange-50 rounded-full flex items-center justify-center border border-orange-100 shadow-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-700 animate-pulse"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <div class="absolute inset-0 border-4 border-[#DDD2C5] rounded-full"></div>
+            <div class="absolute inset-0 border-4 border-[#B65E3C] border-t-transparent rounded-full animate-spin"></div>
+            <div class="absolute inset-4 bg-[#FFFCF7] rounded-full flex items-center justify-center border border-[#DDD2C5] shadow-sm">
+                <i data-lucide="shield-check" class="w-6 h-6 text-[#B65E3C] animate-pulse"></i>
             </div>
         </div>
 
-        <h2 class="text-stone-950 font-bold uppercase tracking-widest text-xl mb-2 font-serif">Connecting <span class="text-orange-700">Gateway</span></h2>
-        <p class="text-stone-400 text-[10px] font-bold uppercase tracking-widest">Encrypting secure payment connection...</p>
+        <h2 class="text-[#4A3428] font-bold uppercase tracking-widest text-xl mb-2 font-serif">
+            Connecting <span class="text-[#B65E3C]">Gateway</span>
+        </h2>
+        <p class="text-[#6B5E53]/70 text-[10px] font-bold uppercase tracking-widest">
+            Encrypting secure payment connection...
+        </p>
 
         <form id="esewa_form" action="{{ esewa_url }}" method="POST">
             <input type="hidden" name="amount" value="{{ amount }}">
@@ -35,7 +40,10 @@
         </form>
     </div>
 
+    <script src="{% static 'js/lucide.min.js' %}"></script>
     <script>
+        lucide.createIcons();
+
         window.onload = function() {
             setTimeout(function() {
                 document.getElementById('esewa_form').submit();
