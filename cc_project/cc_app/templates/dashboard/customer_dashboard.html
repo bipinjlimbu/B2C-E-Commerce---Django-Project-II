@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patron Workspace | ClayCanvas</title>
+    <title>Customer Dashboard | ClayCanvas</title>
     {% load static %}
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
     <style>
@@ -14,80 +14,80 @@
             background: transparent;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #e7e5e4;
+            background: #DDD2C5;
             border-radius: 10px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #c2410c;
+            background: #B65E3C;
         }
     </style>
 </head>
 
-<body class="bg-stone-50 flex min-h-screen overflow-hidden text-stone-800 font-sans">
+<body class="bg-[#F8F3EC] flex min-h-screen overflow-hidden text-[#6B5E53] font-sans antialiased">
 
     {% include 'components/_messages.html' %}
 
-    <aside class="w-80 bg-white flex flex-col shadow-sm relative z-30 border-r border-orange-100">
-        <div class="p-8 border-b border-orange-100">
+    <aside class="w-80 bg-[#FFFCF7] flex flex-col shadow-sm relative z-30 border-r border-[#DDD2C5]">
+        <div class="p-8 border-b border-[#DDD2C5]">
             <div class="flex items-center gap-3">
-                <div class="h-10 w-10 bg-orange-700 rounded-xl flex items-center justify-center shadow-sm">
-                    <i data-lucide="palette" class="w-5 h-5 text-white"></i>
+                <div class="h-10 w-10 bg-[#B65E3C] rounded-xl flex items-center justify-center shadow-sm">
+                    <i data-lucide="palette" class="w-5 h-5 text-[#FFFCF7]"></i>
                 </div>
-                <h1 class="text-xl font-bold tracking-tight uppercase font-serif text-stone-950">
-                    Clay<span class="text-orange-700">Canvas</span>
+                <h1 class="text-xl font-bold tracking-tight uppercase font-serif text-[#4A3428]">
+                    Clay<span class="text-[#B65E3C]">Canvas</span>
                 </h1>
             </div>
-            <p class="text-[9px] text-stone-400 font-bold uppercase tracking-widest mt-4">Patron Account Panel</p>
+            <p class="text-[9px] text-[#6B5E53]/70 font-bold uppercase tracking-widest mt-4">Customer Account</p>
         </div>
 
         <nav class="flex-grow p-6 space-y-6 overflow-y-auto custom-scrollbar">
             
             <div class="space-y-1">
-                <h3 class="px-4 text-[9px] font-bold text-stone-400 uppercase tracking-widest mb-3">Orders & History</h3>
-                <a href="?section=pending-orders" class="flex items-center gap-4 px-4 py-3.5 rounded-xl {% if section == 'pending-orders' or not section %}bg-orange-700 text-white shadow-md font-semibold{% else %}text-stone-600 hover:bg-stone-50 hover:text-stone-950 font-medium{% endif %} uppercase text-xs tracking-wider transition-all group">
+                <h3 class="px-4 text-[9px] font-bold text-[#6B5E53]/70 uppercase tracking-widest mb-3">Orders</h3>
+                <a href="?section=pending-orders" class="flex items-center gap-4 px-4 py-3.5 rounded-xl {% if section == 'pending-orders' or not section %}bg-[#B65E3C] text-[#FFFCF7] shadow-sm font-semibold{% else %}text-[#6B5E53] hover:bg-[#F8F3EC] hover:text-[#4A3428] font-medium{% endif %} uppercase text-xs tracking-wider transition-all group">
                     <i data-lucide="clock" class="w-4 h-4 transition-transform group-hover:scale-105"></i>
                     Pending Orders
                 </a>
 
-                <a href="?section=my-orders" class="flex items-center gap-4 px-4 py-3.5 rounded-xl {% if section == 'my-orders' %}bg-orange-700 text-white shadow-md font-semibold{% else %}text-stone-600 hover:bg-stone-50 hover:text-stone-950 font-medium{% endif %} uppercase text-xs tracking-wider transition-all group">
-                    <i data-lucide="shopping-cart" class="w-4 h-4 transition-transform group-hover:scale-105"></i>
-                    Purchase History
+                <a href="?section=my-orders" class="flex items-center gap-4 px-4 py-3.5 rounded-xl {% if section == 'my-orders' %}bg-[#B65E3C] text-[#FFFCF7] shadow-sm font-semibold{% else %}text-[#6B5E53] hover:bg-[#F8F3EC] hover:text-[#4A3428] font-medium{% endif %} uppercase text-xs tracking-wider transition-all group">
+                    <i data-lucide="shopping-bag" class="w-4 h-4 transition-transform group-hover:scale-105"></i>
+                    My Orders
                 </a>
             </div>
 
             <div class="space-y-1">
-                <h3 class="px-4 text-[9px] font-bold text-stone-400 uppercase tracking-widest mb-3">Financial Metrics</h3>
-                <a href="?section=total-spent" class="flex items-center gap-4 px-4 py-3.5 rounded-xl {% if section == 'total-spent' %}bg-orange-700 text-white shadow-md font-semibold{% else %}text-stone-600 hover:bg-stone-50 hover:text-stone-950 font-medium{% endif %} uppercase text-xs tracking-wider transition-all group">
+                <h3 class="px-4 text-[9px] font-bold text-[#6B5E53]/70 uppercase tracking-widest mb-3">Spending</h3>
+                <a href="?section=total-spent" class="flex items-center gap-4 px-4 py-3.5 rounded-xl {% if section == 'total-spent' %}bg-[#B65E3C] text-[#FFFCF7] shadow-sm font-semibold{% else %}text-[#6B5E53] hover:bg-[#F8F3EC] hover:text-[#4A3428] font-medium{% endif %} uppercase text-xs tracking-wider transition-all group">
                     <i data-lucide="wallet" class="w-4 h-4 transition-transform group-hover:scale-105"></i>
-                    Total Investment
+                    Total Spent
                 </a>
             </div>
 
             <div class="space-y-1">
-                <h3 class="px-4 text-[9px] font-bold text-stone-400 uppercase tracking-widest mb-3">Art Feedback</h3>
-                <a href="?section=my-reviews" class="flex items-center gap-4 px-4 py-3.5 rounded-xl {% if section == 'my-reviews' %}bg-orange-700 text-white shadow-md font-semibold{% else %}text-stone-600 hover:bg-stone-50 hover:text-stone-950 font-medium{% endif %} uppercase text-xs tracking-wider transition-all group">
+                <h3 class="px-4 text-[9px] font-bold text-[#6B5E53]/70 uppercase tracking-widest mb-3">Feedback</h3>
+                <a href="?section=my-reviews" class="flex items-center gap-4 px-4 py-3.5 rounded-xl {% if section == 'my-reviews' %}bg-[#B65E3C] text-[#FFFCF7] shadow-sm font-semibold{% else %}text-[#6B5E53] hover:bg-[#F8F3EC] hover:text-[#4A3428] font-medium{% endif %} uppercase text-xs tracking-wider transition-all group">
                     <i data-lucide="star" class="w-4 h-4 transition-transform group-hover:scale-105"></i>
                     My Reviews
                 </a>
             </div>
         </nav>
 
-        <div class="p-6 border-t border-orange-100 bg-stone-50 flex flex-col gap-2">
+        <div class="p-6 border-t border-[#DDD2C5] bg-[#F8F3EC] flex flex-col gap-2">
             <a href="/profile/" 
-               class="flex items-center justify-center gap-3 w-full bg-orange-700 text-white px-6 py-3.5 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:bg-orange-800 transition-all shadow-sm active:scale-95">
+               class="flex items-center justify-center gap-3 w-full bg-[#B65E3C] text-[#FFFCF7] px-6 py-3.5 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:bg-[#94492F] transition-all shadow-sm active:scale-95">
                 <i data-lucide="user" class="w-4 h-4"></i>
                 My Profile
             </a>
 
-            <a href="/" target="_blank" 
-               class="flex items-center justify-center gap-3 w-full bg-white border border-orange-100 text-stone-600 px-6 py-3.5 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:bg-stone-100 hover:text-stone-950 transition-all active:scale-95">
+            <a href="/"
+               class="flex items-center justify-center gap-3 w-full bg-[#FFFCF7] border border-[#DDD2C5] text-[#6B5E53] px-6 py-3.5 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:bg-[#F8F3EC] hover:text-[#4A3428] transition-all active:scale-95">
                 <i data-lucide="external-link" class="w-4 h-4"></i>
-                Live Website
+                View Website
             </a>
         </div>
     </aside>
 
-    <main class="flex-grow flex flex-col h-screen overflow-y-auto bg-stone-50 p-6 sm:p-8">
+    <main class="flex-grow flex flex-col h-screen overflow-y-auto bg-[#F8F3EC] p-6 sm:p-8">
         
         {% if section == 'pending-orders' or not section %}
             {% include 'dashboard/customer/_pending_orders.html' %}
