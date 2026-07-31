@@ -1,43 +1,45 @@
-<nav class="bg-[#FFFCF7] border-b border-[#DDD2C5] sticky top-0 z-50 shadow-sm">
+<nav class="bg-[#FFFCF7]/95 backdrop-blur-md border-b border-[#DDD2C5] sticky top-0 z-50 shadow-xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16 items-center">
+        <div class="flex justify-between h-20 items-center gap-4">
             
-            <div class="flex items-center flex-1 md:flex-initial">
-                <a href="/" class="flex-shrink-0 flex items-center mr-8">
-                    <i data-lucide="shapes" class="text-[#B65E3C] mr-2"></i>
-                    <span class="text-xl font-bold tracking-wide text-[#4A3428] font-serif">ClayCanvas</span>
+            <div class="flex items-center gap-8 lg:gap-10">
+                <a href="/" class="flex-shrink-0 flex items-center gap-2.5 group">
+                    <div class="w-10 h-10 rounded-xl bg-[#B65E3C]/10 border border-[#B65E3C]/20 flex items-center justify-center text-[#B65E3C] group-hover:bg-[#B65E3C] group-hover:text-[#FFFCF7] transition-all duration-300">
+                        <i data-lucide="shapes" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-2xl font-serif font-bold text-[#4A3428] tracking-tight">ClayCanvas</span>
                 </a>
 
-                <div class="hidden md:flex space-x-6 font-medium">
-                    <a href="/products/" class="{% if request.path == '/products/' and not request.GET.category %}text-[#B65E3C] border-b-2 border-[#B65E3C]{% else %}text-[#6B5E53] hover:text-[#B65E3C]{% endif %} px-1 pt-1 text-sm transition">Shop All</a>
-                    <a href="/products/?category=paintings" class="{% if request.GET.category == 'paintings' %}text-[#B65E3C] border-b-2 border-[#B65E3C]{% else %}text-[#6B5E53] hover:text-[#B65E3C]{% endif %} px-1 pt-1 text-sm transition">Paintings</a>
-                    <a href="/products/?category=pottery" class="{% if request.GET.category == 'pottery' %}text-[#B65E3C] border-b-2 border-[#B65E3C]{% else %}text-[#6B5E53] hover:text-[#B65E3C]{% endif %} px-1 pt-1 text-sm transition">Pottery</a>
-                    <a href="/products/?category=accessories" class="{% if request.GET.category == 'accessories' %}text-[#B65E3C] border-b-2 border-[#B65E3C]{% else %}text-[#6B5E53] hover:text-[#B65E3C]{% endif %} px-1 pt-1 text-sm transition">Accessories</a>
+                <div class="hidden md:flex items-center space-x-1 lg:space-x-2 font-medium">
+                    <a href="/products/" class="{% if request.path == '/products/' and not request.GET.category %}text-[#B65E3C] bg-[#B65E3C]/10 font-semibold{% else %}text-[#6B5E53] hover:text-[#B65E3C] hover:bg-[#F8F3EC]{% endif %} px-3.5 py-2 rounded-xl text-sm transition-all duration-200">Shop All</a>
+                    <a href="/products/?category=paintings" class="{% if request.GET.category == 'paintings' %}text-[#B65E3C] bg-[#B65E3C]/10 font-semibold{% else %}text-[#6B5E53] hover:text-[#B65E3C] hover:bg-[#F8F3EC]{% endif %} px-3.5 py-2 rounded-xl text-sm transition-all duration-200">Paintings</a>
+                    <a href="/products/?category=pottery" class="{% if request.GET.category == 'pottery' %}text-[#B65E3C] bg-[#B65E3C]/10 font-semibold{% else %}text-[#6B5E53] hover:text-[#B65E3C] hover:bg-[#F8F3EC]{% endif %} px-3.5 py-2 rounded-xl text-sm transition-all duration-200">Pottery</a>
+                    <a href="/products/?category=accessories" class="{% if request.GET.category == 'accessories' %}text-[#B65E3C] bg-[#B65E3C]/10 font-semibold{% else %}text-[#6B5E53] hover:text-[#B65E3C] hover:bg-[#F8F3EC]{% endif %} px-3.5 py-2 rounded-xl text-sm transition-all duration-200">Accessories</a>
                 </div>
             </div>
 
-            <div class="hidden sm:block flex-1 max-w-md mx-8">
+            <div class="hidden sm:block flex-1 max-w-md mx-4">
                 <form action="/products/" method="GET" class="relative m-0">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <i data-lucide="search" class="h-4 w-4 text-[#6B5E53]/60"></i>
+                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#6B5E53]/60">
+                        <i data-lucide="search" class="w-4 h-4"></i>
                     </div>
-                    <input type="text" name="q" value="{{ request.GET.q|default:'' }}" placeholder="Search paintings, pottery..." class="block w-full pl-9 pr-3 py-1.5 border border-[#DDD2C5] rounded-lg bg-[#F8F3EC] text-sm placeholder-[#6B5E53]/60 focus:outline-none focus:border-[#B65E3C] focus:bg-[#FFFCF7] text-[#4A3428] transition">
+                    <input type="text" name="q" value="{{ request.GET.q|default:'' }}" placeholder="Search paintings, pottery..." class="block w-full pl-10 pr-4 py-2 border border-[#DDD2C5] rounded-xl bg-[#F8F3EC] text-sm text-[#4A3428] placeholder-[#6B5E53]/60 focus:outline-none focus:border-[#B65E3C] focus:bg-[#FFFCF7] focus:ring-2 focus:ring-[#B65E3C]/20 transition-all duration-200">
                 </form>
             </div>
 
-            <div class="flex items-center space-x-4">
-                <a href="/products/" class="text-[#6B5E53] hover:text-[#B65E3C] transition sm:hidden">
-                    <i data-lucide="search"></i>
+            <div class="flex items-center gap-2 sm:gap-3">
+                <a href="/products/" class="w-10 h-10 rounded-xl flex items-center justify-center text-[#6B5E53] hover:text-[#B65E3C] hover:bg-[#F8F3EC] transition-all duration-200 sm:hidden">
+                    <i data-lucide="search" class="w-5 h-5"></i>
                 </a>
 
                 {% if not request.user.is_staff %}
-                    <a href="/wishlist/" class="text-[#6B5E53] hover:text-[#B65E3C] transition relative">
-                        <i data-lucide="heart"></i>
+                    <a href="/wishlist/" class="w-10 h-10 rounded-xl flex items-center justify-center text-[#6B5E53] hover:text-[#B65E3C] hover:bg-[#F8F3EC] transition-all duration-200 relative">
+                        <i data-lucide="heart" class="w-5 h-5"></i>
                     </a>
-                    <a href="/cart/" class="text-[#6B5E53] hover:text-[#B65E3C] transition relative mr-2">
-                        <i data-lucide="shopping-basket"></i>
+                    <a href="/cart/" class="w-10 h-10 rounded-xl flex items-center justify-center text-[#6B5E53] hover:text-[#B65E3C] hover:bg-[#F8F3EC] transition-all duration-200 relative">
+                        <i data-lucide="shopping-basket" class="w-5 h-5"></i>
                         {% if user.is_authenticated and user.cart.items.exists %}
-                            <span class="absolute top-0 right-0 w-4 h-4 bg-[#B4473A] text-[#FFFCF7] text-[10px] font-bold rounded-full flex items-center justify-center transform translate-x-1 -translate-y-1">
+                            <span class="absolute top-1.5 right-1.5 w-4 h-4 bg-[#B4473A] text-[#FFFCF7] text-[10px] font-bold rounded-full flex items-center justify-center shadow-xs">
                                 {{ user.cart.items.count }}
                             </span>
                         {% endif %}
@@ -45,24 +47,24 @@
                 {% endif %}
 
                 {% if user.is_authenticated %}
-                    <div class="flex items-center space-x-3 border-l border-[#DDD2C5] pl-4">
-                        <a href="/profile/" class="block h-8 w-8 rounded-full overflow-hidden border border-[#DDD2C5] bg-[#F8F3EC] focus:outline-none">
+                    <div class="flex items-center gap-3 border-l border-[#DDD2C5] pl-3 sm:pl-4 ml-1">
+                        <a href="/profile/" class="block h-9 w-9 rounded-full overflow-hidden border border-[#DDD2C5] bg-[#F8F3EC] hover:border-[#B65E3C] transition-all duration-200 focus:outline-none shadow-xs">
                             {% if user.profile_picture %}
                                 <img src="{{ user.profile_picture.url }}" alt="{{ user.username }}" class="h-full w-full object-cover">
                             {% else %}
-                                <div class="h-full w-full flex items-center justify-center text-[#B65E3C] font-bold text-sm bg-[#F8F3EC]">
+                                <div class="h-full w-full flex items-center justify-center text-[#B65E3C] font-semibold text-xs bg-[#B65E3C]/10">
                                     {{ user.username|slice:":1"|upper }}
                                 </div>
                             {% endif %}
                         </a>
-                        <a href="/logout/" class="text-[#6B5E53] hover:text-[#B4473A] transition" title="Logout">
-                            <i data-lucide="log-out"></i>
+                        <a href="/logout/" class="w-9 h-9 rounded-xl flex items-center justify-center text-[#6B5E53] hover:text-[#B4473A] hover:bg-[#B4473A]/10 transition-all duration-200" title="Logout">
+                            <i data-lucide="log-out" class="w-4 h-4"></i>
                         </a>
                     </div>
                 {% else %}
-                    <div class="flex items-center space-x-2 border-l border-[#DDD2C5] pl-4">
-                        <a href="/login/" class="text-[#6B5E53] hover:text-[#B65E3C] text-sm font-medium px-2 py-1.5 transition">Login</a>
-                        <a href="/register/" class="bg-[#B65E3C] text-[#FFFCF7] text-sm font-medium px-3 py-1.5 rounded-lg hover:bg-[#94492F] transition shadow-sm">Register</a>
+                    <div class="flex items-center gap-2 border-l border-[#DDD2C5] pl-3 sm:pl-4 ml-1">
+                        <a href="/login/" class="text-[#6B5E53] hover:text-[#B65E3C] text-sm font-medium px-3 py-2 rounded-xl hover:bg-[#F8F3EC] transition-all duration-200">Login</a>
+                        <a href="/register/" class="bg-[#B65E3C] text-[#FFFCF7] text-sm font-medium px-4 py-2 rounded-xl hover:bg-[#94492F] transition-all duration-200 shadow-sm hover:shadow-md">Register</a>
                     </div>
                 {% endif %}
             </div>

@@ -607,6 +607,26 @@ Ensure the default browser behavior of the `hidden` attribute.
   left: -6rem;
 }
 
+.top-1\.5 {
+  top: 0.375rem;
+}
+
+.right-1\.5 {
+  right: 0.375rem;
+}
+
+.top-1 {
+  top: 0.25rem;
+}
+
+.right-1 {
+  right: 0.25rem;
+}
+
+.left-3\.5 {
+  left: 0.875rem;
+}
+
 .z-\[100\] {
   z-index: 100;
 }
@@ -648,6 +668,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .my-12 {
   margin-top: 3rem;
   margin-bottom: 3rem;
+}
+
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .mb-6 {
@@ -1358,6 +1383,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: calc(5rem * var(--tw-space-y-reverse));
 }
 
+.space-x-1 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.25rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
 .divide-y > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-y-reverse: 0;
   border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
@@ -2066,6 +2097,22 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pr-6 {
   padding-right: 1.5rem;
+}
+
+.pl-3\.5 {
+  padding-left: 0.875rem;
+}
+
+.pl-10 {
+  padding-left: 2.5rem;
+}
+
+.pr-4 {
+  padding-right: 1rem;
+}
+
+.pl-11 {
+  padding-left: 2.75rem;
 }
 
 .text-left {
@@ -2926,6 +2973,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(221 210 197 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-\[\#B4473A\]\/10:hover {
+  background-color: rgb(180 71 58 / 0.1);
+}
+
 .hover\:text-\[\#B65E3C\]:hover {
   --tw-text-opacity: 1;
   color: rgb(182 94 60 / var(--tw-text-opacity));
@@ -3023,6 +3074,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .focus\:ring-\[\#B65E3C\]:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(182 94 60 / var(--tw-ring-opacity));
+}
+
+.focus\:ring-\[\#B65E3C\]\/20:focus {
+  --tw-ring-color: rgb(182 94 60 / 0.2);
 }
 
 .active\:scale-95:active {
@@ -3171,6 +3226,10 @@ Ensure the default browser behavior of the `hidden` attribute.
     justify-content: space-between;
   }
 
+  .sm\:gap-3 {
+    gap: 0.75rem;
+  }
+
   .sm\:space-y-0 > :not([hidden]) ~ :not([hidden]) {
     --tw-space-y-reverse: 0;
     margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
@@ -3204,6 +3263,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .sm\:pt-0 {
     padding-top: 0px;
+  }
+
+  .sm\:pl-4 {
+    padding-left: 1rem;
   }
 
   .sm\:text-left {
@@ -3327,6 +3390,16 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .lg\:gap-16 {
     gap: 4rem;
+  }
+
+  .lg\:gap-10 {
+    gap: 2.5rem;
+  }
+
+  .lg\:space-x-2 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+    margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
   .lg\:border-t-0 {
