@@ -3,216 +3,286 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClayCanvas | Handcrafted Ceramic Form & Artistry</title>
+    <title>ClayCanvas | Handcrafted Pottery & Fine Art</title>
     {% load static %}
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
     <style>
         .custom-scrollbar::-webkit-scrollbar {
-            height: 4px;
+            height: 6px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
             background: #F8F3EC;
-            border-radius: 10px;
+            border-radius: 9999px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #B65E3C;
-            border-radius: 10px;
+            background: #DDD2C5;
+            border-radius: 9999px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #94492F;
-            border-radius: 10px;
+            background: #B65E3C;
         }
     </style>
 </head>
-<body class="bg-[#F8F3EC] font-sans min-h-screen flex flex-col text-[#6B5E53] antialiased">
+<body class="bg-[#F8F3EC] font-sans min-h-screen flex flex-col text-[#6B5E53] antialiased selection:bg-[#B65E3C] selection:text-[#FFFCF7]">
 
     {% include 'components/_navbar.html' %}
 
     {% include 'components/_messages.html' %}
 
     <main class="flex-grow">
-        
-        <section class="relative bg-[#FFFCF7] text-[#4A3428] overflow-hidden py-24 lg:py-36 border-b border-[#DDD2C5]">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="max-w-2xl space-y-6">
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest bg-[#B65E3C]/10 text-[#B65E3C] border border-[#B65E3C]/20">
-                        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Handmade Ceramics
-                    </span>
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal tracking-tight leading-tight text-[#4A3428]">
-                        Handmade Pottery & <br>
-                        <span class="text-[#B65E3C] italic font-light">Ceramic Art</span>
-                    </h1>
-                    <p class="text-base sm:text-lg text-[#6B5E53] font-normal leading-relaxed">
-                        Explore our collection of functional dinnerware, textured vases, and handcrafted ceramic pieces.
-                    </p>
-                    <div class="flex flex-wrap gap-4 pt-2">
-                        <a href="/products/" class="bg-[#B65E3C] hover:bg-[#94492F] text-[#FFFCF7] font-medium px-6 py-3 rounded-lg transition-all shadow-sm flex items-center gap-2 text-sm tracking-wide">
-                            Shop Products
-                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        <section class="relative bg-gradient-to-b from-[#FFFCF7] to-[#F8F3EC] text-[#4A3428] border-b border-[#DDD2C5] py-20 lg:py-28 overflow-hidden">
+            <div class="absolute -top-24 -right-24 w-96 h-96 bg-[#C89B3C]/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-[#7A8F6A]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#B65E3C]/10 text-[#B65E3C] border border-[#B65E3C]/20">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#B65E3C]"></i>
+                    <span>Artisan Craft Studio</span>
+                </div>
+                
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif text-[#4A3428] leading-[1.15] font-medium tracking-tight">
+                    Handcrafted Pottery & <br class="hidden sm:inline">
+                    <span class="text-[#B65E3C] italic font-light">Artisan Home Décor</span>
+                </h1>
+                
+                <p class="text-base sm:text-lg text-[#6B5E53] max-w-2xl mx-auto font-normal leading-relaxed">
+                    Discover unique ceramic pieces, original paintings, and handcrafted studio art made with natural materials and timeless care.
+                </p>
+                
+                <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+                    <a href="/products/" class="bg-[#B65E3C] hover:bg-[#94492F] text-[#FFFCF7] font-medium px-7 py-3.5 rounded-xl transition-all shadow-md hover:shadow-lg flex items-center gap-2.5 text-sm tracking-wide group">
+                        <span>Shop Collection</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                    </a>
+                    
+                    {% if not user.is_authenticated %}
+                        <a href="/register/" class="bg-[#FFFCF7] hover:bg-[#DDD2C5]/30 text-[#4A3428] font-medium px-7 py-3.5 rounded-xl transition-all border border-[#DDD2C5] shadow-sm text-sm tracking-wide">
+                            Create Account
                         </a>
-                        
-                        {% if not user.is_authenticated %}
-                            <a href="/register/" class="bg-[#F8F3EC] hover:bg-[#DDD2C5]/40 text-[#4A3428] font-medium px-6 py-3 rounded-lg transition-all border border-[#DDD2C5] shadow-sm text-sm tracking-wide">
-                                Join Us
-                            </a>
-                        {% elif user.is_staff %}
-                            <a href="/dashboard/admin/" class="bg-[#F8F3EC] hover:bg-[#DDD2C5]/40 text-[#4A3428] font-medium px-6 py-3 rounded-lg transition-all border border-[#DDD2C5] shadow-sm text-sm tracking-wide">
-                                Dashboard
-                            </a>
-                        {% else %}
-                            <a href="/dashboard/" class="bg-[#F8F3EC] hover:bg-[#DDD2C5]/40 text-[#4A3428] font-medium px-6 py-3 rounded-lg transition-all border border-[#DDD2C5] shadow-sm text-sm tracking-wide">
-                                Dashboard
-                            </a>
-                        {% endif %}
+                    {% elif user.is_staff %}
+                        <a href="/dashboard/admin/" class="bg-[#FFFCF7] hover:bg-[#DDD2C5]/30 text-[#4A3428] font-medium px-7 py-3.5 rounded-xl transition-all border border-[#DDD2C5] shadow-sm text-sm tracking-wide">
+                            Admin Dashboard
+                        </a>
+                    {% else %}
+                        <a href="/dashboard/" class="bg-[#FFFCF7] hover:bg-[#DDD2C5]/30 text-[#4A3428] font-medium px-7 py-3.5 rounded-xl transition-all border border-[#DDD2C5] shadow-sm text-sm tracking-wide">
+                            My Dashboard
+                        </a>
+                    {% endif %}
+                </div>
+
+                <div class="grid grid-cols-3 gap-6 pt-8 border-t border-[#DDD2C5]/60 max-w-md mx-auto">
+                    <div>
+                        <p class="text-xs uppercase font-semibold text-[#B65E3C] tracking-wider">Materials</p>
+                        <p class="text-sm font-medium text-[#4A3428] mt-0.5">100% Natural Clay</p>
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase font-semibold text-[#7A8F6A] tracking-wider">Creation</p>
+                        <p class="text-sm font-medium text-[#4A3428] mt-0.5">Hand-Thrown</p>
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase font-semibold text-[#C89B3C] tracking-wider">Quality</p>
+                        <p class="text-sm font-medium text-[#4A3428] mt-0.5">One-of-a-Kind</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12">
-                <div>
-                    <h2 class="text-xs font-bold uppercase tracking-widest text-[#B65E3C] mb-1">Categories</h2>
-                    <p class="text-2xl font-serif font-normal tracking-tight text-[#4A3428]">Shop by Category</p>
+        <section class="border-b border-[#DDD2C5] bg-[#FFFCF7] shadow-sm relative z-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <div class="flex items-center gap-4 p-4 rounded-2xl bg-[#F8F3EC] border border-[#DDD2C5] hover:border-[#B65E3C]/40 transition-all duration-300">
+                        <div class="w-12 h-12 bg-[#B65E3C]/10 text-[#B65E3C] rounded-xl flex items-center justify-center shrink-0 border border-[#B65E3C]/20">
+                            <i data-lucide="truck" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-sm text-[#4A3428]">Fast Shipping</h3>
+                            <p class="text-xs text-[#6B5E53]">Free on orders over Rs. 10,000</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 p-4 rounded-2xl bg-[#F8F3EC] border border-[#DDD2C5] hover:border-[#B65E3C]/40 transition-all duration-300">
+                        <div class="w-12 h-12 bg-[#B65E3C]/10 text-[#B65E3C] rounded-xl flex items-center justify-center shrink-0 border border-[#B65E3C]/20">
+                            <i data-lucide="shield-check" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-sm text-[#4A3428]">100% Real Items</h3>
+                            <p class="text-xs text-[#6B5E53]">Official brand warranty</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 p-4 rounded-2xl bg-[#F8F3EC] border border-[#DDD2C5] hover:border-[#B65E3C]/40 transition-all duration-300">
+                        <div class="w-12 h-12 bg-[#B65E3C]/10 text-[#B65E3C] rounded-xl flex items-center justify-center shrink-0 border border-[#B65E3C]/20">
+                            <i data-lucide="rotate-ccw" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-sm text-[#4A3428]">Easy 7-Day Return</h3>
+                            <p class="text-xs text-[#6B5E53]">Simple exchange process</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 p-4 rounded-2xl bg-[#F8F3EC] border border-[#DDD2C5] hover:border-[#B65E3C]/40 transition-all duration-300">
+                        <div class="w-12 h-12 bg-[#B65E3C]/10 text-[#B65E3C] rounded-xl flex items-center justify-center shrink-0 border border-[#B65E3C]/20">
+                            <i data-lucide="headphones" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-sm text-[#4A3428]">Help & Support</h3>
+                            <p class="text-xs text-[#6B5E53]">Friendly guidance anytime</p>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-            
-            <div class="flex overflow-x-auto gap-6 pb-6 snap-x snap-mandatory custom-scrollbar">
-                <a href="/products/?category=paintings" class="group min-w-[280px] sm:min-w-[320px] snap-start bg-[#FFFCF7] border border-[#DDD2C5] p-6 rounded-xl shadow-sm hover:border-[#B65E3C] transition-all flex items-center justify-between">
-                    <div class="space-y-1">
-                        <h3 class="font-serif text-lg text-[#4A3428] group-hover:text-[#B65E3C] transition-colors">Original Paintings</h3>
-                        <p class="text-xs text-[#6B5E53]">Oil and acrylic paintings</p>
-                    </div>
-                    <div class="w-10 h-10 bg-[#F8F3EC] rounded-lg flex items-center justify-center border border-[#DDD2C5] group-hover:bg-[#B65E3C]/10 group-hover:border-[#B65E3C] transition-colors shrink-0 ml-4">
-                        <i data-lucide="palette" class="w-4 h-4 text-[#6B5E53] group-hover:text-[#B65E3C] transition-colors"></i>
-                    </div>
-                </a>
-
-                <a href="/products/?category=pottery" class="group min-w-[280px] sm:min-w-[320px] snap-start bg-[#FFFCF7] border border-[#DDD2C5] p-6 rounded-xl shadow-sm hover:border-[#B65E3C] transition-all flex items-center justify-between">
-                    <div class="space-y-1">
-                        <h3 class="font-serif text-lg text-[#4A3428] group-hover:text-[#B65E3C] transition-colors">Handmade Pottery</h3>
-                        <p class="text-xs text-[#6B5E53]">Mugs, bowls, and plates</p>
-                    </div>
-                    <div class="w-10 h-10 bg-[#F8F3EC] rounded-lg flex items-center justify-center border border-[#DDD2C5] group-hover:bg-[#B65E3C]/10 group-hover:border-[#B65E3C] transition-colors shrink-0 ml-4">
-                        <i data-lucide="coffee" class="w-4 h-4 text-[#6B5E53] group-hover:text-[#B65E3C] transition-colors"></i>
-                    </div>
-                </a>
-
-                <a href="/products/?category=ceramics" class="group min-w-[280px] sm:min-w-[320px] snap-start bg-[#FFFCF7] border border-[#DDD2C5] p-6 rounded-xl shadow-sm hover:border-[#B65E3C] transition-all flex items-center justify-between">
-                    <div class="space-y-1">
-                        <h3 class="font-serif text-lg text-[#4A3428] group-hover:text-[#B65E3C] transition-colors">Sculptures & Ceramics</h3>
-                        <p class="text-xs text-[#6B5E53]">Decorative ceramic pieces</p>
-                    </div>
-                    <div class="w-10 h-10 bg-[#F8F3EC] rounded-lg flex items-center justify-center border border-[#DDD2C5] group-hover:bg-[#B65E3C]/10 group-hover:border-[#B65E3C] transition-colors shrink-0 ml-4">
-                        <i data-lucide="shapes" class="w-4 h-4 text-[#6B5E53] group-hover:text-[#B65E3C] transition-colors"></i>
-                    </div>
-                </a>
-
-                <a href="/products/?category=prints" class="group min-w-[280px] sm:min-w-[320px] snap-start bg-[#FFFCF7] border border-[#DDD2C5] p-6 rounded-xl shadow-sm hover:border-[#B65E3C] transition-all flex items-center justify-between">
-                    <div class="space-y-1">
-                        <h3 class="font-serif text-lg text-[#4A3428] group-hover:text-[#B65E3C] transition-colors">Art Prints</h3>
-                        <p class="text-xs text-[#6B5E53]">High quality printed art</p>
-                    </div>
-                    <div class="w-10 h-10 bg-[#F8F3EC] rounded-lg flex items-center justify-center border border-[#DDD2C5] group-hover:bg-[#B65E3C]/10 group-hover:border-[#B65E3C] transition-colors shrink-0 ml-4">
-                        <i data-lucide="image" class="w-4 h-4 text-[#6B5E53] group-hover:text-[#B65E3C] transition-colors"></i>
-                    </div>
-                </a>
-
-                <a href="/products/?category=accessories" class="group min-w-[280px] sm:min-w-[320px] snap-start bg-[#FFFCF7] border border-[#DDD2C5] p-6 rounded-xl shadow-sm hover:border-[#B65E3C] transition-all flex items-center justify-between">
-                    <div class="space-y-1">
-                        <h3 class="font-serif text-lg text-[#4A3428] group-hover:text-[#B65E3C] transition-colors">Art Supplies</h3>
-                        <p class="text-xs text-[#6B5E53]">Tools and accessories</p>
-                    </div>
-                    <div class="w-10 h-10 bg-[#F8F3EC] rounded-lg flex items-center justify-center border border-[#DDD2C5] group-hover:bg-[#B65E3C]/10 group-hover:border-[#B65E3C] transition-colors shrink-0 ml-4">
-                        <i data-lucide="brush" class="w-4 h-4 text-[#6B5E53] group-hover:text-[#B65E3C] transition-colors"></i>
-                    </div>
-                </a>
             </div>
         </section>
 
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mb-24">
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-10">
                 <div>
-                    <h2 class="text-xs font-bold uppercase tracking-wider text-[#B65E3C]">Products</h2>
-                    <p class="text-2xl font-serif font-normal tracking-tight text-[#4A3428]">Featured Items</p>
+                    <span class="text-xs font-semibold uppercase tracking-widest text-[#B65E3C] block mb-1">Categories</span>
+                    <h2 class="text-2xl sm:text-3xl font-serif font-normal text-[#4A3428]">Browse by Studio Category</h2>
                 </div>
-                <a href="/products/" class="text-sm font-semibold text-[#4A3428] hover:text-[#B65E3C] transition-colors underline decoration-1 underline-offset-4 flex items-center gap-1">
-                    View All Products <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </div>
+
+            <div class="flex overflow-x-auto gap-5 pb-4 snap-x snap-mandatory custom-scrollbar">
+                <a href="/products/?category=paintings" class="group min-w-[260px] sm:min-w-[300px] snap-start bg-[#FFFCF7] border border-[#DDD2C5] p-6 rounded-2xl shadow-sm hover:shadow-md hover:border-[#B65E3C] transition-all flex items-center justify-between">
+                    <div class="space-y-1">
+                        <h3 class="font-serif text-lg text-[#4A3428] group-hover:text-[#B65E3C] transition-colors">Original Paintings</h3>
+                        <p class="text-xs text-[#6B5E53]">Canvas, oil & acrylic artwork</p>
+                    </div>
+                    <div class="w-11 h-11 bg-[#F8F3EC] rounded-xl flex items-center justify-center border border-[#DDD2C5] group-hover:bg-[#B65E3C] group-hover:border-[#B65E3C] transition-colors shrink-0 ml-4">
+                        <i data-lucide="palette" class="w-5 h-5 text-[#6B5E53] group-hover:text-[#FFFCF7] transition-colors"></i>
+                    </div>
+                </a>
+
+                <a href="/products/?category=pottery" class="group min-w-[260px] sm:min-w-[300px] snap-start bg-[#FFFCF7] border border-[#DDD2C5] p-6 rounded-2xl shadow-sm hover:shadow-md hover:border-[#B65E3C] transition-all flex items-center justify-between">
+                    <div class="space-y-1">
+                        <h3 class="font-serif text-lg text-[#4A3428] group-hover:text-[#B65E3C] transition-colors">Handmade Pottery</h3>
+                        <p class="text-xs text-[#6B5E53]">Mugs, bowls & dinnerware</p>
+                    </div>
+                    <div class="w-11 h-11 bg-[#F8F3EC] rounded-xl flex items-center justify-center border border-[#DDD2C5] group-hover:bg-[#B65E3C] group-hover:border-[#B65E3C] transition-colors shrink-0 ml-4">
+                        <i data-lucide="coffee" class="w-5 h-5 text-[#6B5E53] group-hover:text-[#FFFCF7] transition-colors"></i>
+                    </div>
+                </a>
+
+                <a href="/products/?category=ceramics" class="group min-w-[260px] sm:min-w-[300px] snap-start bg-[#FFFCF7] border border-[#DDD2C5] p-6 rounded-2xl shadow-sm hover:shadow-md hover:border-[#B65E3C] transition-all flex items-center justify-between">
+                    <div class="space-y-1">
+                        <h3 class="font-serif text-lg text-[#4A3428] group-hover:text-[#B65E3C] transition-colors">Sculptures & Vases</h3>
+                        <p class="text-xs text-[#6B5E53]">Decorative ceramic forms</p>
+                    </div>
+                    <div class="w-11 h-11 bg-[#F8F3EC] rounded-xl flex items-center justify-center border border-[#DDD2C5] group-hover:bg-[#B65E3C] group-hover:border-[#B65E3C] transition-colors shrink-0 ml-4">
+                        <i data-lucide="shapes" class="w-5 h-5 text-[#6B5E53] group-hover:text-[#FFFCF7] transition-colors"></i>
+                    </div>
+                </a>
+
+                <a href="/products/?category=prints" class="group min-w-[260px] sm:min-w-[300px] snap-start bg-[#FFFCF7] border border-[#DDD2C5] p-6 rounded-2xl shadow-sm hover:shadow-md hover:border-[#B65E3C] transition-all flex items-center justify-between">
+                    <div class="space-y-1">
+                        <h3 class="font-serif text-lg text-[#4A3428] group-hover:text-[#B65E3C] transition-colors">Art Prints</h3>
+                        <p class="text-xs text-[#6B5E53]">High quality art reproductions</p>
+                    </div>
+                    <div class="w-11 h-11 bg-[#F8F3EC] rounded-xl flex items-center justify-center border border-[#DDD2C5] group-hover:bg-[#B65E3C] group-hover:border-[#B65E3C] transition-colors shrink-0 ml-4">
+                        <i data-lucide="image" class="w-5 h-5 text-[#6B5E53] group-hover:text-[#FFFCF7] transition-colors"></i>
+                    </div>
+                </a>
+
+                <a href="/products/?category=accessories" class="group min-w-[260px] sm:min-w-[300px] snap-start bg-[#FFFCF7] border border-[#DDD2C5] p-6 rounded-2xl shadow-sm hover:shadow-md hover:border-[#B65E3C] transition-all flex items-center justify-between">
+                    <div class="space-y-1">
+                        <h3 class="font-serif text-lg text-[#4A3428] group-hover:text-[#B65E3C] transition-colors">Art Supplies</h3>
+                        <p class="text-xs text-[#6B5E53]">Studio tools & materials</p>
+                    </div>
+                    <div class="w-11 h-11 bg-[#F8F3EC] rounded-xl flex items-center justify-center border border-[#DDD2C5] group-hover:bg-[#B65E3C] group-hover:border-[#B65E3C] transition-colors shrink-0 ml-4">
+                        <i data-lucide="brush" class="w-5 h-5 text-[#6B5E53] group-hover:text-[#FFFCF7] transition-colors"></i>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mb-20">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-10 pb-4 border-b border-[#DDD2C5]/80">
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-widest text-[#B65E3C] block mb-1">Featured Items</span>
+                    <h2 class="text-2xl sm:text-3xl font-serif font-normal text-[#4A3428]">Handcrafted Works</h2>
+                </div>
+                <a href="/products/" class="text-sm font-medium text-[#B65E3C] hover:text-[#94492F] transition-colors flex items-center gap-1 group">
+                    <span>View All Products</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
                 </a>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                 {% for product in products %}
-                    <div class="bg-[#FFFCF7] border border-[#DDD2C5] rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-[#B65E3C]/50 transition-all flex flex-col group relative">
+                    <div class="bg-[#FFFCF7] border border-[#DDD2C5] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:border-[#B65E3C]/40 transition-all duration-300 flex flex-col group relative">
                         
                         <a href="/products/{{ product.id }}/" class="flex flex-col flex-grow">
-                            <div class="aspect-square w-full bg-[#F8F3EC] relative overflow-hidden border-b border-[#DDD2C5]">
+                            <div class="aspect-square w-full bg-[#F8F3EC] relative overflow-hidden border-b border-[#DDD2C5]/80">
                                 {% if product.product_image %}
                                     <img src="{{ product.product_image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                 {% else %}
-                                    <div class="w-full h-full flex flex-col items-center justify-center bg-[#F8F3EC] p-4">
-                                        <i data-lucide="palette" class="w-10 h-10 text-[#6B5E53]/40 group-hover:text-[#B65E3C] transition-all duration-300"></i>
-                                        <span class="text-[9px] uppercase tracking-widest text-[#6B5E53]/60 font-bold mt-2">No Artwork Preview</span>
+                                    <div class="w-full h-full flex flex-col items-center justify-center bg-[#F8F3EC] p-6 text-center">
+                                        <i data-lucide="palette" class="w-10 h-10 text-[#6B5E53]/30 group-hover:text-[#B65E3C] transition-all duration-300"></i>
+                                        <span class="text-[10px] uppercase tracking-widest text-[#6B5E53]/60 font-semibold mt-3">Artisan Creation</span>
                                     </div>
                                 {% endif %}
                                 
-                                <span class="absolute top-3 left-3 bg-[#FFFCF7]/90 border border-[#DDD2C5] backdrop-blur-md text-[9px] font-bold uppercase tracking-widest text-[#6B5E53] px-2.5 py-1 rounded-md shadow-sm z-10">
+                                <span class="absolute top-3 left-3 bg-[#FFFCF7]/95 border border-[#DDD2C5] backdrop-blur-md text-[10px] font-semibold uppercase tracking-wider text-[#4A3428] px-2.5 py-1 rounded-lg shadow-sm z-10">
                                     {{ product.get_category_display }}
                                 </span>
 
                                 {% if product.stock == 1 %}
-                                    <span class="absolute top-3 right-3 bg-[#F8F3EC] border border-[#B65E3C]/30 backdrop-blur-md text-[8px] font-bold uppercase tracking-widest text-[#B65E3C] px-2 py-0.5 rounded-md shadow-sm z-10">
-                                        1-of-1 Original
+                                    <span class="absolute top-3 right-3 bg-[#C89B3C]/10 border border-[#C89B3C]/40 backdrop-blur-md text-[10px] font-semibold uppercase tracking-wider text-[#C89B3C] px-2.5 py-1 rounded-lg shadow-sm z-10">
+                                        1-of-1 Piece
                                     </span>
                                 {% endif %}
                             </div>
 
-                            <div class="p-5 flex-grow space-y-2">
-                                <h3 class="font-serif font-bold text-[#4A3428] text-base tracking-tight group-hover:text-[#B65E3C] transition-colors line-clamp-1">
+                            <div class="p-6 flex-grow space-y-2">
+                                <h3 class="font-serif font-normal text-[#4A3428] text-lg leading-snug group-hover:text-[#B65E3C] transition-colors line-clamp-1">
                                     {{ product.name }}
                                 </h3>
                                 <p class="text-xs text-[#6B5E53] leading-relaxed line-clamp-2">
-                                    {{ product.description|truncatechars:100|default:"No description updated for this collection masterwork." }}
+                                    {{ product.description|truncatechars:100|default:"Handcrafted artisan piece created with natural materials." }}
                                 </p>
                             </div>
                         </a>
 
-                        <div class="p-5 pt-0">
-                            <div class="flex items-center justify-between pt-3 border-t border-[#DDD2C5]/50">
+                        <div class="p-6 pt-0">
+                            <div class="flex items-center justify-between pt-4 border-t border-[#DDD2C5]/60">
                                 <div class="flex flex-col">
-                                    <span class="text-[9px] uppercase font-bold tracking-wider text-[#6B5E53]/70">Valuation</span>
-                                    <span class="text-base font-bold text-[#4A3428]">Rs. {{ product.price|floatformat:2 }}</span>
+                                    <span class="text-[10px] uppercase font-semibold tracking-wider text-[#6B5E3C]/80">Price</span>
+                                    <span class="text-lg font-bold text-[#4A3428]">Rs. {{ product.price|floatformat:2 }}</span>
                                 </div>
 
                                 {% if user.is_authenticated and not user.is_staff %}
                                     {% if product.stock > 0 %}
-                                        <a href="/cart/add/{{ product.id }}/" class="bg-[#F8F3EC] hover:bg-[#B65E3C] text-[#6B5E53] hover:text-[#FFFCF7] w-9 h-9 rounded-xl transition-all border border-[#DDD2C5] hover:border-[#B65E3C] flex items-center justify-center shadow-sm z-10">
-                                            <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                                        <a href="/cart/add/{{ product.id }}/" class="bg-[#B65E3C] hover:bg-[#94492F] text-[#FFFCF7] px-3.5 py-2 rounded-xl transition-all shadow-sm flex items-center gap-1.5 text-xs font-medium z-10">
+                                            <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i>
+                                            <span>Add to Cart</span>
                                         </a>
                                     {% else %}
-                                        <p class="text-[10px] font-bold text-[#6B5E53]/70 uppercase tracking-wider bg-[#F8F3EC] px-2 py-1 rounded-md border border-[#DDD2C5]">Acquired</p>
+                                        <span class="text-xs font-semibold text-[#B4473A] bg-[#B4473A]/10 px-3 py-1.5 rounded-lg border border-[#B4473A]/20">Out of Stock</span>
                                     {% endif %}
                                 {% elif user.is_staff %}
-                                    <a href="/dashboard/admin/?section=product-management" class="bg-[#F8F3EC] hover:bg-[#B65E3C] text-[#6B5E53] hover:text-[#FFFCF7] w-9 h-9 rounded-xl transition-all border border-[#DDD2C5] hover:border-[#B65E3C] flex items-center justify-center shadow-sm z-10">
-                                        <i data-lucide="settings" class="w-4 h-4"></i>
+                                    <a href="/dashboard/admin/?section=product-management" class="bg-[#F8F3EC] hover:bg-[#DDD2C5] text-[#4A3428] px-3 py-1.5 rounded-xl transition-all border border-[#DDD2C5] flex items-center gap-1 text-xs font-medium z-10">
+                                        <i data-lucide="settings" class="w-3.5 h-3.5"></i>
+                                        <span>Manage</span>
                                     </a>
                                 {% else %}
-                                    <a href="/login/" class="bg-[#F8F3EC] hover:bg-[#B65E3C] text-[#6B5E53] hover:text-[#FFFCF7] w-9 h-9 rounded-xl transition-all border border-[#DDD2C5] hover:border-[#B65E3C] flex items-center justify-center shadow-sm z-10">
-                                        <i data-lucide="log-in" class="w-4 h-4"></i>
+                                    <a href="/login/" class="bg-[#B65E3C] hover:bg-[#94492F] text-[#FFFCF7] px-3.5 py-2 rounded-xl transition-all shadow-sm flex items-center gap-1.5 text-xs font-medium z-10">
+                                        <i data-lucide="log-in" class="w-3.5 h-3.5"></i>
+                                        <span>Sign In</span>
                                     </a>
                                 {% endif %}
                             </div>
                         </div>
                     </div>
                 {% empty %}
-                    <div class="col-span-full text-center py-12">
-                        <i data-lucide="box" class="w-8 h-8 text-[#DDD2C5] mx-auto mb-4"></i>
-                        <p class="text-sm text-[#6B5E53]">No products available at the moment. Please check back later.</p>
+                    <div class="col-span-full text-center py-16 bg-[#FFFCF7] border border-[#DDD2C5] rounded-2xl p-8">
+                        <i data-lucide="box" class="w-10 h-10 text-[#DDD2C5] mx-auto mb-3"></i>
+                        <h3 class="font-serif text-lg text-[#4A3428] mb-1">No Products Available</h3>
+                        <p class="text-xs text-[#6B5E53]">We are currently updating our studio collection. Please check back soon.</p>
                     </div>
                 {% endfor %}
             </div>
         </section>
-
     </main>
 
     {% include 'components/_footer.html' %}
