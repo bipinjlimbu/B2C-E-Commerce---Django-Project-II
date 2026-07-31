@@ -1302,6 +1302,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   gap: 0.625rem;
 }
 
+.gap-10 {
+  gap: 2.5rem;
+}
+
 .gap-x-6 {
   -moz-column-gap: 1.5rem;
        column-gap: 1.5rem;
@@ -1309,6 +1313,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .gap-y-2 {
   row-gap: 0.5rem;
+}
+
+.gap-x-4 {
+  -moz-column-gap: 1rem;
+       column-gap: 1rem;
 }
 
 .space-y-4 > :not([hidden]) ~ :not([hidden]) {
@@ -1817,6 +1826,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .bg-\[\#B4473A\]\/10 {
   background-color: rgb(180 71 58 / 0.1);
+}
+
+.bg-\[\#F8F3EC\]\/70 {
+  background-color: rgb(248 243 236 / 0.7);
 }
 
 .bg-gradient-to-b {
@@ -3256,6 +3269,10 @@ Ensure the default browser behavior of the `hidden` attribute.
     padding: 2.5rem;
   }
 
+  .sm\:p-12 {
+    padding: 3rem;
+  }
+
   .sm\:px-6 {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -3286,6 +3303,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   .sm\:text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
+  }
+
+  .sm\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 }
 
@@ -3376,6 +3398,10 @@ Ensure the default browser behavior of the `hidden` attribute.
     grid-template-columns: repeat(12, minmax(0, 1fr));
   }
 
+  .lg\:grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
   .lg\:flex-row {
     flex-direction: row;
   }
@@ -3396,10 +3422,18 @@ Ensure the default browser behavior of the `hidden` attribute.
     gap: 2.5rem;
   }
 
+  .lg\:gap-12 {
+    gap: 3rem;
+  }
+
   .lg\:space-x-2 > :not([hidden]) ~ :not([hidden]) {
     --tw-space-x-reverse: 0;
     margin-right: calc(0.5rem * var(--tw-space-x-reverse));
     margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .lg\:justify-self-end {
+    justify-self: end;
   }
 
   .lg\:border-t-0 {
