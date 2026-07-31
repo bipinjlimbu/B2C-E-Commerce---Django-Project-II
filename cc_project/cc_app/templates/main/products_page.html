@@ -3,29 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Gallery | ClayCanvas</title>
+    <title>Shop Collection | ClayCanvas</title>
     {% load static %}
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
 </head>
-<body class="bg-[#F8F3EC] text-[#6B5E53] font-sans min-h-screen flex flex-col antialiased">
+<body class="bg-[#F8F3EC] text-[#6B5E53] font-sans min-h-screen flex flex-col antialiased selection:bg-[#B65E3C]/20 selection:text-[#B65E3C]">
 
     {% include 'components/_navbar.html' %}
 
     {% include 'components/_messages.html' %}
 
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 space-y-8">
-        <div>
-            <h1 class="text-xs font-bold uppercase tracking-widest text-[#B65E3C] mb-1">Curated Collections</h1>
-            <p class="text-3xl font-serif text-[#4A3428] capitalize tracking-tight">Fine Art & Pottery Catalog</p>
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16 space-y-8 sm:space-y-10">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#DDD2C5] pb-6 sm:pb-8">
+            <div class="space-y-2">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#B65E3C]/10 text-[#B65E3C] text-xs font-semibold tracking-wide">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Handmade Studio Works</span>
+                </div>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#4A3428] tracking-tight">
+                    Artisan Collection
+                </h1>
+                <p class="text-sm sm:text-base text-[#6B5E53] max-w-xl">
+                    Discover handcrafted pottery, original fine art paintings, and unique home décor pieces.
+                </p>
+            </div>
+            <div class="text-xs text-[#6B5E53]/80 font-medium self-start md:self-end bg-[#FFFCF7] px-4 py-2.5 rounded-xl border border-[#DDD2C5] shadow-sm">
+                Authentic handcrafted creations
+            </div>
         </div>
 
-        <form method="GET" action="/products/" class="bg-[#FFFCF7] border border-[#DDD2C5] rounded-2xl p-5 shadow-sm">
+        <form method="GET" action="/products/" class="bg-[#FFFCF7] border border-[#DDD2C5] rounded-2xl p-5 sm:p-6 shadow-sm">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
                 
                 <div class="space-y-1.5">
-                    <label class="text-[10px] font-bold uppercase tracking-wider text-[#6B5E53]/70 block">Collection / Medium</label>
-                    <select name="category" onchange="this.form.submit()" class="w-full bg-[#F8F3EC] border border-[#DDD2C5] rounded-xl p-3 text-xs text-[#4A3428] focus:outline-none focus:border-[#B65E3C]">
-                        <option value="">All Mediums</option>
+                    <label class="text-xs font-semibold text-[#4A3428] block">Category</label>
+                    <select name="category" onchange="this.form.submit()" class="w-full bg-[#F8F3EC] border border-[#DDD2C5] rounded-xl px-3.5 py-2.5 text-xs font-medium text-[#4A3428] focus:outline-none focus:border-[#B65E3C] focus:ring-2 focus:ring-[#B65E3C]/20 transition-all cursor-pointer">
+                        <option value="">All Categories</option>
                         <option value="paintings" {% if request.GET.category == 'paintings' %}selected{% endif %}>Original Paintings</option>
                         <option value="pottery" {% if request.GET.category == 'pottery' %}selected{% endif %}>Handmade Pottery</option>
                         <option value="ceramics" {% if request.GET.category == 'ceramics' %}selected{% endif %}>Sculptures & Ceramics</option>
@@ -35,30 +49,30 @@
                 </div>
 
                 <div class="space-y-1.5">
-                    <label class="text-[10px] font-bold uppercase tracking-wider text-[#6B5E53]/70 block">Availability</label>
-                    <select name="availability" onchange="this.form.submit()" class="w-full bg-[#F8F3EC] border border-[#DDD2C5] rounded-xl p-3 text-xs text-[#4A3428] focus:outline-none focus:border-[#B65E3C]">
+                    <label class="text-xs font-semibold text-[#4A3428] block">Availability</label>
+                    <select name="availability" onchange="this.form.submit()" class="w-full bg-[#F8F3EC] border border-[#DDD2C5] rounded-xl px-3.5 py-2.5 text-xs font-medium text-[#4A3428] focus:outline-none focus:border-[#B65E3C] focus:ring-2 focus:ring-[#B65E3C]/20 transition-all cursor-pointer">
                         <option value="all">All Items</option>
-                        <option value="available" {% if request.GET.availability == 'available' %}selected{% endif %}>In Stock / Available</option>
-                        <option value="masterworks" {% if request.GET.availability == 'masterworks' %}selected{% endif %}>One-off Masterworks (1 Left)</option>
+                        <option value="available" {% if request.GET.availability == 'available' %}selected{% endif %}>In Stock</option>
+                        <option value="masterworks" {% if request.GET.availability == 'masterworks' %}selected{% endif %}>1-of-1 Single Piece Left</option>
                     </select>
                 </div>
 
                 <div class="space-y-1.5">
-                    <label class="text-[10px] font-bold uppercase tracking-wider text-[#6B5E53]/70 block">Valuation Range</label>
-                    <select name="price_range" onchange="this.form.submit()" class="w-full bg-[#F8F3EC] border border-[#DDD2C5] rounded-xl p-3 text-xs text-[#4A3428] focus:outline-none focus:border-[#B65E3C]">
+                    <label class="text-xs font-semibold text-[#4A3428] block">Price Range</label>
+                    <select name="price_range" onchange="this.form.submit()" class="w-full bg-[#F8F3EC] border border-[#DDD2C5] rounded-xl px-3.5 py-2.5 text-xs font-medium text-[#4A3428] focus:outline-none focus:border-[#B65E3C] focus:ring-2 focus:ring-[#B65E3C]/20 transition-all cursor-pointer">
                         <option value="all">Any Price</option>
-                        <option value="0-999" {% if request.GET.price_range == '0-999' %}selected{% endif %}>Rs.0 - Rs.999</option>
-                        <option value="1000-4999" {% if request.GET.price_range == '1000-4999' %}selected{% endif %}>Rs.1,000 - Rs.4,999</option>
-                        <option value="5000-9999" {% if request.GET.price_range == '5000-9999' %}selected{% endif %}>Rs.5,000 - Rs.9,999</option>
-                        <option value="10000-49999" {% if request.GET.price_range == '10000-49999' %}selected{% endif %}>Rs.10,000 - Rs.49,999</option>
-                        <option value="50000+" {% if request.GET.price_range == '50000+' %}selected{% endif %}>Rs.50,000+</option>
+                        <option value="0-999" {% if request.GET.price_range == '0-999' %}selected{% endif %}>Rs. 0 - Rs. 999</option>
+                        <option value="1000-4999" {% if request.GET.price_range == '1000-4999' %}selected{% endif %}>Rs. 1,000 - Rs. 4,999</option>
+                        <option value="5000-9999" {% if request.GET.price_range == '5000-9999' %}selected{% endif %}>Rs. 5,000 - Rs. 9,999</option>
+                        <option value="10000-49999" {% if request.GET.price_range == '10000-49999' %}selected{% endif %}>Rs. 10,000 - Rs. 49,999</option>
+                        <option value="50000+" {% if request.GET.price_range == '50000+' %}selected{% endif %}>Rs. 50,000+</option>
                     </select>
                 </div>
 
                 <div class="space-y-1.5">
-                    <label class="text-[10px] font-bold uppercase tracking-wider text-[#6B5E53]/70 block">Sort Catalog</label>
-                    <select name="sort" onchange="this.form.submit()" class="w-full bg-[#F8F3EC] border border-[#DDD2C5] rounded-xl p-3 text-xs text-[#4A3428] focus:outline-none focus:border-[#B65E3C]">
-                        <option value="latest" {% if request.GET.sort == 'latest' %}selected{% endif %}>Recently Added</option>
+                    <label class="text-xs font-semibold text-[#4A3428] block">Sort By</label>
+                    <select name="sort" onchange="this.form.submit()" class="w-full bg-[#F8F3EC] border border-[#DDD2C5] rounded-xl px-3.5 py-2.5 text-xs font-medium text-[#4A3428] focus:outline-none focus:border-[#B65E3C] focus:ring-2 focus:ring-[#B65E3C]/20 transition-all cursor-pointer">
+                        <option value="latest" {% if request.GET.sort == 'latest' %}selected{% endif %}>Newest First</option>
                         <option value="oldest" {% if request.GET.sort == 'oldest' %}selected{% endif %}>Oldest First</option>
                         <option value="price_asc" {% if request.GET.sort == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
                         <option value="price_desc" {% if request.GET.sort == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
@@ -66,93 +80,91 @@
                 </div>
 
                 <div>
-                    <a href="/products/" class="bg-[#F8F3EC] hover:bg-[#EAE0D5] text-[#6B5E53] hover:text-[#B65E3C] text-[10px] font-bold uppercase tracking-widest border border-[#DDD2C5] h-[46px] rounded-xl transition-all flex items-center justify-center w-full shadow-sm">
-                        Reset Filters
+                    <a href="/products/" class="w-full h-[42px] bg-[#F8F3EC] hover:bg-[#B65E3C] hover:text-[#FFFCF7] text-[#6B5E53] text-xs font-semibold rounded-xl border border-[#DDD2C5] hover:border-[#B65E3C] transition-all duration-200 flex items-center justify-center gap-2 shadow-sm">
+                        <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                        <span>Reset Filters</span>
                     </a>
                 </div>
             </div>
         </form>
 
         <div class="w-full">
-            {% if products %}
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {% for product in products %}
-                        <div class="bg-[#FFFCF7] border border-[#DDD2C5] rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-[#B65E3C]/50 transition-all flex flex-col group relative">
-                            
-                            <a href="/products/{{ product.id }}/" class="flex flex-col flex-grow">
-                                <div class="aspect-square w-full bg-[#F8F3EC] relative overflow-hidden border-b border-[#DDD2C5]">
-                                    {% if product.product_image %}
-                                        <img src="{{ product.product_image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                                    {% else %}
-                                        <div class="w-full h-full flex flex-col items-center justify-center bg-[#F8F3EC] p-4">
-                                            <i data-lucide="palette" class="w-10 h-10 text-[#6B5E53]/40 group-hover:text-[#B65E3C] transition-all duration-300"></i>
-                                            <span class="text-[9px] uppercase tracking-widest text-[#6B5E53]/60 font-bold mt-2">No Artwork Preview</span>
-                                        </div>
-                                    {% endif %}
-                                    
-                                    <span class="absolute top-3 left-3 bg-[#FFFCF7]/90 border border-[#DDD2C5] backdrop-blur-md text-[9px] font-bold uppercase tracking-widest text-[#6B5E53] px-2.5 py-1 rounded-md shadow-sm z-10">
-                                        {{ product.get_category_display }}
-                                    </span>
-
-                                    {% if product.stock == 1 %}
-                                        <span class="absolute top-3 right-3 bg-[#F8F3EC] border border-[#B65E3C]/30 backdrop-blur-md text-[8px] font-bold uppercase tracking-widest text-[#B65E3C] px-2 py-0.5 rounded-md shadow-sm z-10">
-                                            1-of-1 Original
-                                        </span>
-                                    {% endif %}
-                                </div>
-
-                                <div class="p-5 flex-grow space-y-2">
-                                    <h3 class="font-serif font-bold text-[#4A3428] text-base tracking-tight group-hover:text-[#B65E3C] transition-colors line-clamp-1">
-                                        {{ product.name }}
-                                    </h3>
-                                    <p class="text-xs text-[#6B5E53] leading-relaxed line-clamp-2">
-                                        {{ product.description| truncatechars:100 |default:"No description updated for this collection masterwork." }}
-                                    </p>
-                                </div>
-                            </a>
-
-                            <div class="p-5 pt-0">
-                                <div class="flex items-center justify-between pt-3 border-t border-[#DDD2C5]/50">
-                                    <div class="flex flex-col">
-                                        <span class="text-[9px] uppercase font-bold tracking-wider text-[#6B5E53]/70">Valuation</span>
-                                        <span class="text-base font-bold text-[#4A3428]">Rs. {{ product.price|floatformat:2 }}</span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                {% for product in products %}
+                    <div class="bg-[#FFFCF7] border border-[#DDD2C5] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:border-[#B65E3C]/40 transition-all duration-300 flex flex-col group relative">
+                        
+                        <a href="/products/{{ product.id }}/" class="flex flex-col flex-grow">
+                            <div class="aspect-square w-full bg-[#F8F3EC] relative overflow-hidden border-b border-[#DDD2C5]/80">
+                                {% if product.product_image %}
+                                    <img src="{{ product.product_image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                {% else %}
+                                    <div class="w-full h-full flex flex-col items-center justify-center bg-[#F8F3EC] p-6 text-center">
+                                        <i data-lucide="palette" class="w-10 h-10 text-[#6B5E53]/30 group-hover:text-[#B65E3C] transition-all duration-300"></i>
+                                        <span class="text-[10px] uppercase tracking-widest text-[#6B5E53]/60 font-semibold mt-3">Artisan Creation</span>
                                     </div>
+                                {% endif %}
+                                
+                                <span class="absolute top-3 left-3 bg-[#FFFCF7]/95 border border-[#DDD2C5] backdrop-blur-md text-[10px] font-semibold uppercase tracking-wider text-[#4A3428] px-2.5 py-1 rounded-lg shadow-sm z-10">
+                                    {{ product.get_category_display }}
+                                </span>
 
-                                    {% if user.is_authenticated and not user.is_staff %}
-                                        {% if product.stock > 0 %}
-                                            <a href="/cart/add/{{ product.id }}/" class="bg-[#F8F3EC] hover:bg-[#B65E3C] text-[#6B5E53] hover:text-[#FFFCF7] w-9 h-9 rounded-xl transition-all border border-[#DDD2C5] hover:border-[#B65E3C] flex items-center justify-center shadow-sm z-10">
-                                                <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-                                            </a>
-                                        {% else %}
-                                            <p class="text-[10px] font-bold text-[#6B5E53]/70 uppercase tracking-wider bg-[#F8F3EC] px-2 py-1 rounded-md border border-[#DDD2C5]">Acquired</p>
-                                        {% endif %}
-                                    {% elif user.is_staff %}
-                                        <a href="/dashboard/admin/?section=product-management" class="bg-[#F8F3EC] hover:bg-[#B65E3C] text-[#6B5E53] hover:text-[#FFFCF7] w-9 h-9 rounded-xl transition-all border border-[#DDD2C5] hover:border-[#B65E3C] flex items-center justify-center shadow-sm z-10">
-                                            <i data-lucide="settings" class="w-4 h-4"></i>
+                                {% if product.stock == 1 %}
+                                    <span class="absolute top-3 right-3 bg-[#C89B3C]/10 border border-[#C89B3C]/40 backdrop-blur-md text-[10px] font-semibold uppercase tracking-wider text-[#C89B3C] px-2.5 py-1 rounded-lg shadow-sm z-10">
+                                        1-of-1 Piece
+                                    </span>
+                                {% endif %}
+                            </div>
+
+                            <div class="p-6 flex-grow space-y-2">
+                                <h3 class="font-serif font-normal text-[#4A3428] text-lg leading-snug group-hover:text-[#B65E3C] transition-colors line-clamp-1">
+                                    {{ product.name }}
+                                </h3>
+                                <p class="text-xs text-[#6B5E53] leading-relaxed line-clamp-2">
+                                    {{ product.description|truncatechars:100|default:"Handcrafted artisan piece created with natural materials." }}
+                                </p>
+                            </div>
+                        </a>
+
+                        <div class="p-6 pt-0">
+                            <div class="flex items-center justify-between pt-4 border-t border-[#DDD2C5]/60">
+                                <div class="flex flex-col">
+                                    <span class="text-[10px] uppercase font-semibold tracking-wider text-[#6B5E3C]/80">Price</span>
+                                    <span class="text-lg font-bold text-[#4A3428]">Rs. {{ product.price|floatformat:2 }}</span>
+                                </div>
+
+                                {% if user.is_authenticated and not user.is_staff %}
+                                    {% if product.stock > 0 %}
+                                        <a href="/cart/add/{{ product.id }}/" class="bg-[#B65E3C] hover:bg-[#94492F] text-[#FFFCF7] px-3.5 py-2 rounded-xl transition-all shadow-sm flex items-center gap-1.5 text-xs font-medium z-10">
+                                            <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i>
+                                            <span>Add to Cart</span>
                                         </a>
                                     {% else %}
-                                        <a href="/login/" class="bg-[#F8F3EC] hover:bg-[#B65E3C] text-[#6B5E53] hover:text-[#FFFCF7] w-9 h-9 rounded-xl transition-all border border-[#DDD2C5] hover:border-[#B65E3C] flex items-center justify-center shadow-sm z-10">
-                                            <i data-lucide="log-in" class="w-4 h-4"></i>
-                                        </a>
+                                        <span class="text-xs font-semibold text-[#B4473A] bg-[#B4473A]/10 px-3 py-1.5 rounded-lg border border-[#B4473A]/20">Out of Stock</span>
                                     {% endif %}
-                                </div>
+                                {% elif user.is_staff %}
+                                    <a href="/dashboard/admin/?section=product-management" class="bg-[#F8F3EC] hover:bg-[#DDD2C5] text-[#4A3428] px-3 py-1.5 rounded-xl transition-all border border-[#DDD2C5] flex items-center gap-1 text-xs font-medium z-10">
+                                        <i data-lucide="settings" class="w-3.5 h-3.5"></i>
+                                        <span>Manage</span>
+                                    </a>
+                                {% else %}
+                                    <a href="/login/" class="bg-[#B65E3C] hover:bg-[#94492F] text-[#FFFCF7] px-3.5 py-2 rounded-xl transition-all shadow-sm flex items-center gap-1.5 text-xs font-medium z-10">
+                                        <i data-lucide="log-in" class="w-3.5 h-3.5"></i>
+                                        <span>Sign In</span>
+                                    </a>
+                                {% endif %}
                             </div>
                         </div>
-                    {% endfor %}
-                </div>
-            {% else %}
-                <div class="flex flex-col items-center justify-center text-center py-24 border border-dashed border-[#DDD2C5] rounded-3xl bg-[#FFFCF7] shadow-sm">
-                    <div class="w-16 h-16 bg-[#F8F3EC] rounded-2xl flex items-center justify-center border border-[#DDD2C5] mb-4">
-                        <i data-lucide="palette" class="w-7 h-7 text-[#6B5E53]/60"></i>
                     </div>
-                    <h3 class="text-[#4A3428] font-bold text-base tracking-tight">No Artworks Found</h3>
-                    <p class="text-xs text-[#6B5E53] mt-1 max-w-xs leading-relaxed mb-6">No pieces match your selected curation settings. Reset filters to see all available art masterworks.</p>
-                    <a href="/products/" class="bg-[#F8F3EC] hover:bg-[#EAE0D5] border border-[#DDD2C5] text-[#4A3428] font-bold px-6 py-3.5 rounded-xl text-xs uppercase tracking-widest transition-all shadow-sm">
-                        Reset Search Grid
-                    </a>
-                </div>
-            {% endif %}
+                {% empty %}
+                    <div class="col-span-full text-center py-16 bg-[#FFFCF7] border border-[#DDD2C5] rounded-2xl p-8">
+                        <i data-lucide="box" class="w-10 h-10 text-[#DDD2C5] mx-auto mb-3"></i>
+                        <h3 class="font-serif text-lg text-[#4A3428] mb-1">No Products Available</h3>
+                        <p class="text-xs text-[#6B5E53]">We are currently updating our studio collection. Please check back soon.</p>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
+
     </main>
 
     {% include 'components/_footer.html' %}
