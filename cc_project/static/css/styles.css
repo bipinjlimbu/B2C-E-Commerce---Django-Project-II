@@ -431,7 +431,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-scroll-snap-strictness: proximity;
 }
 
-.divide-y > *, .border, .border-4, .border-2, .border-t, .border-b, .border-b-2, .border-l, .border-r, .border-b-8, .file\:border-0::file-selector-button, .sm\:border-t-0, .lg\:border-t-0, .lg\:border-b-0, .lg\:border-r {
+.divide-y > *, .border, .border-4, .border-2, .border-x, .border-t, .border-b, .border-b-2, .border-l, .border-r, .border-b-8, .file\:border-0::file-selector-button, .sm\:border-t-0, .lg\:border-t-0, .lg\:border-b-0, .lg\:border-r {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
@@ -625,6 +625,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .left-3\.5 {
   left: 0.875rem;
+}
+
+.left-4 {
+  left: 1rem;
 }
 
 .z-\[100\] {
@@ -1420,6 +1424,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
 }
 
+.space-y-12 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(3rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(3rem * var(--tw-space-y-reverse));
+}
+
 .divide-y > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-y-reverse: 0;
   border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
@@ -1521,6 +1531,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .border-2 {
   border-width: 2px;
+}
+
+.border-x {
+  border-left-width: 1px;
+  border-right-width: 1px;
 }
 
 .border-t {
@@ -1936,6 +1951,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding: 0.625rem;
 }
 
+.p-1\.5 {
+  padding: 0.375rem;
+}
+
+.p-10 {
+  padding: 2.5rem;
+}
+
 .py-20 {
   padding-top: 5rem;
   padding-bottom: 5rem;
@@ -2165,6 +2188,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pl-11 {
   padding-left: 2.75rem;
+}
+
+.pt-12 {
+  padding-top: 3rem;
+}
+
+.pr-12 {
+  padding-right: 3rem;
 }
 
 .text-left {
@@ -2711,8 +2742,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-duration: 200ms;
 }
 
+.duration-700 {
+  transition-duration: 700ms;
+}
+
 .ease-\[cubic-bezier\(0\.18\2c 0\.89\2c 0\.32\2c 1\.28\)\] {
   transition-timing-function: cubic-bezier(0.18,0.89,0.32,1.28);
+}
+
+.ease-out {
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
 .selection\:bg-orange-200 *::-moz-selection {
@@ -2993,6 +3032,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .hover\:border-\[\#B65E3C\]\/40:hover {
   border-color: rgb(182 94 60 / 0.4);
+}
+
+.hover\:border-\[\#B4473A\]\/30:hover {
+  border-color: rgb(180 71 58 / 0.3);
 }
 
 .hover\:bg-\[\#94492F\]:hover {
@@ -3350,6 +3393,12 @@ Ensure the default browser behavior of the `hidden` attribute.
     margin-bottom: calc(2.5rem * var(--tw-space-y-reverse));
   }
 
+  .sm\:space-y-16 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(4rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(4rem * var(--tw-space-y-reverse));
+  }
+
   .sm\:border-t-0 {
     border-top-width: 0px;
   }
@@ -3443,6 +3492,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:flex {
     display: flex;
+  }
+
+  .md\:w-auto {
+    width: auto;
   }
 
   .md\:flex-initial {
