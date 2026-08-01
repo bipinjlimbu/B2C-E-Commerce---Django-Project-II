@@ -76,8 +76,16 @@ def cancel_order_view(request, order_id):
 
     if order.status in [Order.Status.CONFIRMED, Order.Status.SHIPPING, Order.Status.DELIVERED]:
         order.status = Order.Status.CANCELLED
+        
+        for item in order.items.all():
+            product = item.product
+            product.stock += item.quantity
+            product.save()
+            
         order.save()
         messages.success(request, "Order cancelled successfully.")
+        return redirect('/dashboard/?section=my-orders')
+    
     else:
         messages.error(request, "Only confirmed or in-transit orders can be cancelled.")
 
