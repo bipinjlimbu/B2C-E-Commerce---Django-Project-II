@@ -87,10 +87,10 @@
                 </div>
 
                 {% if not user.is_staff %}
-                    <a href="/profile/delete/{{ user.id }}/" class="w-full bg-[#FFFCF7] hover:bg-[#B4473A]/10 text-[#B4473A] font-semibold py-3.5 px-4 rounded-2xl transition-all duration-200 text-xs flex items-center justify-center gap-2 border border-[#B4473A]/30 shadow-sm">
+                    <button type="button" onclick="openDeleteAccountModal('/profile/delete/{{ user.id }}/')" class="w-full bg-[#FFFCF7] hover:bg-[#B4473A]/10 text-[#B4473A] font-semibold py-3.5 px-4 rounded-2xl transition-all duration-200 text-xs flex items-center justify-center gap-2 border border-[#B4473A]/30 shadow-sm cursor-pointer">
                         <i data-lucide="trash-2" class="w-4 h-4"></i>
                         <span>Delete Account</span>
-                    </a>
+                    </button>
                 {% endif %}
             </div>
 
@@ -142,11 +142,82 @@
         </div>
     </main>
 
+    <div id="deleteAccountModal" class="fixed inset-0 z-50 flex items-center justify-center bg-[#4A3428]/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300 px-4">
+        <div id="deleteAccountModalCard" class="bg-[#FFFCF7] border border-[#DDD2C5] rounded-3xl max-w-sm w-full p-6 sm:p-8 shadow-2xl transform scale-95 transition-all duration-300 space-y-6 text-center">
+            
+            <div class="w-16 h-16 bg-[#B4473A]/10 border border-[#B4473A]/20 rounded-2xl flex items-center justify-center mx-auto text-[#B4473A]">
+                <i data-lucide="trash-2" class="w-8 h-8"></i>
+            </div>
+
+            <div class="space-y-2">
+                <h3 class="text-xl font-serif font-bold text-[#4A3428]">Delete Account</h3>
+                <p class="text-xs text-[#6B5E53] leading-relaxed">
+                    Are you sure you want to delete your profile? This action cannot be undone and all your account data will be permanently removed.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 pt-2">
+                <button type="button" onclick="closeDeleteAccountModal()" class="bg-[#F8F3EC] hover:bg-[#DDD2C5]/50 text-[#6B5E53] font-bold py-3 px-4 rounded-xl border border-[#DDD2C5] transition-all text-xs uppercase tracking-wider cursor-pointer">
+                    Cancel
+                </button>
+                <a id="confirmDeleteAccountBtn" href="#" class="bg-[#B4473A] hover:bg-[#94492F] text-[#FFFCF7] font-bold py-3 px-4 rounded-xl shadow-xs transition-all text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer">
+                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                    <span>Delete</span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
     {% include 'components/_footer.html' %}
 
     <script src="{% static 'js/lucide.min.js' %}"></script>
     <script>
         lucide.createIcons();
+
+        const deleteAccountModal = document.getElementById('deleteAccountModal');
+        const deleteAccountModalCard = document.getElementById('deleteAccountModalCard');
+        const confirmDeleteAccountBtn = document.getElementById('confirmDeleteAccountBtn');
+
+        function openDeleteAccountModal(deleteUrl) {
+            if (deleteAccountModal && deleteAccountModalCard) {
+                if (confirmDeleteAccountBtn) confirmDeleteAccountBtn.setAttribute('href', deleteUrl);
+
+                deleteAccountModal.classList.remove('opacity-0', 'pointer-events-none');
+                deleteAccountModal.classList.add('opacity-100');
+                
+                deleteAccountModalCard.classList.remove('scale-95');
+                deleteAccountModalCard.classList.add('scale-100');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeDeleteAccountModal() {
+            if (deleteAccountModal && deleteAccountModalCard) {
+                deleteAccountModal.classList.remove('opacity-100');
+                deleteAccountModal.classList.add('opacity-0', 'pointer-events-none');
+                
+                deleteAccountModalCard.classList.remove('scale-100');
+                deleteAccountModalCard.classList.add('scale-95');
+                document.body.style.overflow = '';
+            }
+        }
+
+        if (deleteAccountModal) {
+            deleteAccountModal.addEventListener('click', function(event) {
+                if (event.target === deleteAccountModal) {
+                    closeDeleteAccountModal();
+                }
+            });
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                if (deleteAccountModal && !deleteAccountModal.classList.contains('pointer-events-none')) {
+                    closeDeleteAccountModal();
+                }
+            }
+        });
     </script>
 </body>
 </html>
