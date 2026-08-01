@@ -416,7 +416,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-.translate-x-\[120\%\], .rotate-180, .rotate-6, .hover\:scale-110, .active\:scale-95, .group-hover\:translate-x-1, .group-hover\:rotate-12, .group-hover\:scale-105, .peer-checked\:after\:translate-x-full::after {
+.translate-x-\[120\%\], .-translate-y-1\/2, .rotate-180, .rotate-6, .hover\:scale-110, .active\:scale-95, .group-hover\:translate-x-1, .group-hover\:rotate-12, .group-hover\:scale-105, .peer-checked\:after\:translate-x-full::after {
   --tw-translate-x: 0;
   --tw-translate-y: 0;
   --tw-rotate: 0;
@@ -443,7 +443,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-shadow-colored: 0 0 #0000;
 }
 
-.ring-1, .focus-within\:ring-1, .focus\:ring-2 {
+.ring-1, .focus-within\:ring-1, .focus\:ring-2, .focus\:ring-1 {
   --tw-ring-inset: var(--tw-empty,/*!*/ /*!*/);
   --tw-ring-offset-width: 0px;
   --tw-ring-offset-color: #fff;
@@ -617,6 +617,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .right-4 {
   right: 1rem;
+}
+
+.right-3\.5 {
+  right: 0.875rem;
+}
+
+.top-1\/2 {
+  top: 50%;
 }
 
 .z-10 {
@@ -1110,6 +1118,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .translate-x-\[120\%\] {
   --tw-translate-x: 120%;
+  transform: var(--tw-transform);
+}
+
+.-translate-y-1\/2 {
+  --tw-translate-y: -50%;
   transform: var(--tw-transform);
 }
 
@@ -1804,6 +1817,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(255 252 247 / 0.9);
 }
 
+.bg-\[\#4A3428\]\/75 {
+  background-color: rgb(74 52 40 / 0.75);
+}
+
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
 }
@@ -2101,6 +2118,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pb-1 {
   padding-bottom: 0.25rem;
+}
+
+.pr-10 {
+  padding-right: 2.5rem;
 }
 
 .text-left {
@@ -2468,6 +2489,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-stone-50 {
   --tw-text-opacity: 1;
   color: rgb(250 250 249 / var(--tw-text-opacity));
+}
+
+.text-\[\#6B5E53\]\/90 {
+  color: rgb(107 94 83 / 0.9);
 }
 
 .underline {
@@ -3101,8 +3126,19 @@ Ensure the default browser behavior of the `hidden` attribute.
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
 
+.focus\:ring-1:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
 .focus\:ring-\[\#B65E3C\]\/20:focus {
   --tw-ring-color: rgb(182 94 60 / 0.2);
+}
+
+.focus\:ring-\[\#B65E3C\]:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(182 94 60 / var(--tw-ring-opacity));
 }
 
 .active\:scale-95:active {
