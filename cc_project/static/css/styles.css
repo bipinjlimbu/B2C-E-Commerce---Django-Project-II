@@ -436,7 +436,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
 
-.shadow-lg, .shadow-md, .shadow-2xl, .shadow-sm, .shadow-xl, .hover\:shadow-lg, .hover\:shadow-md, .hover\:shadow-xl {
+.shadow-lg, .shadow-md, .shadow-2xl, .shadow-sm, .shadow-xl, .hover\:shadow-lg, .hover\:shadow-md, .hover\:shadow-xl, .hover\:shadow {
   --tw-ring-offset-shadow: 0 0 #0000;
   --tw-ring-shadow: 0 0 #0000;
   --tw-shadow: 0 0 #0000;
@@ -1775,6 +1775,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(91 138 90 / 0.1);
 }
 
+.bg-\[\#FFFCF7\]\/90 {
+  background-color: rgb(255 252 247 / 0.9);
+}
+
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
 }
@@ -3026,6 +3030,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.hover\:shadow:hover {
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .hover\:file\:bg-\[\#94492F\]::file-selector-button:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(148 73 47 / var(--tw-bg-opacity));
@@ -3210,10 +3220,20 @@ Ensure the default browser behavior of the `hidden` attribute.
     gap: 1.25rem;
   }
 
+  .sm\:gap-8 {
+    gap: 2rem;
+  }
+
   .sm\:space-y-10 > :not([hidden]) ~ :not([hidden]) {
     --tw-space-y-reverse: 0;
     margin-top: calc(2.5rem * calc(1 - var(--tw-space-y-reverse)));
     margin-bottom: calc(2.5rem * var(--tw-space-y-reverse));
+  }
+
+  .sm\:space-y-12 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(3rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(3rem * var(--tw-space-y-reverse));
   }
 
   .sm\:border-y-0 {
