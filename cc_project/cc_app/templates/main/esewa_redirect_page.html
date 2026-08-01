@@ -3,26 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Gateway | ClayCanvas</title>
+    <title>Connecting to Payment | ClayCanvas</title>
     {% load static %}
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
 </head>
-<body class="bg-[#F8F3EC] text-[#6B5E53] font-sans flex items-center justify-center min-h-screen antialiased">
+<body class="bg-[#F8F3EC] text-[#6B5E53] font-sans flex items-center justify-center min-h-screen p-4 antialiased selection:bg-[#B65E3C]/20 selection:text-[#B65E3C]">
 
-    <div class="text-center px-6 max-w-sm">
-        <div class="relative w-24 h-24 mx-auto mb-8">
+    <div class="bg-[#FFFCF7] border border-[#DDD2C5] rounded-3xl p-8 sm:p-12 max-w-md w-full text-center shadow-md relative overflow-hidden space-y-6">
+        
+        <div class="inline-flex items-center gap-2 bg-[#F8F3EC] border border-[#DDD2C5] px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#B65E3C]">
+            <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+            <span>Secure Payment</span>
+        </div>
+
+        <div class="relative w-24 h-24 mx-auto my-4 flex items-center justify-center">
             <div class="absolute inset-0 border-4 border-[#DDD2C5] rounded-full"></div>
             <div class="absolute inset-0 border-4 border-[#B65E3C] border-t-transparent rounded-full animate-spin"></div>
-            <div class="absolute inset-4 bg-[#FFFCF7] rounded-full flex items-center justify-center border border-[#DDD2C5] shadow-sm">
-                <i data-lucide="shield-check" class="w-6 h-6 text-[#B65E3C] animate-pulse"></i>
+            <div class="w-16 h-16 bg-[#F8F3EC] border border-[#DDD2C5] rounded-full flex items-center justify-center text-[#B65E3C] shadow-inner">
+                <i data-lucide="shield-check" class="w-8 h-8 animate-pulse"></i>
             </div>
         </div>
 
-        <h2 class="text-[#4A3428] font-bold uppercase tracking-widest text-xl mb-2 font-serif">
-            Connecting <span class="text-[#B65E3C]">Gateway</span>
-        </h2>
-        <p class="text-[#6B5E53]/70 text-[10px] font-bold uppercase tracking-widest">
-            Encrypting secure payment connection...
+        <div class="space-y-2">
+            <h1 class="text-2xl font-serif font-bold text-[#4A3428]">Connecting to eSewa</h1>
+            <p class="text-xs sm:text-sm text-[#6B5E53] leading-relaxed">
+                Please wait a moment while we safely transfer you to complete your order payment.
+            </p>
+        </div>
+
+        <div class="bg-[#F8F3EC] border border-[#DDD2C5] rounded-2xl p-4 flex items-center justify-between text-left">
+            <div>
+                <span class="text-[11px] font-semibold text-[#6B5E53]/70 block">Total Amount</span>
+                <span class="text-base font-serif font-bold text-[#4A3428]">Rs. {{ amount }}</span>
+            </div>
+            <div class="w-8 h-8 bg-[#FFFCF7] border border-[#DDD2C5] rounded-xl flex items-center justify-center text-[#7A8F6A]">
+                <i data-lucide="credit-card" class="w-4 h-4"></i>
+            </div>
+        </div>
+
+        <p class="text-[11px] text-[#6B5E53]/60 pt-2 flex items-center justify-center gap-1.5">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#C89B3C]"></i>
+            <span>Do not refresh or close this page</span>
         </p>
 
         <form id="esewa_form" action="{{ esewa_url }}" method="POST">
@@ -38,6 +59,7 @@
             <input type="hidden" name="signed_field_names" value="total_amount,transaction_uuid,product_code">
             <input type="hidden" name="signature" value="{{ signature }}">
         </form>
+
     </div>
 
     <script src="{% static 'js/lucide.min.js' %}"></script>
