@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Terminal | ClayCanvas</title>
+    <title>Studio Manager | ClayCanvas</title>
     {% load static %}
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
     <style>
@@ -14,97 +14,98 @@
             background: transparent;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #e5e5e5;
-            border-radius: 10px;
+            background: #DDD2C5;
+            border-radius: 9999px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #c2410c;
+            background: #B65E3C;
         }
     </style>
 </head>
 
-<body class="bg-[#f9f5f0] flex min-h-screen overflow-hidden text-neutral-900">
+<body class="bg-[#F8F3EC] flex flex-col md:flex-row min-h-screen font-sans text-[#6B5E53] antialiased selection:bg-[#B65E3C]/20 selection:text-[#B65E3C]">
 
     {% include 'components/_messages.html' %}
 
-    <aside class="w-72 bg-white flex flex-col shadow-sm relative z-30 border-r border-gray-200">
-        <div class="p-6 border-b border-gray-100">
+    <aside class="w-full md:w-72 bg-[#FFFCF7] flex flex-col border-b md:border-b-0 md:border-r border-[#DDD2C5] shrink-0 z-30 shadow-sm">
+        <div class="p-6 border-b border-[#DDD2C5]/60 flex items-center justify-between md:block">
             <div class="flex items-center gap-3">
-                <div class="h-9 w-9 bg-[#f9f5f0] border border-gray-200 rounded-xl flex items-center justify-center">
-                    <i data-lucide="palette" class="w-5 h-5 text-orange-700"></i>
+                <div class="h-10 w-10 bg-[#F8F3EC] border border-[#DDD2C5] rounded-2xl flex items-center justify-center shrink-0">
+                    <i data-lucide="palette" class="w-5 h-5 text-[#B65E3C]"></i>
                 </div>
-                <h1 class="text-xl font-serif font-normal tracking-tight text-neutral-900">
-                    CLAY<span class="text-orange-700 italic font-light">CANVAS</span>
-                </h1>
+                <div>
+                    <h1 class="text-xl font-serif font-bold tracking-tight text-[#4A3428]">
+                        Clay<span class="text-[#B65E3C] italic font-normal">Canvas</span>
+                    </h1>
+                    <p class="text-[11px] font-semibold tracking-wider text-[#7A8F6A] uppercase">Studio Manager</p>
+                </div>
             </div>
-            <p class="text-[10px] font-bold uppercase tracking-widest text-neutral-400 mt-3">Studio Manager</p>
         </div>
 
         <nav class="flex-grow p-4 space-y-6 overflow-y-auto custom-scrollbar">
-            
-            <div class="space-y-1">
-                <span class="px-3 text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-2">Identity Control</span>
+            <div class="space-y-1.5">
+                <span class="px-3 text-[11px] font-bold text-[#6B5E53]/70 uppercase tracking-wider block">Customers</span>
                 
-                <a href="?section=customer-management" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors {% if section == 'customer-management' or not section %}bg-neutral-900 text-white shadow-sm{% else %}text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900{% endif %}">
+                <a href="?section=customer-management" class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-semibold transition-all duration-200 {% if section == 'customer-management' or not section %}bg-[#B65E3C] text-[#FFFCF7] shadow-sm{% else %}text-[#6B5E53] hover:bg-[#F8F3EC] hover:text-[#4A3428]{% endif %}">
                     <i data-lucide="users" class="w-4 h-4 shrink-0"></i>
-                    <span>Customer Directory</span>
+                    <span>Customer List</span>
                 </a>
             </div>
 
-            <div class="space-y-1">
-                <span class="px-3 text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-2">Catalog Architecture</span>
+            <div class="space-y-1.5">
+                <span class="px-3 text-[11px] font-bold text-[#6B5E53]/70 uppercase tracking-wider block">Products</span>
                 
-                <a href="?section=product-management" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors {% if section == 'product-management' %}bg-neutral-900 text-white shadow-sm{% else %}text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900{% endif %}">
-                    <i data-lucide="package-open" class="w-4 h-4 shrink-0"></i>
-                    <span>Product Master</span>
+                <a href="?section=product-management" class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-semibold transition-all duration-200 {% if section == 'product-management' %}bg-[#B65E3C] text-[#FFFCF7] shadow-sm{% else %}text-[#6B5E53] hover:bg-[#F8F3EC] hover:text-[#4A3428]{% endif %}">
+                    <i data-lucide="package" class="w-4 h-4 shrink-0"></i>
+                    <span>All Products</span>
                 </a>
             </div>
 
-            <div class="space-y-1">
-                <span class="px-3 text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-2">Orders & Logistics</span>
+            <div class="space-y-1.5">
+                <span class="px-3 text-[11px] font-bold text-[#6B5E53]/70 uppercase tracking-wider block">Orders</span>
                 
-                <a href="?section=order-fulfillment" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors {% if section == 'order-fulfillment' %}bg-neutral-900 text-white shadow-sm{% else %}text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900{% endif %}">
+                <a href="?section=order-fulfillment" class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-semibold transition-all duration-200 {% if section == 'order-fulfillment' %}bg-[#B65E3C] text-[#FFFCF7] shadow-sm{% else %}text-[#6B5E53] hover:bg-[#F8F3EC] hover:text-[#4A3428]{% endif %}">
                     <i data-lucide="truck" class="w-4 h-4 shrink-0"></i>
-                    <span>Order Fulfillment</span>
+                    <span>Manage Orders</span>
                     {% if pending_orders_count > 0 %}
-                        <span class="ml-auto bg-orange-700 text-white px-2 py-0.5 rounded-full text-[11px] font-medium font-mono leading-none"> {{ pending_orders_count }}</span>
+                        <span class="ml-auto bg-[#C89B3C] text-[#FFFCF7] px-2 py-0.5 rounded-full text-[10px] font-bold leading-none shadow-sm"> {{ pending_orders_count }}</span>
                     {% endif %}
                 </a>
             </div>
 
-            <div class="space-y-1">
-                <span class="px-3 text-[10px] font-bold text-neutral-400 uppercase tracking-widest block mb-2">Platform Audit</span>
+            <div class="space-y-1.5">
+                <span class="px-3 text-[11px] font-bold text-[#6B5E53]/70 uppercase tracking-wider block">Feedback & Sales</span>
                 
-                <a href="?section=product-reviews" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors {% if section == 'product-reviews' %}bg-neutral-900 text-white shadow-sm{% else %}text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900{% endif %}">
-                    <i data-lucide="heart-handshake" class="w-4 h-4 shrink-0"></i>
-                    <span>Product Reviews</span>
+                <a href="?section=product-reviews" class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-semibold transition-all duration-200 {% if section == 'product-reviews' %}bg-[#B65E3C] text-[#FFFCF7] shadow-sm{% else %}text-[#6B5E53] hover:bg-[#F8F3EC] hover:text-[#4A3428]{% endif %}">
+                    <i data-lucide="star" class="w-4 h-4 shrink-0"></i>
+                    <span>Customer Reviews</span>
                 </a>
                 
-                <a href="?section=revenue-logs" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors {% if section == 'revenue-logs' %}bg-neutral-900 text-white shadow-sm{% else %}text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900{% endif %}">
-                    <i data-lucide="line-chart" class="w-4 h-4 shrink-0"></i>
-                    <span>Revenue Logs</span>
+                <a href="?section=revenue-logs" class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-semibold transition-all duration-200 {% if section == 'revenue-logs' %}bg-[#B65E3C] text-[#FFFCF7] shadow-sm{% else %}text-[#6B5E53] hover:bg-[#F8F3EC] hover:text-[#4A3428]{% endif %}">
+                    <i data-lucide="bar-chart-3" class="w-4 h-4 shrink-0"></i>
+                    <span>Revenue Reports</span>
                 </a>
             </div>
         </nav>
 
-        <div class="p-4 border-t border-gray-100 bg-white grid grid-cols-2 gap-2">
+        <div class="p-4 border-t border-[#DDD2C5]/60 bg-[#FFFCF7] grid grid-cols-2 gap-2">
             <a href="/profile/" 
-               class="flex flex-col items-center justify-center gap-1.5 border border-gray-200 text-neutral-700 p-3 rounded-xl hover:bg-neutral-50 hover:text-neutral-900 transition-colors shadow-sm">
-                <i data-lucide="user" class="w-4 h-4 text-neutral-500"></i>
-                <span class="text-[10px] font-semibold tracking-wide uppercase">Profile</span>
+               class="flex flex-col items-center justify-center gap-1.5 border border-[#DDD2C5] text-[#4A3428] p-3 rounded-2xl hover:bg-[#F8F3EC] transition-all duration-200 shadow-sm text-center">
+                <i data-lucide="user" class="w-4 h-4 text-[#7A8F6A]"></i>
+                <span class="text-[10px] font-semibold tracking-wider uppercase">My Profile</span>
             </a>
 
             <a href="/" target="_blank" 
-               class="flex flex-col items-center justify-center gap-1.5 border border-gray-200 text-neutral-700 p-3 rounded-xl hover:bg-neutral-50 hover:text-neutral-900 transition-colors shadow-sm">
-                <i data-lucide="external-link" class="w-4 h-4 text-neutral-500"></i>
-                <span class="text-[10px] font-semibold tracking-wide uppercase">Live Site</span>
+               class="flex flex-col items-center justify-center gap-1.5 border border-[#DDD2C5] text-[#4A3428] p-3 rounded-2xl hover:bg-[#F8F3EC] transition-all duration-200 shadow-sm text-center">
+                <i data-lucide="external-link" class="w-4 h-4 text-[#B65E3C]"></i>
+                <span class="text-[10px] font-semibold tracking-wider uppercase">View Shop</span>
             </a>
         </div>
     </aside>
 
-    <main class="flex-grow flex flex-col h-screen overflow-y-auto bg-[#f9f5f0] p-6 lg:p-10">
+    <main class="flex-grow flex flex-col h-auto md:h-screen overflow-y-auto bg-[#F8F3EC] p-4 sm:p-6 lg:p-10 custom-scrollbar">
         
-        <div class="max-w-7xl w-full mx-auto">
+        <div class="max-w-7xl w-full mx-auto space-y-6">
             {% if section == 'customer-management' or not section %}
                 {% include 'dashboard/admin/_customer_management.html' %}
 

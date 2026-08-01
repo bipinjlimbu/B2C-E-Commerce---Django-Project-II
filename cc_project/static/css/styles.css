@@ -431,7 +431,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-scroll-snap-strictness: proximity;
 }
 
-.divide-y > *, .border, .border-4, .border-2, .border-x, .border-y, .border-b, .border-t, .border-l, .border-r, .border-b-8, .file\:border-0::file-selector-button, .sm\:border-y-0, .sm\:border-x, .sm\:border-t-0, .md\:border-t-0, .lg\:border-b-0, .lg\:border-r, .lg\:border-t-0 {
+.divide-y > *, .border, .border-4, .border-2, .border-x, .border-y, .border-b, .border-t, .border-l, .border-r, .border-b-8, .file\:border-0::file-selector-button, .sm\:border-y-0, .sm\:border-x, .sm\:border-t-0, .md\:border-t-0, .md\:border-b-0, .md\:border-r, .lg\:border-b-0, .lg\:border-r, .lg\:border-t-0 {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
@@ -910,6 +910,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-1 {
   height: 0.25rem;
+}
+
+.h-auto {
+  height: auto;
 }
 
 .max-h-full {
@@ -3445,12 +3449,24 @@ Ensure the default browser behavior of the `hidden` attribute.
     grid-column: span 2 / span 2;
   }
 
+  .md\:block {
+    display: block;
+  }
+
   .md\:flex {
     display: flex;
   }
 
+  .md\:h-screen {
+    height: 100vh;
+  }
+
   .md\:w-auto {
     width: auto;
+  }
+
+  .md\:w-72 {
+    width: 18rem;
   }
 
   .md\:grid-cols-2 {
@@ -3479,6 +3495,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .md\:border-t-0 {
     border-top-width: 0px;
+  }
+
+  .md\:border-b-0 {
+    border-bottom-width: 0px;
+  }
+
+  .md\:border-r {
+    border-right-width: 1px;
   }
 
   .md\:pt-0 {
