@@ -57,7 +57,7 @@
                                 <div class="flex items-center gap-1.5 text-xs">
                                     <span class="w-2 h-2 rounded-full {% if product.stock > 0 %}bg-[#5B8A5A]{% else %}bg-[#B4473A]{% endif %}"></span>
                                     <span class="text-[#6B5E53] font-medium">
-                                        {% if product.stock == 1 and product.category == 'paintings' or product.category == 'pottery' %}
+                                        {% if product.stock == 1 %}
                                             Original Piece
                                         {% else %}
                                             {{ product.stock }} Units

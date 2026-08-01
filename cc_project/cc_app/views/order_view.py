@@ -64,7 +64,7 @@ def complete_order_view(request, order_id):
     order.status = Order.Status.COMPLETED
     order.save()
     messages.success(request, "Order marked as completed successfully.")
-    return redirect('/dashboard/?section=pending-orders')
+    return redirect('/dashboard/?section=my-orders')
 
 @login_required
 def cancel_order_view(request, order_id):
