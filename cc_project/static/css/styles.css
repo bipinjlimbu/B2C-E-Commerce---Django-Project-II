@@ -2869,6 +2869,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(182 94 60 / var(--tw-bg-opacity));
 }
 
+.selection\:bg-\[\#DDD2C5\] *::-moz-selection {
+  --tw-bg-opacity: 1;
+  background-color: rgb(221 210 197 / var(--tw-bg-opacity));
+}
+
+.selection\:bg-\[\#DDD2C5\] *::selection {
+  --tw-bg-opacity: 1;
+  background-color: rgb(221 210 197 / var(--tw-bg-opacity));
+}
+
 .selection\:text-\[\#B65E3C\] *::-moz-selection {
   --tw-text-opacity: 1;
   color: rgb(182 94 60 / var(--tw-text-opacity));
@@ -2915,6 +2925,16 @@ Ensure the default browser behavior of the `hidden` attribute.
 .selection\:bg-\[\#B65E3C\]::selection {
   --tw-bg-opacity: 1;
   background-color: rgb(182 94 60 / var(--tw-bg-opacity));
+}
+
+.selection\:bg-\[\#DDD2C5\]::-moz-selection {
+  --tw-bg-opacity: 1;
+  background-color: rgb(221 210 197 / var(--tw-bg-opacity));
+}
+
+.selection\:bg-\[\#DDD2C5\]::selection {
+  --tw-bg-opacity: 1;
+  background-color: rgb(221 210 197 / var(--tw-bg-opacity));
 }
 
 .selection\:text-\[\#B65E3C\]::-moz-selection {
