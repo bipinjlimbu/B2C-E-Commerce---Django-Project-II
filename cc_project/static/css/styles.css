@@ -916,6 +916,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: auto;
 }
 
+.h-14 {
+  height: 3.5rem;
+}
+
 .max-h-full {
   max-height: 100%;
 }
@@ -1036,6 +1040,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 15%;
 }
 
+.w-14 {
+  width: 3.5rem;
+}
+
 .min-w-\[320px\] {
   min-width: 320px;
 }
@@ -1058,6 +1066,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .min-w-\[100px\] {
   min-width: 100px;
+}
+
+.min-w-0 {
+  min-width: 0px;
 }
 
 .max-w-4xl {
@@ -1102,6 +1114,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .max-w-6xl {
   max-width: 72rem;
+}
+
+.max-w-\[200px\] {
+  max-width: 200px;
 }
 
 .flex-1 {
@@ -1634,6 +1650,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .border-\[\#DDD2C5\]\/70 {
   border-color: rgb(221 210 197 / 0.7);
+}
+
+.border-\[\#5B8A5A\]\/30 {
+  border-color: rgb(91 138 90 / 0.3);
 }
 
 .border-t-transparent {
@@ -2958,6 +2978,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(180 71 58 / var(--tw-border-opacity));
 }
 
+.hover\:border-\[\#B4473A\]\/40:hover {
+  border-color: rgb(180 71 58 / 0.4);
+}
+
 .hover\:bg-\[\#94492F\]:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(148 73 47 / var(--tw-bg-opacity));
@@ -3041,6 +3065,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .hover\:bg-\[\#DDD2C5\]\/50:hover {
   background-color: rgb(221 210 197 / 0.5);
+}
+
+.hover\:bg-\[\#F8F3EC\]\/50:hover {
+  background-color: rgb(248 243 236 / 0.5);
 }
 
 .hover\:text-\[\#94492F\]:hover {
