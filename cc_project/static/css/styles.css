@@ -784,6 +784,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 0px;
 }
 
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+
 .block {
   display: block;
 }
@@ -1656,6 +1660,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(91 138 90 / 0.3);
 }
 
+.border-\[\#7A8F6A\]\/20 {
+  border-color: rgb(122 143 106 / 0.2);
+}
+
 .border-t-transparent {
   border-top-color: transparent;
 }
@@ -1851,6 +1859,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .bg-\[\#4A3428\]\/75 {
   background-color: rgb(74 52 40 / 0.75);
+}
+
+.bg-\[\#DDD2C5\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(221 210 197 / var(--tw-bg-opacity));
 }
 
 .bg-gradient-to-b {
@@ -2874,9 +2887,19 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 0.75rem;
 }
 
+.after\:h-4::after {
+  content: var(--tw-content);
+  height: 1rem;
+}
+
 .after\:w-3::after {
   content: var(--tw-content);
   width: 0.75rem;
+}
+
+.after\:w-4::after {
+  content: var(--tw-content);
+  width: 1rem;
 }
 
 .after\:rounded-full::after {
@@ -3240,6 +3263,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .peer:checked ~ .peer-checked\:bg-orange-700 {
   --tw-bg-opacity: 1;
   background-color: rgb(194 65 12 / var(--tw-bg-opacity));
+}
+
+.peer:checked ~ .peer-checked\:bg-\[\#B65E3C\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(182 94 60 / var(--tw-bg-opacity));
 }
 
 .peer:checked ~ .peer-checked\:after\:translate-x-full::after {
