@@ -65,9 +65,9 @@
                                     <a href="/review/edit/{{review.id}}" class="inline-flex items-center gap-1 bg-[#F8F3EC] hover:bg-[#B65E3C] text-[#4A3428] hover:text-[#FFFCF7] font-semibold h-8 px-3 rounded-xl text-xs border border-[#DDD2C5] hover:border-[#B65E3C] transition-all duration-200">
                                         <i data-lucide="edit-3" class="w-3 h-3"></i> Edit
                                     </a>
-                                    <a href="/review/delete/{{review.id}}" class="inline-flex items-center justify-center bg-[#F8F3EC] hover:bg-[#B4473A]/10 border border-[#DDD2C5] hover:border-[#B4473A] text-[#6B5E53] hover:text-[#B4473A] h-8 w-8 rounded-xl transition-all duration-200" title="Delete Review">
+                                    <button type="button" onclick="openDeleteReviewModal('/review/delete/{{review.id}}', '{{ review.product.name|escapejs }}')" class="inline-flex items-center justify-center bg-[#F8F3EC] hover:bg-[#B4473A]/10 border border-[#DDD2C5] hover:border-[#B4473A] text-[#6B5E53] hover:text-[#B4473A] h-8 w-8 rounded-xl transition-all duration-200 cursor-pointer" title="Delete Review">
                                         <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                                    </a>
+                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -89,3 +89,78 @@
         </div>
     </div>
 </div>
+
+<div id="deleteReviewModal" class="fixed inset-0 z-[9999] flex items-center justify-center bg-[#4A3428]/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300 px-4">
+    <div id="deleteReviewModalCard" class="bg-[#FFFCF7] border border-[#DDD2C5] rounded-3xl max-w-sm w-full p-6 sm:p-8 shadow-2xl transform scale-95 transition-all duration-300 space-y-6 text-center">
+        
+        <div class="w-16 h-16 bg-[#B4473A]/10 border border-[#B4473A]/20 rounded-2xl flex items-center justify-center mx-auto text-[#B4473A]">
+            <i data-lucide="trash-2" class="w-8 h-8"></i>
+        </div>
+
+        <div class="space-y-2">
+            <h3 class="text-xl font-serif font-bold text-[#4A3428]">Delete Review</h3>
+            <p class="text-xs text-[#6B5E53] leading-relaxed">
+                Are you sure you want to delete your review for <span id="deleteReviewProductName" class="font-semibold text-[#4A3428]">this product</span>? This action cannot be undone.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 pt-2">
+            <button type="button" onclick="closeDeleteReviewModal()" class="bg-[#F8F3EC] hover:bg-[#DDD2C5]/50 text-[#6B5E53] font-bold py-3 px-4 rounded-xl border border-[#DDD2C5] transition-all text-xs uppercase tracking-wider cursor-pointer">
+                Cancel
+            </button>
+            <a id="confirmDeleteReviewBtn" href="#" class="bg-[#B4473A] hover:bg-[#94492F] text-[#FFFCF7] font-bold py-3 px-4 rounded-xl shadow-xs transition-all text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                <span>Delete</span>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const deleteReviewModal = document.getElementById('deleteReviewModal');
+    const deleteReviewModalCard = document.getElementById('deleteReviewModalCard');
+    const confirmDeleteReviewBtn = document.getElementById('confirmDeleteReviewBtn');
+    const deleteReviewProductName = document.getElementById('deleteReviewProductName');
+
+    function openDeleteReviewModal(deleteUrl, productName) {
+        if (deleteReviewModal && deleteReviewModalCard) {
+            if (confirmDeleteReviewBtn) confirmDeleteReviewBtn.setAttribute('href', deleteUrl);
+            if (deleteReviewProductName && productName) deleteReviewProductName.textContent = `"${productName}"`;
+
+            deleteReviewModal.classList.remove('opacity-0', 'pointer-events-none');
+            deleteReviewModal.classList.add('opacity-100');
+            
+            deleteReviewModalCard.classList.remove('scale-95');
+            deleteReviewModalCard.classList.add('scale-100');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function closeDeleteReviewModal() {
+        if (deleteReviewModal && deleteReviewModalCard) {
+            deleteReviewModal.classList.remove('opacity-100');
+            deleteReviewModal.classList.add('opacity-0', 'pointer-events-none');
+            
+            deleteReviewModalCard.classList.remove('scale-100');
+            deleteReviewModalCard.classList.add('scale-95');
+            document.body.style.overflow = '';
+        }
+    }
+
+    if (deleteReviewModal) {
+        deleteReviewModal.addEventListener('click', function(event) {
+            if (event.target === deleteReviewModal) {
+                closeDeleteReviewModal();
+            }
+        });
+    }
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            if (deleteReviewModal && !deleteReviewModal.classList.contains('pointer-events-none')) {
+                closeDeleteReviewModal();
+            }
+        }
+    });
+</script>
