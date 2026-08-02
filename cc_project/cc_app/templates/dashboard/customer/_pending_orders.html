@@ -98,9 +98,9 @@
                             </a>
                         {% endif %}
 
-                        <a href="/order/cancel/{{ order.id }}" class="bg-[#FFFCF7] hover:bg-[#B4473A]/10 border border-[#DDD2C5] hover:border-[#B4473A]/30 text-[#6B5E53] hover:text-[#B4473A] h-10 w-10 rounded-2xl transition-all duration-200 flex items-center justify-center shadow-sm active:scale-95" title="Cancel Order">
+                        <button type="button" onclick="openCancelOrderModal('/order/cancel/{{ order.id }}', '{{ order.id }}')" class="bg-[#FFFCF7] hover:bg-[#B4473A]/10 border border-[#DDD2C5] hover:border-[#B4473A]/30 text-[#6B5E53] hover:text-[#B4473A] h-10 w-10 rounded-2xl transition-all duration-200 flex items-center justify-center shadow-sm active:scale-95 cursor-pointer" title="Cancel Order">
                             <i data-lucide="x-circle" class="w-4 h-4"></i>
-                        </a>
+                        </button>
                     </div>
                 </div>
 
@@ -116,3 +116,78 @@
         {% endfor %}
     </div>
 </div>
+
+<div id="cancelOrderModal" class="fixed inset-0 z-[9999] flex items-center justify-center bg-[#4A3428]/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300 px-4">
+    <div id="cancelOrderModalCard" class="bg-[#FFFCF7] border border-[#DDD2C5] rounded-3xl max-w-sm w-full p-6 sm:p-8 shadow-2xl transform scale-95 transition-all duration-300 space-y-6 text-center">
+        
+        <div class="w-16 h-16 bg-[#B4473A]/10 border border-[#B4473A]/20 rounded-2xl flex items-center justify-center mx-auto text-[#B4473A]">
+            <i data-lucide="x-circle" class="w-8 h-8"></i>
+        </div>
+
+        <div class="space-y-2">
+            <h3 class="text-xl font-serif font-bold text-[#4A3428]">Cancel Order</h3>
+            <p class="text-xs text-[#6B5E53] leading-relaxed">
+                Are you sure you want to cancel <span id="cancelOrderId" class="font-semibold text-[#4A3428]">this order</span>? This action cannot be undone.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 pt-2">
+            <button type="button" onclick="closeCancelOrderModal()" class="bg-[#F8F3EC] hover:bg-[#DDD2C5]/50 text-[#6B5E53] font-bold py-3 px-4 rounded-xl border border-[#DDD2C5] transition-all text-xs uppercase tracking-wider cursor-pointer">
+                Keep Order
+            </button>
+            <a id="confirmCancelOrderBtn" href="#" class="bg-[#B4473A] hover:bg-[#94492F] text-[#FFFCF7] font-bold py-3 px-4 rounded-xl shadow-xs transition-all text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer">
+                <i data-lucide="x-circle" class="w-3.5 h-3.5"></i>
+                <span>Cancel Order</span>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const cancelOrderModal = document.getElementById('cancelOrderModal');
+    const cancelOrderModalCard = document.getElementById('cancelOrderModalCard');
+    const confirmCancelOrderBtn = document.getElementById('confirmCancelOrderBtn');
+    const cancelOrderId = document.getElementById('cancelOrderId');
+
+    function openCancelOrderModal(cancelUrl, orderId) {
+        if (cancelOrderModal && cancelOrderModalCard) {
+            if (confirmCancelOrderBtn) confirmCancelOrderBtn.setAttribute('href', cancelUrl);
+            if (cancelOrderId && orderId) cancelOrderId.textContent = `#ORDER-${orderId}`;
+
+            cancelOrderModal.classList.remove('opacity-0', 'pointer-events-none');
+            cancelOrderModal.classList.add('opacity-100');
+            
+            cancelOrderModalCard.classList.remove('scale-95');
+            cancelOrderModalCard.classList.add('scale-100');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function closeCancelOrderModal() {
+        if (cancelOrderModal && cancelOrderModalCard) {
+            cancelOrderModal.classList.remove('opacity-100');
+            cancelOrderModal.classList.add('opacity-0', 'pointer-events-none');
+            
+            cancelOrderModalCard.classList.remove('scale-100');
+            cancelOrderModalCard.classList.add('scale-95');
+            document.body.style.overflow = '';
+        }
+    }
+
+    if (cancelOrderModal) {
+        cancelOrderModal.addEventListener('click', function(event) {
+            if (event.target === cancelOrderModal) {
+                closeCancelOrderModal();
+            }
+        });
+    }
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            if (cancelOrderModal && !cancelOrderModal.classList.contains('pointer-events-none')) {
+                closeCancelOrderModal();
+            }
+        }
+    });
+</script>
