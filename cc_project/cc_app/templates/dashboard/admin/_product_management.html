@@ -76,9 +76,10 @@
                                     <a href="/products/edit/{{ product.id }}/" class="p-2 bg-[#FFFCF7] hover:bg-[#F8F3EC] text-[#4A3428] rounded-xl border border-[#DDD2C5] transition-colors shadow-sm" title="Edit Product">
                                         <i data-lucide="edit-3" class="w-4 h-4"></i>
                                     </a>
-                                    <a href="/products/delete/{{ product.id }}/" class="p-2 bg-[#FFFCF7] hover:bg-[#B4473A]/10 text-[#B4473A] rounded-xl border border-[#DDD2C5] hover:border-[#B4473A]/30 transition-colors shadow-sm" title="Delete Product">
+                                    <!-- Changed to trigger modal open -->
+                                    <button type="button" onclick="openDeleteProductModal('/products/delete/{{ product.id }}/', '{{ product.name|escapejs }}')" class="p-2 bg-[#FFFCF7] hover:bg-[#B4473A]/10 text-[#B4473A] rounded-xl border border-[#DDD2C5] hover:border-[#B4473A]/30 transition-colors shadow-sm cursor-pointer" title="Delete Product">
                                         <i data-lucide="trash-2" class="w-4 h-4"></i>
-                                    </a>
+                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -101,3 +102,78 @@
     </div>
     {% endif %}
 </div>
+
+<div id="deleteProductModal" class="fixed inset-0 z-[9999] flex items-center justify-center bg-[#4A3428]/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300 px-4">
+    <div id="deleteProductModalCard" class="bg-[#FFFCF7] border border-[#DDD2C5] rounded-3xl max-w-sm w-full p-6 sm:p-8 shadow-2xl transform scale-95 transition-all duration-300 space-y-6 text-center">
+        
+        <div class="w-16 h-16 bg-[#B4473A]/10 border border-[#B4473A]/20 rounded-2xl flex items-center justify-center mx-auto text-[#B4473A]">
+            <i data-lucide="trash-2" class="w-8 h-8"></i>
+        </div>
+
+        <div class="space-y-2">
+            <h3 class="text-xl font-serif font-bold text-[#4A3428]">Delete Product</h3>
+            <p class="text-xs text-[#6B5E53] leading-relaxed">
+                Are you sure you want to delete <span id="deleteProductName" class="font-semibold text-[#4A3428]">this product</span>? This action cannot be undone and it will be permanently removed.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 pt-2">
+            <button type="button" onclick="closeDeleteProductModal()" class="bg-[#F8F3EC] hover:bg-[#DDD2C5]/50 text-[#6B5E53] font-bold py-3 px-4 rounded-xl border border-[#DDD2C5] transition-all text-xs uppercase tracking-wider cursor-pointer">
+                Cancel
+            </button>
+            <a id="confirmDeleteProductBtn" href="#" class="bg-[#B4473A] hover:bg-[#94492F] text-[#FFFCF7] font-bold py-3 px-4 rounded-xl shadow-xs transition-all text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                <span>Delete</span>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const deleteProductModal = document.getElementById('deleteProductModal');
+    const deleteProductModalCard = document.getElementById('deleteProductModalCard');
+    const confirmDeleteProductBtn = document.getElementById('confirmDeleteProductBtn');
+    const deleteProductName = document.getElementById('deleteProductName');
+
+    function openDeleteProductModal(deleteUrl, productName) {
+        if (deleteProductModal && deleteProductModalCard) {
+            if (confirmDeleteProductBtn) confirmDeleteProductBtn.setAttribute('href', deleteUrl);
+            if (deleteProductName && productName) deleteProductName.textContent = `"${productName}"`;
+
+            deleteProductModal.classList.remove('opacity-0', 'pointer-events-none');
+            deleteProductModal.classList.add('opacity-100');
+            
+            deleteProductModalCard.classList.remove('scale-95');
+            deleteProductModalCard.classList.add('scale-100');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function closeDeleteProductModal() {
+        if (deleteProductModal && deleteProductModalCard) {
+            deleteProductModal.classList.remove('opacity-100');
+            deleteProductModal.classList.add('opacity-0', 'pointer-events-none');
+            
+            deleteProductModalCard.classList.remove('scale-100');
+            deleteProductModalCard.classList.add('scale-95');
+            document.body.style.overflow = '';
+        }
+    }
+
+    if (deleteProductModal) {
+        deleteProductModal.addEventListener('click', function(event) {
+            if (event.target === deleteProductModal) {
+                closeDeleteProductModal();
+            }
+        });
+    }
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            if (deleteProductModal && !deleteProductModal.classList.contains('pointer-events-none')) {
+                closeDeleteProductModal();
+            }
+        }
+    });
+</script>
