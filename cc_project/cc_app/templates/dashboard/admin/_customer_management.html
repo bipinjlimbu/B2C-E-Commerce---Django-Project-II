@@ -64,10 +64,10 @@
                                 </span>
                             </td>
                             <td class="py-4 px-6 text-right whitespace-nowrap">
-                                <a href="/profile/delete/{{ customer.id }}/" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FFFCF7] hover:bg-[#B4473A]/10 text-[#B4473A] hover:text-[#B4473A] rounded-xl border border-[#DDD2C5] hover:border-[#B4473A]/40 text-xs font-semibold transition-all duration-200 shadow-sm">
+                                <button type="button" onclick="openDeleteCustomerModal('/profile/delete/{{ customer.id }}/')" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FFFCF7] hover:bg-[#B4473A]/10 text-[#B4473A] hover:text-[#B4473A] rounded-xl border border-[#DDD2C5] hover:border-[#B4473A]/40 text-xs font-semibold transition-all duration-200 shadow-sm cursor-pointer">
                                     <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
                                     <span>Delete Customer</span>
-                                </a>
+                                </button>
                             </td>
                         </tr>
                     {% endfor %}
@@ -85,3 +85,76 @@
     </div>
     {% endif %}
 </div>
+
+<div id="deleteCustomerModal" class="fixed inset-0 w-screen h-screen top-0 left-0 z-[9999] flex items-center justify-center bg-[#4A3428]/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300 px-4">
+    <div id="deleteCustomerModalCard" class="bg-[#FFFCF7] border border-[#DDD2C5] rounded-3xl max-w-sm w-full p-6 sm:p-8 shadow-2xl transform scale-95 transition-all duration-300 space-y-6 text-center relative z-[10000]">
+        
+        <div class="w-16 h-16 bg-[#B4473A]/10 border border-[#B4473A]/20 rounded-2xl flex items-center justify-center mx-auto text-[#B4473A]">
+            <i data-lucide="trash-2" class="w-8 h-8"></i>
+        </div>
+
+        <div class="space-y-2">
+            <h3 class="text-xl font-serif font-bold text-[#4A3428]">Delete Customer</h3>
+            <p class="text-xs text-[#6B5E53] leading-relaxed">
+                Are you sure you want to delete this customer account? This action cannot be undone and all their data will be permanently removed.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 pt-2">
+            <button type="button" onclick="closeDeleteCustomerModal()" class="bg-[#F8F3EC] hover:bg-[#DDD2C5]/50 text-[#6B5E53] font-bold py-3 px-4 rounded-xl border border-[#DDD2C5] transition-all text-xs uppercase tracking-wider cursor-pointer">
+                Cancel
+            </button>
+            <a id="confirmDeleteCustomerBtn" href="#" class="bg-[#B4473A] hover:bg-[#94492F] text-[#FFFCF7] font-bold py-3 px-4 rounded-xl shadow-xs transition-all text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                <span>Delete</span>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const deleteCustomerModal = document.getElementById('deleteCustomerModal');
+    const deleteCustomerModalCard = document.getElementById('deleteCustomerModalCard');
+    const confirmDeleteCustomerBtn = document.getElementById('confirmDeleteCustomerBtn');
+
+    function openDeleteCustomerModal(deleteUrl) {
+        if (deleteCustomerModal && deleteCustomerModalCard) {
+            if (confirmDeleteCustomerBtn) confirmDeleteCustomerBtn.setAttribute('href', deleteUrl);
+
+            deleteCustomerModal.classList.remove('opacity-0', 'pointer-events-none');
+            deleteCustomerModal.classList.add('opacity-100');
+            
+            deleteCustomerModalCard.classList.remove('scale-95');
+            deleteCustomerModalCard.classList.add('scale-100');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function closeDeleteCustomerModal() {
+        if (deleteCustomerModal && deleteCustomerModalCard) {
+            deleteCustomerModal.classList.remove('opacity-100');
+            deleteCustomerModal.classList.add('opacity-0', 'pointer-events-none');
+            
+            deleteCustomerModalCard.classList.remove('scale-100');
+            deleteCustomerModalCard.classList.add('scale-95');
+            document.body.style.overflow = '';
+        }
+    }
+
+    if (deleteCustomerModal) {
+        deleteCustomerModal.addEventListener('click', function(event) {
+            if (event.target === deleteCustomerModal) {
+                closeDeleteCustomerModal();
+            }
+        });
+    }
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            if (deleteCustomerModal && !deleteCustomerModal.classList.contains('pointer-events-none')) {
+                closeDeleteCustomerModal();
+            }
+        }
+    });
+</script>
